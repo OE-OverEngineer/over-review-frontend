@@ -6,15 +6,15 @@
     "dev": "next dev",
     "build": "next build",
     "start": "next start",
-    "lint": "eslint .",
+    "lint": "eslint --ignore-path .gitignore \"src/**/*.+(ts|js|tsx)\"",
     "lint:fix": "eslint --fix .",
-    "format": "prettier --write ./src/**/*.ts{,x} --config ./.prettierrc.js",
+    "format": "prettier --write \"src/**/*.+(ts|js|tsx)\" --ignore-path .gitignore   --config ./.prettierrc.js",
     "postinstall": "husky install",
     "commit": "cz"
   },
   "lint-staged": {
     "./src/**/*.{ts,js,jsx,tsx}": [
-      "yarn lint:fix",
+      "yarn lint --fix",
       "yarn format"
     ]
   },
