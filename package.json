@@ -1,5 +1,5 @@
 {
-  "name": "mhor-rit-frontend",
+  "name": "over-review",
   "version": "0.1.0",
   "private": true,
   "scripts": {
@@ -11,6 +11,16 @@
     "format": "prettier --write ./src/**/*.ts{,x} --config ./.prettierrc.js",
     "commit": "cz"
   },
+  "lint-staged": {
+  "src/**/*.{js,jsx}": [
+    "eslint . --fix"
+  ]
+},
+"husky": {
+  "hooks": {
+    "pre-commit": "lint-staged"
+  }
+},
   "dependencies": {
     "antd": "^4.16.12",
     "next": "11.1.0",
@@ -33,6 +43,8 @@
     "eslint-plugin-prettier": "^3.4.0",
     "eslint-plugin-react": "^7.24.0",
     "eslint-plugin-react-hooks": "^4.2.0",
+    "husky": "^7.0.2",
+    "lint-staged": "^11.1.2",
     "postcss": "^8.3.6",
     "prettier": "^2.3.2",
     "tailwindcss": "^2.2.7",
