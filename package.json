@@ -9,18 +9,15 @@
     "lint": "eslint .",
     "lint:fix": "eslint --fix .",
     "format": "prettier --write ./src/**/*.ts{,x} --config ./.prettierrc.js",
+    "postinstall": "husky install",
     "commit": "cz"
   },
   "lint-staged": {
-  "src/**/*.{js,jsx}": [
-    "eslint . --fix"
-  ]
-},
-"husky": {
-  "hooks": {
-    "pre-commit": "lint-staged"
-  }
-},
+    "./src/**/*.{ts,js,jsx,tsx}": [
+      "yarn lint:fix",
+      "yarn format"
+    ]
+  },
   "dependencies": {
     "antd": "^4.16.12",
     "next": "11.1.0",
