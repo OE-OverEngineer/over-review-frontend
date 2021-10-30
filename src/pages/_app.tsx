@@ -1,6 +1,6 @@
 import type { AppProps } from 'next/app';
-import 'tailwindcss/tailwind.css';
 require('styles/global.less');
+import 'tailwindcss/tailwind.css';
 
 const App = ({ Component, pageProps }: AppProps): JSX.Element => (
   <>
