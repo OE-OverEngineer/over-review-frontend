@@ -1,42 +1,17 @@
 import React from 'react';
 
 import { LockOutlined, UserOutlined } from '@ant-design/icons';
-import { Button, Checkbox, Form, Input, Layout, Menu } from 'antd';
-import { Content, Footer, Header } from 'antd/lib/layout/layout';
+import { Button, Checkbox, Form, Input, Layout } from 'antd';
+import { Content, Footer } from 'antd/lib/layout/layout';
 
-import Logo from 'common/assets/images/logoNav.svg';
 import Star from 'common/assets/images/star.svg';
-
-const NAV_CONTENT = [
-  { key: '1', title: 'Home' },
-  { key: '2', title: 'About' },
-  { key: '3', title: 'News' },
-  { key: '4', title: 'Discover' },
-  { key: '5', title: 'Community' },
-];
+import Navbar from 'common/components/Navbar';
 
 const Auth: React.FC = () => {
   return (
     <Layout className="max-h-screen  h-screen">
       <Star className="absolute h-full w-full z-0" />
-      <Header className="flex items-center justify-between">
-        <Logo />
-
-        <Menu
-          className="max-w-4xl items-center"
-          theme="light"
-          mode="horizontal"
-          defaultSelectedKeys={['1']}>
-          {NAV_CONTENT.map(({ key, title }) => (
-            <Menu.Item className="px-10 py-0" key={key}>
-              {title}
-            </Menu.Item>
-          ))}
-          <Button className="px-10 py-0 order-5 mr-6" type="primary" shape="round">
-            Login or Register
-          </Button>
-        </Menu>
-      </Header>
+      <Navbar />
       <Content>
         <section className="max-w-screen-2xl m-auto mt-16">
           <p className=" text-3xl text-center"># Welcome to Over review </p>
@@ -48,7 +23,7 @@ const Auth: React.FC = () => {
             wrapperCol={{ offset: 4, span: 16 }}
             labelCol={{ offset: 4, span: 16 }}
             autoComplete="off">
-            <p className=" text-primary-default text-4xl text-center">Over review</p>
+            <p className=" text-primary-default text-4xl text-center ">Sign In</p>
             <Form.Item
               label="Username"
               name="username"
