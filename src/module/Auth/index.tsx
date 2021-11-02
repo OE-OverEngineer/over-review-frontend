@@ -8,11 +8,11 @@ import Logo from 'common/assets/images/logoNav.svg';
 import Star from 'common/assets/images/star.svg';
 
 const NAV_CONTENT = [
-  { key: '1', title: 'Home' },
-  { key: '2', title: 'About' },
-  { key: '3', title: 'News' },
-  { key: '4', title: 'Discover' },
-  { key: '5', title: 'Community' },
+  { key: 'Home', title: 'Home' },
+  { key: 'About', title: 'About' },
+  { key: 'News', title: 'News' },
+  { key: 'Discover', title: 'Discover' },
+  { key: 'Community', title: 'Community' },
 ];
 
 const Auth: React.FC = () => {
@@ -26,7 +26,7 @@ const Auth: React.FC = () => {
           className="max-w-4xl items-center"
           theme="light"
           mode="horizontal"
-          defaultSelectedKeys={['1']}>
+          defaultSelectedKeys={['Home']}>
           {NAV_CONTENT.map(({ key, title }) => (
             <Menu.Item className="px-10 py-0" key={key}>
               {title}
