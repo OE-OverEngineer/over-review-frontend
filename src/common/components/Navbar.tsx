@@ -15,7 +15,7 @@ const NAV_CONTENT = [
 
 const Navbar: React.FC = () => {
   return (
-    <Header className="flex items-center justify-between mt-10 ">
+    <Header className="flex items-center justify-between mt-20 mx-8">
       <Logo />
 
       <Menu
@@ -24,7 +24,7 @@ const Navbar: React.FC = () => {
         mode="horizontal"
         defaultSelectedKeys={['1']}>
         {NAV_CONTENT.map(({ key, title }) => (
-          <Menu.Item className="px-10 py-0" key={key}>
+          <Menu.Item className=" px-10 py-0" key={key}>
             {title}
           </Menu.Item>
         ))}
