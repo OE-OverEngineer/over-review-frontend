@@ -4,14 +4,13 @@ import { LockOutlined, UserOutlined } from '@ant-design/icons';
 import { Button, Checkbox, Form, Input, Layout } from 'antd';
 import { Content, Footer } from 'antd/lib/layout/layout';
 
-import Earth from 'common/assets/images/2.svg';
 import Star from 'common/assets/images/star.svg';
 import Navbar from 'common/components/Navbar';
 
 const Auth: React.FC = () => {
   return (
     <Layout className="max-h-screen  h-screen">
-      <Earth className="absolute h-full w-full z-0 opacity-60" />
+      <Star className="absolute h-full w-full z-0" />
 
       <Navbar />
       <Content>
