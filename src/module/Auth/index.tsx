@@ -11,7 +11,7 @@ import Navbar from 'common/components/Navbar';
 const Auth: React.FC = () => {
   return (
     <Layout className="max-h-screen  h-screen">
-      <Earth className="absolute h-full w-full z-0" />
+      <Earth className="absolute h-full w-full z-0 opacity-60" />
 
       <Navbar />
       <Content>
@@ -27,6 +27,7 @@ const Auth: React.FC = () => {
             autoComplete="off">
             <p className=" text-primary-default text-4xl text-center mt-4 ">Sign In</p>
             <Form.Item
+              className="hidden-required"
               label="Username"
               name="username"
               rules={[{ required: true, message: 'Please input your username!' }]}>
@@ -36,6 +37,7 @@ const Auth: React.FC = () => {
               />
             </Form.Item>
             <Form.Item
+              className="hidden-required"
               label="Password"
               name="password"
               rules={[{ required: true, message: 'Please input your password!' }]}>

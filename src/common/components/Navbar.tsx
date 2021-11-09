@@ -15,7 +15,7 @@ const NAV_CONTENT = [
 
 const Navbar: React.FC = () => {
   return (
-    <Header className="flex items-center justify-between mt-20 mx-8">
+    <Header className="flex items-center justify-between mt-8 mx-8">
       <Logo />
 
       <Menu
