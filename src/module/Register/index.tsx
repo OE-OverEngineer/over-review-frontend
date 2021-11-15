@@ -12,7 +12,7 @@ const { Option } = Select;
 
 const Register: React.FC = () => {
   return (
-    <Layout className="max-h-screen  h-screen">
+    <Layout className="max-h-screen  h-screen font-poppins">
       <Star className="absolute h-full w-full z-0" />
       <Bg className="absolute h-5/6 z-0 right-0 bottom-0" />
 
@@ -20,7 +20,7 @@ const Register: React.FC = () => {
       <Content className="flex justify-between z-10">
         <div className="w-full">
           <p
-            className=" text-white text-center mt-64  "
+            className="  text-center mt-64 text-transparent bg-clip-text  bg-gradient-to-r from-primary-default  to-primary-purple2nd"
             style={{ fontSize: '5rem', lineHeight: '5rem' }}>
             Create Account
             <br />

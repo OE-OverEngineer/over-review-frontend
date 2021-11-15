@@ -7,12 +7,12 @@ module.exports = {
       colors: {
         primary: {
           default: '#7433FF',
-          gradient: 'linear-gradient(114.44deg, #7433FF 0%, #BCA4FF 100%)',
+          purple2nd: '#BCA4FF',
         },
       },
     },
     fontFamily: {
-      poppins: ['Poppins'],
+      poppins: ['Poppins', 'Prompt'],
     },
   },
   variants: {

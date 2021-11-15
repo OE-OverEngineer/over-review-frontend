@@ -9,7 +9,7 @@ import Navbar from 'common/components/Navbar';
 
 const Auth: React.FC = () => {
   return (
-    <Layout className="max-h-screen  h-screen">
+    <Layout className="max-h-screen  h-screen font-poppins">
       <Star className="absolute h-full w-full z-0" />
 
       <Navbar />

@@ -16,6 +16,11 @@ class Document extends NextDocument<Props> {
             href="https://fonts.googleapis.com/css2?family=K2D:wght@300;400;500&display=swap"
             rel="stylesheet"
           />
+
+          <link
+            href="https://fonts.googleapis.com/css2?family=Poppins:ital,wght@0,400;0,700;1,400&family=Prompt:wght@300&display=swap"
+            rel="stylesheet"
+          />
         </Head>
         <body>
           <Main />

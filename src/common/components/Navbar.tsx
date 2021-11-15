@@ -15,7 +15,7 @@ const NAV_CONTENT = [
 
 const Navbar: React.FC = () => {
   return (
-    <Header className="flex items-center justify-between mt-8 mx-8">
+    <Header className="flex items-center justify-between mt-8 mx-8 font-poppins">
       <Logo />
 
       <Menu
@@ -28,7 +28,10 @@ const Navbar: React.FC = () => {
             {title}
           </Menu.Item>
         ))}
-        <Button className="px-6 py-0 order-5 mr-6 " type="primary" shape="round">
+        <Button
+          className="px-6 py-0 order-5 mr-6 font-poppins"
+          type="primary"
+          shape="round">
           Login or Register
         </Button>
       </Menu>
