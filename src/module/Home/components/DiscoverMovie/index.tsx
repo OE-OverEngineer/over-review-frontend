@@ -8,13 +8,12 @@ import Banner1 from 'common/assets/images/banner/banner_1.png';
 import Banner2 from 'common/assets/images/banner/banner_2.png';
 import Banner3 from 'common/assets/images/banner/banner_3.png';
 import Rating from 'common/assets/images/rating.svg';
-
-import 'slick-carousel/slick/slick.css';
-import 'slick-carousel/slick/slick-theme.css';
+import Star from 'common/assets/images/star.svg';
 
 const DiscoverMovie: React.FC = () => {
   return (
     <section className="discover-movies h-full">
+      <Star className="absolute h-full w-full z-0" />
       <div className=" max-w-screen-2xl mt-20 mb-16 mx-auto">
         <Tabs
           defaultActiveKey="Random"

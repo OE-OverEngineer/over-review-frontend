@@ -8,6 +8,7 @@ import Navbar from 'common/components/Navbar';
 
 import BannerSlider from './components/BannerSlider';
 import DiscoverMovie from './components/DiscoverMovie';
+import News from './components/News';
 
 const Home: React.FC = () => {
   return (
@@ -17,6 +18,7 @@ const Home: React.FC = () => {
       <Content>
         <BannerSlider />
         <DiscoverMovie />
+        <News />
       </Content>
       <Footer className="text-center">Over Review ©2021 Created by Over Engineer</Footer>
     </Layout>
