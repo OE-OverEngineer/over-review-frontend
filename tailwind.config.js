@@ -10,6 +10,9 @@ module.exports = {
           purple2nd: '#BCA4FF',
         },
       },
+      backgroundImage: {
+        'primary-gradient': 'linear-gradient(114.44deg, #7433FF 0%, #BCA4FF 100%)',
+      },
     },
     fontFamily: {
       poppins: ['Poppins', 'Prompt'],
