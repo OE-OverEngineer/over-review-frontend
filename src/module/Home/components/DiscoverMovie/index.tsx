@@ -14,7 +14,7 @@ const DiscoverMovie: React.FC = () => {
   return (
     <section className="discover-movies h-full">
       <Star className="absolute h-full w-full z-0" />
-      <div className=" max-w-screen-2xl mt-20 mb-16 mx-auto">
+      <div className=" max-w-screen-2xl mt-20 mb-16 mx-auto font-poppins">
         <Tabs
           defaultActiveKey="Random"
           centered

@@ -54,7 +54,9 @@ const BannerSlider: React.FC = () => {
 
   return (
     <section className="slider-banner py-16">
-      <div className="text-center text-2xl"># Your weekend buddy for this week</div>
+      <div className="text-center text-2xl font-poppins">
+        # Your weekend buddy for this week
+      </div>
       <div className="mt-16">
         <Slider
           className="slider z-10"
@@ -70,7 +72,7 @@ const BannerSlider: React.FC = () => {
             .fill(0)
             .map((_, index) => (
               <div
-                className="max-w-5xl flex z-10 justify-center m-auto"
+                className="max-w-5xl flex z-10 justify-center m-auto font-poppins"
                 key={`slider-items-${index}`}>
                 <img src={Banner.src} alt="banner1" className=" w-96 relative -mr-2" />
                 <div className="max-w-xl w-full bg-white my-8 rounded-r-2xl py-8 px-12">

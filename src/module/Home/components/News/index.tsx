@@ -6,7 +6,7 @@ import { Avatar } from 'antd';
 const News: React.FC = () => {
   return (
     <section className="news h-full">
-      <div className=" max-w-screen-2xl mt-20 mb-16 mx-auto">
+      <div className=" max-w-screen-2xl mt-20 mb-16 mx-auto font-poppins">
         <div className="flex gap-x-4">
           <div className="w-1/3">
             <div className="text-2xl mb-4"> Hall Of Fame</div>
