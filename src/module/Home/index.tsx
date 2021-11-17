@@ -12,7 +12,7 @@ import News from './components/News';
 
 const Home: React.FC = () => {
   return (
-    <Layout>
+    <Layout className=" min-h-screen h-full">
       <Star className="absolute h-full w-full z-0" />
       <Navbar />
       <Content>
