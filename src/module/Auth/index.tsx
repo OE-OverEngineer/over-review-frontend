@@ -6,10 +6,22 @@ import { Content, Footer } from 'antd/lib/layout/layout';
 
 import Star from 'common/assets/images/star.svg';
 import Navbar from 'common/components/Navbar';
+import { post } from 'common/services/RestClient';
 
 const Auth: React.FC = () => {
+  const onFinish = (values: Record<string, unknown>) => {
+    console.log('Success:', values);
+    const param = {
+      email: values.email,
+      password: values.password,
+    };
+    post('auth/login', param).then((res) => {
+      console.log(res);
+    });
+  };
+
   return (
-    <Layout className="max-h-screen  h-screen font-poppins">
+    <Layout className="min-h-screen h-full font-poppins">
       <Star className="absolute h-full w-full z-0" />
 
       <Navbar />
@@ -23,7 +35,8 @@ const Auth: React.FC = () => {
             initialValues={{ remember: true }}
             wrapperCol={{ offset: 4, span: 16 }}
             labelCol={{ offset: 4, span: 16 }}
-            autoComplete="off">
+            autoComplete="off"
+            onFinish={onFinish}>
             <p className=" text-primary-default text-4xl text-center mt-4 ">Sign In</p>
             <Form.Item
               className="hidden-required"
