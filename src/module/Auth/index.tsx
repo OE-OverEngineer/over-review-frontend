@@ -3,22 +3,43 @@ import React from 'react';
 import { LockOutlined, UserOutlined } from '@ant-design/icons';
 import { Button, Checkbox, Form, Input, Layout } from 'antd';
 import { Content, Footer } from 'antd/lib/layout/layout';
+import { useRouter } from 'next/dist/client/router';
+import { ToastContainer, toast } from 'react-toastify';
 
 import Star from 'common/assets/images/star.svg';
 import Navbar from 'common/components/Navbar';
-import { post } from 'common/services/RestClient';
+import userController from 'common/services/Controllers/userController';
+import { LoginRequset } from 'common/services/postSchemas';
+import { TOKEN_KEY } from 'common/utilities/constants';
+import { handleItem } from 'common/utilities/local-storage';
 
 const Auth: React.FC = () => {
-  const onFinish = (values: Record<string, unknown>) => {
+  const { postAuth } = userController();
+  const Router = useRouter();
+
+  const onFinish = (values: Record<string, string>) => {
     console.log('Success:', values);
-    const param = {
+    const param: LoginRequset = {
       email: values.username,
       password: values.password,
     };
-    console.log(param);
-    post('auth/login', param).then((res) => {
-      console.log(res);
-    });
+
+    postAuth(param)
+      .then((res) => {
+        handleItem(TOKEN_KEY, res.access_token);
+        Router.push('/');
+      })
+      .catch(() => {
+        toast.error('Wrong email or password', {
+          position: 'bottom-right',
+          autoClose: 5000,
+          hideProgressBar: false,
+          closeOnClick: true,
+          pauseOnHover: true,
+          draggable: true,
+          progress: undefined,
+        });
+      });
   };
 
   return (
@@ -76,6 +97,7 @@ const Auth: React.FC = () => {
             </p>
           </Form>
         </section>
+        <ToastContainer />
       </Content>
       <Footer className="text-center">Over Review ©2021 Created by Over Engineer</Footer>
     </Layout>

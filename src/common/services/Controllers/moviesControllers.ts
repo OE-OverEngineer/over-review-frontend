@@ -8,7 +8,7 @@ import {
 } from '../postSchemas';
 import { get, post } from '../RestClient';
 
-export default function moviesController(): unknown {
+export default function moviesController() {
   return {
     postComments: (data: CreateCommentRequest) => post('comments', data),
     getComments: () => get('comments'),

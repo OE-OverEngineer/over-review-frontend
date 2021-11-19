@@ -1,11 +1,13 @@
 /* eslint-disable no-underscore-dangle */
 import axios, { AxiosError, AxiosRequestConfig, AxiosResponse } from 'axios';
 
+import { API_URL, TOKEN_KEY } from 'common/utilities/constants';
+
 export const http = axios.create({
-  baseURL: 'https://over-review.southeastasia.cloudapp.azure.com/api/',
+  baseURL: API_URL,
 });
 
-export const post = <T>(endpoint: string, data?: T): Promise<AxiosResponse<T>> =>
+export const post = <T, U>(endpoint: string, data?: T): Promise<U> =>
   new Promise((resolve, reject) =>
     http
       .post(endpoint, data)
@@ -32,7 +34,7 @@ export const get = (endpoint: string): Promise<AxiosResponse> =>
 http.interceptors.request.use(
   (config: AxiosRequestConfig) => {
     // eslint-disable-next-line no-param-reassign
-    // config.headers.Authorization = localStorage.getItem(TOKEN_KEY);
+    config.headers.Authorization = localStorage.getItem(TOKEN_KEY);
 
     return config;
   },
