@@ -12,9 +12,10 @@ const Auth: React.FC = () => {
   const onFinish = (values: Record<string, unknown>) => {
     console.log('Success:', values);
     const param = {
-      email: values.email,
+      email: values.username,
       password: values.password,
     };
+    console.log(param);
     post('auth/login', param).then((res) => {
       console.log(res);
     });
