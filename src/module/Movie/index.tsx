@@ -10,6 +10,7 @@ import Male from 'common/assets/images/actors/1.png';
 import Female from 'common/assets/images/actors/2.png';
 import Banner1 from 'common/assets/images/banner/banner_1.png';
 import Line from 'common/assets/images/line.svg';
+import Over from 'common/assets/images/Over.svg';
 import Mini from 'common/assets/images/profilemini.png';
 import Rating from 'common/assets/images/rating.svg';
 import Search from 'common/assets/images/search.svg';
@@ -64,26 +65,17 @@ const Home: React.FC = () => {
   return (
     <Layout className="max-h-full ">
       <Star className="absolute h-full w-full z-0" />
-
       <Navbar />
       <Content>
-        <section className="max-w-screen-2xl m-auto text-white">
-          <div className=" text-center font-poppins italic mt-20 text-2xl">
-            HI NAWAKARN LEE.
-          </div>
-          <div className="flex justify-end mt-14">
-            <Input
-              placeholder="search something here..."
-              className="w-64 bg-transparent border-0 focus:border-0 input-transparent border-l border-white text-white font-poppins"
-              prefix={<Search className=" w-8" />}
-            />
-          </div>
+        <section className="max-w-screen-2xl m-auto text-white z-10">
+          <div className="flex justify-end mt-14"></div>
 
           <div className="text-center text-6xl font-poppins italic mt-10">Moon Light</div>
           <div>
             <MoviePoster />
           </div>
           <Header title={'ACTOR'} />
+
           <div className="grid grid-cols-4 px-80 mt-5 font-poppins text-lg">
             {actors.map((actor) => (
               <div className="col-span-1" key={actor.id}>
@@ -102,7 +94,7 @@ const Home: React.FC = () => {
             type="primary"
             size="middle"
             shape="round">
-            Discover More
+            See more
           </Button>
 
           <Line className="mx-auto mt-8 " />
@@ -112,24 +104,30 @@ const Home: React.FC = () => {
           <div className="border-2 border-primary-default w-3/5 mx-auto rounded-3xl flex flex-col gap-y-4 p-4 mt-4">
             {Array.from({ length: 5 }).map((_, index) => (
               <div className="grid grid-cols-12" key={index}>
+                {index === 0 && (
+                  <div className="col-span-11 flex justify-end">
+                    <span className="text-primary-defaultLight italic">TOP review</span>
+                  </div>
+                )}
                 <div className="border border-white col-span-11 rounded-xl p-3 font-poppins">
-                  A powerful reminder how something as seemingly lowbrow and disposable as
-                  horror cinema can be a surprisingly successful vehicle to address
-                  broader social issues that have very real relevance.A powerful reminder
-                  how something as seemingly lowbrow and disposable as horror cinema can
-                  be a surprisingly successful vehicle to address broader social issues
-                  that have very real relevance.
+                  <Rate className="" allowHalf defaultValue={3.5} disabled />
+                  <br />A powerful reminder how something as seemingly lowbrow and
+                  disposable as horror cinema can be a surprisingly successful vehicle to
+                  address.
                 </div>
                 <div className="col-span-1">
                   <img src={Mini.src} alt="profile" className="w-9/12 mx-auto" />
                 </div>
+                <button className="border-2 border-primary-default font-poppins text-xs italic rounded-md w-16 mt-4 text-primary-defaultLight">
+                  1234 <Over className="inline-block " />
+                </button>
               </div>
             ))}
           </div>
           <div className="mt-8">
             <Header title={'RATE AND REVIEWS '} />
 
-            <Rate className="ml-80 mt-4" allowHalf defaultValue={1} />
+            <Rate className="ml-80 mt-4" allowHalf defaultValue={0} />
           </div>
           <div className="font-poppins text-base ml-80 mt-4 text-primary-purple2nd">
             What do you think of the movie?
@@ -137,12 +135,18 @@ const Home: React.FC = () => {
           <div className="w-3/5 mx-auto">
             <TextArea
               placeholder="input your review."
-              className="mt-4 text-primary-defaultDark font-poppins "
+              className="mt-4 text-primary-default font-poppins "
               showCount
               maxLength={300}
             />
             <br />
-            <Button className="block ml-auto">Post</Button>
+            <Button
+              className="px-6 py-0 font-poppins  block ml-auto"
+              type="primary"
+              size="middle"
+              shape="round">
+              Post
+            </Button>
           </div>
           <Header title={'YOU MIGHT ALSO LIKE'} />
           <div className="w-3/5 mx-auto">

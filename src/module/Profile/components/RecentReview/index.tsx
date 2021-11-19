@@ -9,7 +9,7 @@ const RecentReview: React.FC = () => {
   return (
     <section className="recent-review">
       <TextHeader className="mb-2">Recent Nawa-lee’s Reviews</TextHeader>
-      <div className="w-full h-full rounded-2xl bg-primary-defaultDark p-4 mb-4">
+      <div className="w-full h-full rounded-2xl bg-primary-defaultDark opacity-90 p-4 mb-4">
         <div className="flex justify-between gap-2">
           <img
             src={Banner3.src}
@@ -37,7 +37,7 @@ const RecentReview: React.FC = () => {
                     <div className="text-2xl">
                       <Rate disabled defaultValue={4} />
                     </div>
-                    <div className=" text-xs">From over users</div>
+                    <div className=" text-xs">From over Nawa-lee</div>
                   </div>
                 </div>
               </div>

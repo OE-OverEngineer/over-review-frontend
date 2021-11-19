@@ -6,7 +6,7 @@ import { Avatar, Divider } from 'antd';
 const ProfileCard: React.FC = () => {
   return (
     <section className="profile">
-      <div className="max-w-xs h-full rounded-2xl bg-primary-defaultDark p-4 mb-4">
+      <div className="max-w-xs h-full rounded-2xl bg-primary-defaultDark opacity-90 p-4 mb-4">
         <div className="flex justify-center mb-4">
           <Avatar
             className="border-2 border-primary-default"

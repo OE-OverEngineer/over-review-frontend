@@ -9,7 +9,7 @@ const TopReview: React.FC = () => {
   return (
     <section className="top-review">
       <TextHeader className="mb-2">Nawa-lee’s Top Reviews</TextHeader>
-      <div className="w-full h-full rounded-2xl bg-primary-defaultDark p-4 mb-4">
+      <div className="w-full h-full rounded-2xl bg-primary-defaultDark opacity-90 p-4 mb-4">
         <div className="flex justify-between gap-2">
           <img
             src={Banner3.src}
@@ -23,7 +23,7 @@ const TopReview: React.FC = () => {
             </div>
             <div className="flex flex-1 gap-2">
               <div className="flex-1">
-                <div className="w-full h-48 bg-primary-purpleDark2nd rounded-2xl px-4 py-2 mb-2">
+                <div className="w-full h-48 bg-primary-purpleDark2nd  rounded-2xl px-4 py-2 mb-2">
                   <div className="text-lg text-primary-defaultLight">Synopsis</div>
                   <div className="text-sm">
                     Sebastian (Ryan Gosling) and Mia (Emma Stone) are drawn together by
