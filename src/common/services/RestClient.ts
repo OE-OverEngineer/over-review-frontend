@@ -23,7 +23,7 @@ export const patch = <T>(endpoint: string, data?: T): Promise<AxiosResponse<T>> 
       .catch((e) => reject(e.response?.data)),
   );
 
-export const get = (endpoint: string): Promise<AxiosResponse> =>
+export const get = <T>(endpoint: string): Promise<T> =>
   new Promise((resolve, reject) =>
     http
       .get(endpoint)
