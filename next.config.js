@@ -23,6 +23,7 @@ module.exports = withAntdLess({
       test: /\.svg$/,
       use: ['@svgr/webpack'],
     });
+
     return config;
   },
 

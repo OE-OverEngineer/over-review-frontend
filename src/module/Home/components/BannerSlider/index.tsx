@@ -74,8 +74,12 @@ const BannerSlider: React.FC = () => {
               <div
                 className="max-w-5xl flex z-10 justify-center m-auto font-poppins"
                 key={`slider-items-${index}`}>
-                <img src={Banner.src} alt="banner1" className=" w-96 relative -mr-2" />
-                <div className="max-w-xl w-full bg-white my-8 rounded-r-2xl py-8 px-12">
+                <img
+                  src={Banner.src}
+                  alt="banner1"
+                  className=" w-96 h-full relative -mr-2"
+                />
+                <div className="max-w-xl w-full bg-white my-4 rounded-r-2xl py-8 px-12">
                   <div className="text-2xl text-black mb-2">Moon Light</div>
                   <hr className=" border-gray-500" />
                   <div className="grid grid-cols-2 gap-y-8 my-4">
