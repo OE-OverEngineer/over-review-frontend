@@ -1,16 +1,16 @@
 import React from 'react';
 
-import { Menu, Button } from 'antd';
+import { SearchOutlined } from '@ant-design/icons';
+import { Menu, Button, Input } from 'antd';
 import { Header } from 'antd/lib/layout/layout';
 
 import Logo from 'common/assets/images/logoNav.svg';
 
 const NAV_CONTENT = [
   { key: '1', title: 'Home' },
+
   { key: '2', title: 'About' },
-  { key: '3', title: 'News' },
-  { key: '4', title: 'Discover' },
-  { key: '5', title: 'Community' },
+  { key: '3', title: 'Discover' },
 ];
 
 const Navbar: React.FC = () => {
@@ -30,6 +30,14 @@ const Navbar: React.FC = () => {
           ))}
         </Menu>
         <div className="border-b flex h-16 items-center">
+          <Input
+            allowClear
+            placeholder="search something here ..."
+            bordered={false}
+            style={{ color: '#fff' }}
+            prefix={<SearchOutlined style={{ color: '#fff', marginRight: '8px' }} />}
+            size="large"
+          />
           <Button
             className="px-6 py-0 order-5 mr-6 font-poppins "
             type="primary"
