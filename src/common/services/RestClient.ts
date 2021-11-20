@@ -34,7 +34,9 @@ export const get = <T>(endpoint: string): Promise<T> =>
 http.interceptors.request.use(
   (config: AxiosRequestConfig) => {
     // eslint-disable-next-line no-param-reassign
-    config.headers.Authorization = localStorage.getItem(TOKEN_KEY);
+    if (config.headers) {
+      config.headers.Authorization = localStorage.getItem(TOKEN_KEY) || '';
+    }
 
     return config;
   },

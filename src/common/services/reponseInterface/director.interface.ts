@@ -1,6 +1,4 @@
-import { Entity, Column, PrimaryGeneratedColumn, OneToMany } from 'typeorm';
-
-import { Movie } from './movie.entity';
+import { Movie } from './movie.interface';
 
 export interface Director {
   id: number;
