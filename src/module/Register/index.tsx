@@ -1,7 +1,7 @@
 import React from 'react';
 
 import { LockOutlined, UserOutlined } from '@ant-design/icons';
-import { Button, Checkbox, DatePicker, Form, Input, Layout, Select } from 'antd';
+import { Button, DatePicker, Form, Input, Layout, Select } from 'antd';
 import { Content, Footer } from 'antd/lib/layout/layout';
 
 import Bg from 'common/assets/images/register.svg';

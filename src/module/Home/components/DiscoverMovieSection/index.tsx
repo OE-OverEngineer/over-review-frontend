@@ -12,7 +12,7 @@ import Star from 'common/assets/images/star.svg';
 import moviesController from 'common/services/Controllers/moviesControllers';
 import { Movie } from 'common/services/reponseInterface/movie.interface';
 
-const DiscoverMovie: React.FC = () => {
+const DiscoverMovieSection: React.FC = () => {
   const [moviePoster, setmoviePoster] = useState<Movie[]>();
   const { getMovies, getCategories } = moviesController();
 
@@ -147,4 +147,4 @@ const DiscoverMovie: React.FC = () => {
   );
 };
 
-export default DiscoverMovie;
+export default DiscoverMovieSection;

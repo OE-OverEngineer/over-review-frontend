@@ -1,3 +1,5 @@
+import BannerSlider from 'module/Home/components/DiscoverMovie/BannerMovie';
+
 import React from 'react';
 
 import { SearchOutlined } from '@ant-design/icons';
@@ -8,8 +10,8 @@ import Star from 'common/assets/images/star.svg';
 import Navbar from 'common/components/Navbar';
 import TextHeader from 'common/components/TextHeader';
 
-import BannerSlider from './components/Banner';
-import Slider from './components/Slider';
+import PosterSlider from './components/BannerSlider';
+import HeroSlider from './components/HeroSlider';
 
 const Home: React.FC = () => {
   return (
@@ -31,15 +33,15 @@ const Home: React.FC = () => {
             />
           </div>
           <TextHeader className="max-w-screen-2xl mx-auto mb-8">Trending Now</TextHeader>
-          <Slider />
-          {/* <TextHeader>Last Release</TextHeader>
-          <Slider />
-          <TextHeader>Action</TextHeader>
-          <Slider />
-          <TextHeader>Romantic</TextHeader>
-          <Slider />
-          <TextHeader>Horror</TextHeader>
-          <Slider /> */}
+          <PosterSlider />
+          <TextHeader className="max-w-screen-2xl mx-auto mb-8">Last Release</TextHeader>
+          <PosterSlider />
+          <TextHeader className="max-w-screen-2xl mx-auto mb-8">Action</TextHeader>
+          <PosterSlider />
+          <TextHeader className="max-w-screen-2xl mx-auto mb-8">Romantic</TextHeader>
+          <PosterSlider />
+          <TextHeader className="max-w-screen-2xl mx-auto mb-8">Horror</TextHeader>
+          <PosterSlider />
         </div>
       </Content>
       <Footer className="text-center">Over Review ©2021 Created by Over Engineer</Footer>
