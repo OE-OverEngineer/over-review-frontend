@@ -49,7 +49,7 @@ const PrevArrow = (props: {
 
 const PosterSlider: React.FC = () => {
   return (
-    <section className="slider-banner mb-16">
+    <div className="slider-banner mb-16">
       <Slider
         className="slider"
         slidesToShow={1}
@@ -184,7 +184,7 @@ const PosterSlider: React.FC = () => {
           />
         </div>
       </Slider>
-    </section>
+    </div>
   );
 };
 

@@ -5,7 +5,7 @@ import { Rate, Button } from 'antd';
 import Banner3 from 'common/assets/images/banner/banner_3.png';
 import TextHeader from 'common/components/TextHeader';
 
-const TopReview: React.FC = () => {
+const TopReviewSection: React.FC = () => {
   return (
     <section className="top-review">
       <TextHeader className="mb-2">Nawa-lee’s Top Reviews</TextHeader>
@@ -83,4 +83,4 @@ const TopReview: React.FC = () => {
   );
 };
 
-export default TopReview;
+export default TopReviewSection;

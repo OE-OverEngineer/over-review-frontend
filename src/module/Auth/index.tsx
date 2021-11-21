@@ -7,7 +7,7 @@ import { useRouter } from 'next/dist/client/router';
 import { ToastContainer, toast } from 'react-toastify';
 
 import Star from 'common/assets/images/star.svg';
-import Navbar from 'common/components/Navbar';
+import Navbar from 'common/components/Layouts/Navbar';
 import userController from 'common/services/Controllers/userController';
 import { LoginRequset } from 'common/services/postSchemas';
 import { TOKEN_KEY } from 'common/utilities/constants';

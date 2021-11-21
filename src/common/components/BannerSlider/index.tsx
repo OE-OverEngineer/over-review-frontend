@@ -48,12 +48,12 @@ const PrevArrow = (props: {
   );
 };
 
-const BannerSlider: React.FC = () => {
+const BannerSlider: React.FC<{ className?: string }> = ({ className }) => {
   const [banner, setBanner] = useState<any>();
   const [subBanner, setSubBanner] = useState<any>();
 
   return (
-    <React.Fragment>
+    <div className={className}>
       <Slider
         className="slider z-10"
         asNavFor={banner}
@@ -183,7 +183,7 @@ const BannerSlider: React.FC = () => {
           />
         </div>
       </Slider>
-    </React.Fragment>
+    </div>
   );
 };
 

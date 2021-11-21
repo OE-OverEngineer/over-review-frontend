@@ -11,7 +11,7 @@ import Over from 'common/assets/images/Over.svg';
 import Mini from 'common/assets/images/profilemini.png';
 import Rating from 'common/assets/images/rating.svg';
 import Star from 'common/assets/images/star.svg';
-import Navbar from 'common/components/Navbar';
+import Navbar from 'common/components/Layouts/Navbar';
 
 import MoviePoster from './components/MoviePoster';
 
