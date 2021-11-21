@@ -48,7 +48,7 @@ const Profile: React.FC = () => {
                   <FlagFilled className=" mr-2 ml-0 mx-auto" />
                   <div className="text-sm">report</div>
                 </div>
-                <Anchor className="overflow-hidden">
+                <Anchor className="overflow-hidden mt-2">
                   <ProfileCard />
                   <TopReviewCard />
                 </Anchor>

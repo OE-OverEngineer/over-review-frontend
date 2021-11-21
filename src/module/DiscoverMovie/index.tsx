@@ -1,27 +1,15 @@
 import React from 'react';
 
-import { Input, Layout, Tabs } from 'antd';
+import { SearchOutlined } from '@ant-design/icons';
+import { Input, Layout } from 'antd';
 import { Content, Footer } from 'antd/lib/layout/layout';
 
 import Star from 'common/assets/images/star.svg';
 import Navbar from 'common/components/Navbar';
+import TextHeader from 'common/components/TextHeader';
 
 import BannerSlider from './components/Banner';
 import Slider from './components/Slider';
-
-interface IHeaderProps {
-  children?: React.ReactNode;
-  title: string;
-}
-
-const Header: React.FC<{ title: string }> = ({ title }: IHeaderProps) => {
-  return (
-    <div>
-      <div className="bg-gradient-to-b from-primary-default to-primary-purple2nd w-2 h-5 inline-block mt-8"></div>
-      <span className="text-xl ml-10 font-poppins">{title.toUpperCase()}</span>
-    </div>
-  );
-};
 
 const Home: React.FC = () => {
   return (
@@ -30,18 +18,28 @@ const Home: React.FC = () => {
       <Navbar />
       <Content>
         <BannerSlider />
-        <div className="text-2xl max-w-screen-2xl mt-20 mb-16 mx-auto font-poppins">
-          Discover Movies
-          <Header title={'Trending Now'} />
+        <div className="">
+          <div className="flex justify-between max-w-screen-2xl mx-auto mb-8">
+            <div className="text-2xl ">Discover Movies</div>
+            <Input
+              allowClear
+              placeholder="search something here"
+              bordered={false}
+              className="text-white w-72"
+              prefix={<SearchOutlined className="text-white mr-2" />}
+              size="large"
+            />
+          </div>
+          <TextHeader className="max-w-screen-2xl mx-auto mb-8">Trending Now</TextHeader>
           <Slider />
-          <Header title={'Last Release'} />
+          {/* <TextHeader>Last Release</TextHeader>
           <Slider />
-          <Header title={'Action'} />
+          <TextHeader>Action</TextHeader>
           <Slider />
-          <Header title={'Romantic'} />
+          <TextHeader>Romantic</TextHeader>
           <Slider />
-          <Header title={'Horror'} />
-          <Slider />
+          <TextHeader>Horror</TextHeader>
+          <Slider /> */}
         </div>
       </Content>
       <Footer className="text-center">Over Review ©2021 Created by Over Engineer</Footer>

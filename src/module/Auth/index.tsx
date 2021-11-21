@@ -49,7 +49,6 @@ const Auth: React.FC = () => {
       <Navbar />
       <Content>
         <section className="max-w-screen-2xl m-auto mt-28">
-          <p className=" text-3xl text-center"> </p>
           <Form
             name="loginForm"
             className="max-w-lg m-auto bg-white pt-3 pb-4 rounded-3xl "
