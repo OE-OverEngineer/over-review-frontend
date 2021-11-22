@@ -5,7 +5,6 @@ import { SearchOutlined } from '@ant-design/icons';
 import { Button, Input, Tabs } from 'antd';
 import dayjs from 'dayjs';
 
-import Banner1 from 'common/assets/images/banner/banner_1.png';
 import Banner2 from 'common/assets/images/banner/banner_2.png';
 import Banner3 from 'common/assets/images/banner/banner_3.png';
 import Rating from 'common/assets/images/rating.svg';
@@ -13,7 +12,7 @@ import Star from 'common/assets/images/star.svg';
 import moviesController from 'common/services/Controllers/moviesControllers';
 import { Movie } from 'common/services/reponseInterface/movie.interface';
 
-const DiscoverMovie: React.FC = () => {
+const DiscoverMovieSection: React.FC = () => {
   const [moviePoster, setmoviePoster] = useState<Movie[]>();
   const { getMovies, getCategories } = moviesController();
 
@@ -39,10 +38,10 @@ const DiscoverMovie: React.FC = () => {
             right: (
               <Input
                 allowClear
-                placeholder="search something here ..."
+                placeholder="search something here"
                 bordered={false}
-                style={{ color: '#fff' }}
-                prefix={<SearchOutlined style={{ color: '#fff', marginRight: '8px' }} />}
+                className="text-white"
+                prefix={<SearchOutlined className="text-white mr-2" />}
                 size="large"
               />
             ),
@@ -148,4 +147,4 @@ const DiscoverMovie: React.FC = () => {
   );
 };
 
-export default DiscoverMovie;
+export default DiscoverMovieSection;

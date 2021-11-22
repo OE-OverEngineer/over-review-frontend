@@ -1,9 +1,6 @@
-import DiscoverMovie from 'module/Home/components/DiscoverMovie';
-
 import React from 'react';
 
-import { ProfileFilled, UserOutlined } from '@ant-design/icons';
-import { Button, Input, Layout, Rate, Tabs } from 'antd';
+import { Button, Input, Layout, Rate } from 'antd';
 import { Content, Footer } from 'antd/lib/layout/layout';
 
 import Male from 'common/assets/images/actors/1.png';
@@ -13,9 +10,8 @@ import Line from 'common/assets/images/line.svg';
 import Over from 'common/assets/images/Over.svg';
 import Mini from 'common/assets/images/profilemini.png';
 import Rating from 'common/assets/images/rating.svg';
-import Search from 'common/assets/images/search.svg';
 import Star from 'common/assets/images/star.svg';
-import Navbar from 'common/components/Navbar';
+import Navbar from 'common/components/Layouts/Navbar';
 
 import MoviePoster from './components/MoviePoster';
 

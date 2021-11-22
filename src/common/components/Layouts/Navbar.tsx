@@ -1,7 +1,6 @@
 import React from 'react';
 
-import { SearchOutlined } from '@ant-design/icons';
-import { Menu, Button, Input } from 'antd';
+import { Menu, Button } from 'antd';
 import { Header } from 'antd/lib/layout/layout';
 
 import Logo from 'common/assets/images/logoNav.svg';
