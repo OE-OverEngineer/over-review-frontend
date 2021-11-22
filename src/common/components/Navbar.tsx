@@ -9,8 +9,7 @@ import Logo from 'common/assets/images/logoNav.svg';
 const NAV_CONTENT = [
   { key: '1', title: 'Home' },
 
-  { key: '2', title: 'About' },
-  { key: '3', title: 'Discover' },
+  { key: '2', title: 'Discover' },
 ];
 
 const Navbar: React.FC = () => {
@@ -30,14 +29,6 @@ const Navbar: React.FC = () => {
           ))}
         </Menu>
         <div className="border-b flex h-16 items-center">
-          <Input
-            allowClear
-            placeholder="search something here ..."
-            bordered={false}
-            style={{ color: '#fff' }}
-            prefix={<SearchOutlined style={{ color: '#fff', marginRight: '8px' }} />}
-            size="large"
-          />
           <Button
             className="px-6 py-0 order-5 mr-6 font-poppins "
             type="primary"
