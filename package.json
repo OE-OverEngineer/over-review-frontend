@@ -25,6 +25,7 @@
   },
   "dependencies": {
     "@ant-design/icons": "^4.7.0",
+    "@tailwindcss/line-clamp": "^0.2.2",
     "antd": "^4.17.0-alpha.7",
     "axios": "^0.24.0",
     "buffer": "^6.0.3",

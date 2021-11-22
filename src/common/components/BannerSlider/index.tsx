@@ -2,6 +2,7 @@
 import React, { useState } from 'react';
 
 import { Button, Rate } from 'antd';
+import dayjs from 'dayjs';
 import Slider from 'react-slick';
 
 import Arrow from 'common/assets/images/arrow.svg';
@@ -52,6 +53,21 @@ const BannerSlider: React.FC<{ className?: string }> = ({ className }) => {
   const [banner, setBanner] = useState<any>();
   const [subBanner, setSubBanner] = useState<any>();
 
+  function intersperse(arr: any, sep: any) {
+    if (arr.length === 0) {
+      return [];
+    }
+
+    return arr.slice(1).reduce(
+      function (xs: any, x: any) {
+        return xs.concat([sep, x]);
+      },
+      [arr[0]],
+    );
+  }
+
+  const tags = intersperse([`Fantasy`, `Fiction`], ', ');
+
   return (
     <div className={className}>
       <Slider
@@ -81,11 +97,19 @@ const BannerSlider: React.FC<{ className?: string }> = ({ className }) => {
                 <div className="grid grid-cols-2 gap-y-8 my-4">
                   <div className="block">
                     <div className="text-gray-600 text-sm">Release date</div>
-                    <div className="text-gray-600 text-sm">June 17,2016</div>
+                    <div className="text-gray-600 text-sm">
+                      {dayjs().format(`MMMM DD,YYYY`)}
+                    </div>
                   </div>
                   <div className="block">
                     <div className="text-gray-600 text-sm">Genre</div>
-                    <div className="text-gray-800 text-sm">Fantasy,Fiction</div>
+                    <div className="text-gray-800 text-sm">
+                      {tags.map((tag: any, index: any) => (
+                        <span key={index} className="">
+                          {tag}
+                        </span>
+                      ))}
+                    </div>
                   </div>
                   <div className="block">
                     <div className="text-gray-600 text-sm">Directed by</div>
@@ -93,10 +117,10 @@ const BannerSlider: React.FC<{ className?: string }> = ({ className }) => {
                   </div>
                   <div className="block">
                     <div className="text-gray-600 text-sm">Synopsis</div>
-                    <div className="text-gray-800 text-sm">
+                    <div className="text-gray-800 text-sm line-clamp-5 overflow-hidden">
                       Natasha Romanoff, aka Black Widow, confronts the darker parts of her
                       ledger when a dangerous conspiracy with ties to her past arises.
-                      Pursued by a force that will ....
+                      Pursued by a force that will
                     </div>
                   </div>
                   <div className="block">
@@ -112,9 +136,9 @@ const BannerSlider: React.FC<{ className?: string }> = ({ className }) => {
                   </div>
                 </div>
                 <hr className=" border-gray-500" />
-                <div className="flex justify-between mt-2 mx-4">
+                <div className="flex justify-between mt-8 mx-4">
                   <div className="block text-center">
-                    <div className="text-gray-600 text-2xl">8/10</div>
+                    <div className="text-gray-600 text-2xl">8.2/10</div>
                     <div className="text-gray-600 text-xs">Ratings by IMDb</div>
                   </div>
                   <div className="block text-center">
