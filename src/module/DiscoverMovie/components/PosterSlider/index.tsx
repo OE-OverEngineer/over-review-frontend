@@ -21,7 +21,7 @@ const NextArrow = (props: {
   const { className, style, onClick } = props;
   return (
     <div
-      className={`${className} pr-16 z-10 h-full w-60 flex items-center bg-gradient-to-l from-black bg-opacity-30 justify-end`}
+      className={`${className} pr-16 z-10 h-full w-60 flex items-center bg-gradient-to-l from-black bg-opacity-30 justify-end right-0`}
       style={{ ...style }}
       onClick={onClick}
       role="presentation">
