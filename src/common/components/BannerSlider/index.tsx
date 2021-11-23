@@ -1,20 +1,15 @@
 /* eslint-disable @typescript-eslint/no-explicit-any */
-import React, { useState } from 'react';
+import React, { useEffect, useState } from 'react';
 
 import { Button, Rate } from 'antd';
 import dayjs from 'dayjs';
 import Slider from 'react-slick';
 
 import Arrow from 'common/assets/images/arrow.svg';
-import Banner1 from 'common/assets/images/banner/banner_1.png';
-import Banner2 from 'common/assets/images/banner/banner_2.png';
-import Banner3 from 'common/assets/images/banner/banner_3.png';
-import Banner4 from 'common/assets/images/banner/banner_4.png';
-import Banner5 from 'common/assets/images/banner/banner_5.png';
-import Banner from 'common/assets/images/banner_poster.png';
-
 import 'slick-carousel/slick/slick.css';
 import 'slick-carousel/slick/slick-theme.css';
+import Intersperse from 'common/hooks/Intersperse';
+import { Movie } from 'common/services/reponseInterface/movie.interface';
 
 const NextArrow = (props: {
   className?: string;
@@ -49,165 +44,143 @@ const PrevArrow = (props: {
   );
 };
 
-const BannerSlider: React.FC<{ className?: string }> = ({ className }) => {
+interface BannerSliderProps {
+  movie: Movie[];
+  className?: string;
+}
+
+const BannerSlider: React.FC<BannerSliderProps> = ({ className, movie }) => {
   const [banner, setBanner] = useState<any>();
   const [subBanner, setSubBanner] = useState<any>();
+  const [movieBanner, setMovieBanner] = useState<Movie[]>();
 
-  function intersperse(arr: any, sep: any) {
-    if (arr.length === 0) {
-      return [];
-    }
-
-    return arr.slice(1).reduce(
-      function (xs: any, x: any) {
-        return xs.concat([sep, x]);
-      },
-      [arr[0]],
-    );
-  }
-
-  const tags = intersperse([`Fantasy`, `Fiction`], ', ');
+  useEffect(() => {
+    setMovieBanner(movie);
+    console.log(`movie`, movie);
+    if (subBanner) subBanner.slickNext();
+  }, [movie, movieBanner]);
 
   return (
-    <div className={className}>
-      <Slider
-        className="slider z-10"
-        asNavFor={banner}
-        ref={(slider) => setSubBanner(slider)}
-        infinite
-        slidesToShow={1}
-        slidesToScroll={1}
-        fade
-        nextArrow={<NextArrow />}
-        prevArrow={<PrevArrow />}>
-        {Array(5)
-          .fill(0)
-          .map((_, index) => (
-            <div
-              className="max-w-5xl flex z-10 justify-center m-auto font-poppins"
-              key={`slider-items-${index}`}>
-              <img
-                src={Banner.src}
-                alt="banner1"
-                className=" w-96 h-full relative -mr-2"
-              />
-              <div className="max-w-xl w-full bg-white my-4 rounded-r-2xl py-8 px-12">
-                <div className="text-2xl text-black mb-2">Moon Light</div>
-                <hr className=" border-gray-500" />
-                <div className="grid grid-cols-2 gap-y-8 my-4">
-                  <div className="block">
-                    <div className="text-gray-600 text-sm">Release date</div>
-                    <div className="text-gray-600 text-sm">
-                      {dayjs().format(`MMMM DD,YYYY`)}
+    <>
+      {movieBanner && (
+        <div className={className}>
+          <Slider
+            className="slider z-10"
+            asNavFor={banner}
+            ref={(slider) => setSubBanner(slider)}
+            infinite
+            slidesToShow={1}
+            slidesToScroll={1}
+            fade
+            nextArrow={<NextArrow />}
+            prevArrow={<PrevArrow />}>
+            {movieBanner.map((item, index) => (
+              <div
+                className="max-w-5xl flex z-10 justify-center m-auto font-poppins"
+                key={`slider-items-${index}`}>
+                <img
+                  src={item.bannerImage}
+                  alt="banner1"
+                  className=" w-96 h-full relative -mr-2 rounded-3xl"
+                />
+                <div className="max-w-xl w-full bg-white my-4 rounded-r-2xl py-8 px-12">
+                  <div className="text-2xl text-black mb-2">{item.title}</div>
+                  <hr className=" border-gray-500" />
+                  <div className="grid grid-cols-2 gap-y-8 my-4">
+                    <div className="block">
+                      <div className="text-gray-600 text-sm">Release date</div>
+                      <div className="text-gray-600 text-sm">
+                        {dayjs(item.startDate).format(`MMMM DD,YYYY`)}
+                      </div>
+                    </div>
+                    <div className="block">
+                      <div className="text-gray-600 text-sm">Genre</div>
+                      <div className="text-gray-800 text-sm">
+                        {Intersperse(item.categories, ', ').map(
+                          (tag: any, index: any) => (
+                            <span key={index} className="">
+                              {tag}
+                            </span>
+                          ),
+                        )}
+                      </div>
+                    </div>
+                    <div className="block">
+                      <div className="text-gray-600 text-sm">Directed by</div>
+                      <div className="text-gray-800 text-sm">{`${item.director.firstName} ${item.director.lastName}`}</div>
+                    </div>
+                    <div className="block">
+                      <div className="text-gray-600 text-sm">Synopsis</div>
+                      <div className="text-gray-800 text-sm line-clamp-5 overflow-hidden">
+                        {item.description}
+                      </div>
+                    </div>
+                    <div className="block h-24">
+                      <div className="text-gray-600 text-sm">Starring</div>
+                      {item.actors.map((actor: any, index: any) => {
+                        if (index < 3) {
+                          return (
+                            <div key={actor.firstname} className="text-gray-800 text-sm">
+                              {`${actor.firstName} ${actor.lastName}`}
+                            </div>
+                          );
+                        } else {
+                          return null;
+                        }
+                      })}
+                      {item.actors.length > 3 && (
+                        <div className="text-gray-400 text-sm">
+                          {`+ ${item.actors.length - 3} more`}
+                        </div>
+                      )}
+                    </div>
+                    <div className="block">
+                      <Button type="default" shape="round" size="large">
+                        See more
+                      </Button>
                     </div>
                   </div>
-                  <div className="block">
-                    <div className="text-gray-600 text-sm">Genre</div>
-                    <div className="text-gray-800 text-sm">
-                      {tags.map((tag: any, index: any) => (
-                        <span key={index} className="">
-                          {tag}
-                        </span>
-                      ))}
+                  <hr className=" border-gray-500" />
+                  <div className="flex justify-around mt-8 mx-4">
+                    <div className="block text-center">
+                      <div className="text-gray-600 text-2xl">8.2/10</div>
+                      <div className="text-gray-600 text-xs">Ratings by OverUser</div>
                     </div>
-                  </div>
-                  <div className="block">
-                    <div className="text-gray-600 text-sm">Directed by</div>
-                    <div className="text-gray-800 text-sm">Steven Spielberg</div>
-                  </div>
-                  <div className="block">
-                    <div className="text-gray-600 text-sm">Synopsis</div>
-                    <div className="text-gray-800 text-sm line-clamp-5 overflow-hidden">
-                      Natasha Romanoff, aka Black Widow, confronts the darker parts of her
-                      ledger when a dangerous conspiracy with ties to her past arises.
-                      Pursued by a force that will
+
+                    <div className="block text-center">
+                      <div className="text-gray-600 text-2xl">
+                        <Rate disabled defaultValue={4} />
+                      </div>
+                      <div className="text-gray-600 text-xs">From OverUsers</div>
                     </div>
-                  </div>
-                  <div className="block">
-                    <div className="text-gray-600 text-sm">Starring</div>
-                    <div className="text-gray-800 text-sm">Natasha Romanoff</div>
-                    <div className="text-gray-800 text-sm">Ruby Barnhlll</div>
-                    <div className="text-gray-400 text-sm">+3 see more</div>
-                  </div>
-                  <div className="block">
-                    <Button type="default" shape="round" size="large">
-                      See more
-                    </Button>
-                  </div>
-                </div>
-                <hr className=" border-gray-500" />
-                <div className="flex justify-between mt-8 mx-4">
-                  <div className="block text-center">
-                    <div className="text-gray-600 text-2xl">8.2/10</div>
-                    <div className="text-gray-600 text-xs">Ratings by IMDb</div>
-                  </div>
-                  <div className="block text-center">
-                    <div className="text-gray-600 text-2xl">84%</div>
-                    <div className="text-gray-600 text-xs">MetaCritic</div>
-                  </div>
-                  <div className="block text-center">
-                    <div className="text-gray-600 text-2xl">
-                      <Rate disabled defaultValue={4} />
-                    </div>
-                    <div className="text-gray-600 text-xs">From over users</div>
                   </div>
                 </div>
               </div>
-            </div>
-          ))}
-      </Slider>
-      <Slider
-        className="slider sub-banner relative z-0"
-        asNavFor={subBanner}
-        ref={(slider) => setBanner(slider)}
-        infinite
-        centerMode
-        slidesToShow={1}
-        slidesToScroll={1}
-        arrows={false}
-        variableWidth>
-        <div>
-          <img
-            src={Banner1.src}
-            alt="banner1"
-            width="94%"
-            style={{ margin: 'auto', filter: 'brightness(0.5)' }}
-          />
+            ))}
+          </Slider>
+          <Slider
+            className="slider sub-banner relative z-0"
+            asNavFor={subBanner}
+            ref={(slider) => setBanner(slider)}
+            infinite
+            centerMode
+            slidesToShow={1}
+            slidesToScroll={1}
+            arrows={false}
+            variableWidth>
+            {movieBanner.map((item, index) => (
+              <div key={index} className="h-104 w-80">
+                <img
+                  src={item.bannerImage}
+                  alt="banner1"
+                  className=" h-full object-cover rounded-2xl filter brightness-50 m-auto"
+                />
+              </div>
+            ))}
+          </Slider>
         </div>
-        <div>
-          <img
-            src={Banner2.src}
-            alt="banner2"
-            width="94%"
-            style={{ margin: 'auto', filter: 'brightness(0.5)' }}
-          />
-        </div>
-        <div>
-          <img
-            src={Banner3.src}
-            alt="banner3"
-            width="94%"
-            style={{ margin: 'auto', filter: 'brightness(0.5)' }}
-          />
-        </div>
-        <div>
-          <img
-            src={Banner4.src}
-            alt="banner4"
-            width="94%"
-            style={{ margin: 'auto', filter: 'brightness(0.5)' }}
-          />
-        </div>
-        <div>
-          <img
-            src={Banner5.src}
-            alt="banner5"
-            width="94%"
-            style={{ margin: 'auto', filter: 'brightness(0.5)' }}
-          />
-        </div>
-      </Slider>
-    </div>
+      )}
+    </>
   );
 };
 
