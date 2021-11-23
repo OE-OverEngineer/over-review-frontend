@@ -17,6 +17,10 @@ module.exports = {
       backgroundImage: {
         'primary-gradient': 'linear-gradient(114.44deg, #7433FF 0%, #BCA4FF 100%)',
       },
+      height: {
+        104: '416px',
+        128: '512px',
+      },
     },
     fontFamily: {
       poppins: ['Poppins', 'Prompt'],
