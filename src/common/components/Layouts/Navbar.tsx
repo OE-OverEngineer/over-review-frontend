@@ -8,8 +8,7 @@ import Logo from 'common/assets/images/logoNav.svg';
 const NAV_CONTENT = [
   { key: '1', title: 'Home' },
 
-  { key: '2', title: 'About' },
-  { key: '3', title: 'Discover' },
+  { key: '2', title: 'Discover' },
 ];
 
 const Navbar: React.FC = () => {
@@ -28,7 +27,7 @@ const Navbar: React.FC = () => {
             </Menu.Item>
           ))}
         </Menu>
-        <div className=" flex h-16 items-center">
+        <div className="border-b flex h-16 items-center">
           <Button
             className="px-6 py-0 order-5 mr-6 font-poppins "
             type="primary"
