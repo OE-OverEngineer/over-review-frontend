@@ -7,18 +7,14 @@ import Male from 'common/assets/images/actors/1.png';
 import Female from 'common/assets/images/actors/2.png';
 import Banner1 from 'common/assets/images/banner/banner_1.png';
 import Line from 'common/assets/images/line.svg';
-import Over from 'common/assets/images/Over.svg';
-import Mini from 'common/assets/images/profilemini.png';
 import Rating from 'common/assets/images/rating.svg';
 import Star from 'common/assets/images/star.svg';
 import Navbar from 'common/components/Layouts/Navbar';
+import TextHeader from 'common/components/TextHeader';
 
+import CriticReviews from './components/CriticReviews';
 import MoviePoster from './components/MoviePoster';
 
-interface IHeaderProps {
-  children?: React.ReactNode;
-  title: string;
-}
 const { TextArea } = Input;
 
 const actors = [
@@ -48,15 +44,6 @@ const actors = [
   },
 ];
 
-const Header: React.FC<{ title: string }> = ({ title }: IHeaderProps) => {
-  return (
-    <div>
-      <div className="bg-gradient-to-b from-primary-default to-primary-purple2nd w-2 h-5 inline-block ml-80"></div>
-      <span className="text-xl ml-10 font-poppins">{title.toUpperCase()}</span>
-    </div>
-  );
-};
-
 const Home: React.FC = () => {
   return (
     <Layout className="max-h-full ">
@@ -70,7 +57,7 @@ const Home: React.FC = () => {
           <div>
             <MoviePoster />
           </div>
-          <Header title={'ACTOR'} />
+          <TextHeader className="ml-80">ACTOR</TextHeader>
 
           <div className="grid grid-cols-4 px-80 mt-5 font-poppins text-lg">
             {actors.map((actor) => (
@@ -94,34 +81,9 @@ const Home: React.FC = () => {
           </Button>
 
           <Line className="mx-auto mt-8 " />
+          <CriticReviews />
           <div className="mt-8">
-            <Header title={'CRITIC REVIEWS '} />
-          </div>
-          <div className="border-2 border-primary-default w-3/5 mx-auto rounded-3xl flex flex-col gap-y-4 p-4 mt-4">
-            {Array.from({ length: 5 }).map((_, index) => (
-              <div className="grid grid-cols-12" key={index}>
-                {index === 0 && (
-                  <div className="col-span-11 flex justify-end">
-                    <span className="text-primary-defaultLight italic">TOP review</span>
-                  </div>
-                )}
-                <div className="border border-white col-span-11 rounded-xl p-3 font-poppins">
-                  <Rate className="" allowHalf defaultValue={3.5} disabled />
-                  <br />A powerful reminder how something as seemingly lowbrow and
-                  disposable as horror cinema can be a surprisingly successful vehicle to
-                  address.
-                </div>
-                <div className="col-span-1">
-                  <img src={Mini.src} alt="profile" className="w-9/12 mx-auto" />
-                </div>
-                <button className="border-2 border-primary-default font-poppins text-xs italic rounded-md w-16 mt-4 text-primary-defaultLight">
-                  1234 <Over className="inline-block " />
-                </button>
-              </div>
-            ))}
-          </div>
-          <div className="mt-8">
-            <Header title={'RATE AND REVIEWS '} />
+            <TextHeader className="ml-80">RATE AND REVIEWS</TextHeader>
 
             <Rate className="ml-80 mt-4" allowHalf defaultValue={0} />
           </div>
@@ -144,7 +106,7 @@ const Home: React.FC = () => {
               Post
             </Button>
           </div>
-          <Header title={'YOU MIGHT ALSO LIKE'} />
+          <TextHeader className="ml-80">YOU MIGHT ALSO LIKE</TextHeader>
           <div className="w-3/5 mx-auto">
             <div className="grid gap-y-16 gap-x-5 py-16 justify-items-center grid-cols-2 2xl:grid-cols-5 lg:grid-cols-4 md:grid-cols-3 sm:grid-cols-2">
               {Array.from({ length: 5 }).map((_, index) => (
