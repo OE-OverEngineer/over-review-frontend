@@ -7,7 +7,6 @@ export interface CreateUserRequest {
   avatar: string;
   dateOfBirth: Date;
   gender: string;
-  roleID: number;
 }
 
 export interface CreateCommentRequest {

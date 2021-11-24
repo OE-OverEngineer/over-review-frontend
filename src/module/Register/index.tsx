@@ -1,17 +1,85 @@
-import React from 'react';
+/* eslint-disable @typescript-eslint/no-explicit-any */
+import React, { useState } from 'react';
 
 import { LockOutlined, UserOutlined } from '@ant-design/icons';
-import { Button, DatePicker, Form, Input, Layout, Select } from 'antd';
+import { Button, DatePicker, Form, Input, Layout, message, Select, Upload } from 'antd';
 import { Content, Footer } from 'antd/lib/layout/layout';
+import Link from 'next/link';
+import { toast, ToastContainer } from 'react-toastify';
 
 import Bg from 'common/assets/images/register.svg';
 import Star from 'common/assets/images/star.svg';
 import Navbar from 'common/components/Layouts/Navbar';
 import Svg from 'common/components/Svg';
+import authController from 'common/services/Controllers/authController';
+import { CreateUserRequest } from 'common/services/postSchemas';
 
 const { Option } = Select;
 
 const Register: React.FC = () => {
+  const [imageUrl, setImageUrl] = useState<any>();
+
+  const { postRegister } = authController();
+
+  function getBase64(img: File, callback: (reader: string | ArrayBuffer | null) => void) {
+    const reader = new FileReader();
+    reader.addEventListener('load', () => callback(reader.result));
+    reader.readAsDataURL(img);
+  }
+
+  function beforeUpload(file: File) {
+    const isJpgOrPng = file.type === 'image/jpeg' || file.type === 'image/png';
+    if (!isJpgOrPng) {
+      message.error('You can only upload JPG/PNG file!');
+    }
+    const isLt2M = file.size / 1024 / 1024 < 2;
+    if (!isLt2M) {
+      message.error('Image must smaller than 2MB!');
+    }
+    return isJpgOrPng && isLt2M;
+  }
+
+  const handleChange = (info: any) => {
+    if (info.file.status === 'done') {
+      // Get this url from response in real world.
+      getBase64(info.file.originFileObj, (imageUrl: string | ArrayBuffer | null) => {
+        setImageUrl(imageUrl);
+      });
+    }
+  };
+
+  const onFinish = (values: any) => {
+    const params: CreateUserRequest = {
+      email: values.email,
+      password: values.password,
+      firstName: values.firstName,
+      lastName: values.lastName,
+      avatar: '',
+      displayName: values.displayName,
+      dateOfBirth: values.dateOfBirth,
+      gender: values.gender,
+    };
+    console.log('Success:', params);
+    postRegister(params)
+      .then((res) => {
+        console.log(res);
+      })
+      .catch((res) => {
+        console.log(res);
+        res.message.map((item: string) => {
+          toast.error(item, {
+            position: 'bottom-right',
+            autoClose: 5000,
+            hideProgressBar: false,
+            closeOnClick: true,
+            pauseOnHover: true,
+            draggable: true,
+            progress: undefined,
+          });
+        });
+      });
+  };
+
   return (
     <Layout className="max-h-screen  h-screen font-poppins">
       <Svg Icon={<Star className="absolute h-full w-full z-0" />} />
@@ -36,6 +104,7 @@ const Register: React.FC = () => {
             name="loginForm"
             className="max-w-2xl m-auto pt-3 pb-4 mt-48"
             layout="vertical"
+            onFinish={onFinish}
             wrapperCol={{ offset: 4, span: 16 }}
             labelCol={{ offset: 4, span: 16 }}
             autoComplete="off">
@@ -43,7 +112,7 @@ const Register: React.FC = () => {
               <div className="col-span-1">
                 <Form.Item
                   label="E-mail"
-                  name="username"
+                  name="email"
                   rules={[{ required: true, message: 'Please input your e-mail!' }]}>
                   <Input
                     prefix={<UserOutlined style={{ color: '#7433FF' }} />}
@@ -53,7 +122,14 @@ const Register: React.FC = () => {
                 <Form.Item
                   label="Password"
                   name="password"
-                  rules={[{ required: true, message: 'Please input your password!' }]}>
+                  rules={[
+                    { required: true, message: 'Please input your password!' },
+                    { min: 6, message: 'Password must be at least 6 characters' },
+                    {
+                      max: 50,
+                      message: 'Password must be less than 50 characters',
+                    },
+                  ]}>
                   <Input.Password
                     prefix={<LockOutlined style={{ color: '#7433FF' }} />}
                     className="rounded-lg"
@@ -61,8 +137,23 @@ const Register: React.FC = () => {
                 </Form.Item>
                 <Form.Item
                   label="Comfirm password"
-                  name="password"
-                  rules={[{ required: true, message: 'Please comfirm your password!' }]}>
+                  name="conf-password"
+                  rules={[
+                    {
+                      required: true,
+                      message: 'Please confirm your password!',
+                    },
+                    ({ getFieldValue }) => ({
+                      validator(_, value) {
+                        if (!value || getFieldValue('password') === value) {
+                          return Promise.resolve();
+                        }
+                        return Promise.reject(
+                          new Error('The two passwords that you entered do not match!'),
+                        );
+                      },
+                    }),
+                  ]}>
                   <Input.Password
                     prefix={<LockOutlined style={{ color: '#7433FF' }} />}
                     className="rounded-lg"
@@ -70,12 +161,41 @@ const Register: React.FC = () => {
                 </Form.Item>
               </div>
               <div className="col-span-1 flex flex-col items-center">
-                <div className="w-44 h-44 rounded-full  border-2 border-primary-default"></div>
-                <Button
-                  className="text-primary-default border-primary-default mt-3"
-                  shape="round">
-                  upload
-                </Button>
+                <Form.Item name="avatar">
+                  <Upload
+                    name="avatar"
+                    listType="picture"
+                    className="avatar-uploader"
+                    showUploadList={false}
+                    beforeUpload={beforeUpload}
+                    onChange={handleChange}>
+                    {imageUrl ? (
+                      <div className="text-center">
+                        <div className="w-44 h-44 rounded-full  border-2 border-primary-default">
+                          <img
+                            src={imageUrl}
+                            alt="avatar"
+                            className="rounded-full h-full w-full object-cover"
+                          />
+                        </div>
+                        <Button
+                          className="text-primary-default border-primary-default mt-3"
+                          shape="round">
+                          upload
+                        </Button>
+                      </div>
+                    ) : (
+                      <div className="text-center">
+                        <div className="w-44 h-44 rounded-full  border-2 border-primary-default"></div>
+                        <Button
+                          className="text-primary-default border-primary-default mt-3"
+                          shape="round">
+                          upload
+                        </Button>
+                      </div>
+                    )}
+                  </Upload>
+                </Form.Item>
               </div>
               <div className="col-span-1 text-black">
                 <Form.Item
@@ -89,12 +209,13 @@ const Register: React.FC = () => {
                   name="displayName"
                   rules={[
                     { required: true, message: 'Please input your display name!' },
+                    { min: 4, message: 'Display name must be at least 4 characters' },
                   ]}>
                   <Input className="rounded-lg" />
                 </Form.Item>
                 <Form.Item
-                  label="Date"
-                  name="displayName"
+                  label="Date of birth"
+                  name="dateOfBirth"
                   rules={[{ required: true, message: 'Please select your birthdate!' }]}>
                   <DatePicker className="" />
                 </Form.Item>
@@ -110,11 +231,11 @@ const Register: React.FC = () => {
                   label="Gender"
                   name="gender"
                   rules={[{ required: true, message: 'Please select!' }]}>
-                  <Select className="text-primary-default">
-                    <Option value="male" className="text-primary-default">
+                  <Select className="text-primary-default" placeholder="Select gender">
+                    <Option value="Male" className="text-primary-default">
                       Male
                     </Option>
-                    <Option value="female " className="text-primary-default">
+                    <Option value="Female " className="text-primary-default">
                       Female
                     </Option>
                   </Select>
@@ -131,11 +252,12 @@ const Register: React.FC = () => {
                 Login
               </Button>
             </Form.Item>
-            <span className="col-span-2 w-full block text-gray-400 text-center">
+            <span className="gap-x-2 flex w-full text-gray-400 justify-center">
               Already have an account?
-              <span className="text-purple-400"> Sign in</span>
+              <Link href="/login">Sign in</Link>
             </span>
           </Form>
+          <ToastContainer />
         </section>
       </Content>
       <Footer className="text-center text-blue-900 z-10">
