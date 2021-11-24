@@ -1,7 +1,6 @@
 import React from 'react';
 
-import { LockOutlined, UserOutlined } from '@ant-design/icons';
-import { Button, Checkbox, DatePicker, Form, Input, Layout } from 'antd';
+import { Button, DatePicker, Form, Input, Layout } from 'antd';
 import { Content, Footer } from 'antd/lib/layout/layout';
 import { useRouter } from 'next/dist/client/router';
 import TextArea from 'rc-textarea';

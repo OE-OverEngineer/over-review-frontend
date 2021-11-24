@@ -7,14 +7,15 @@ import { Content, Footer } from 'antd/lib/layout/layout';
 import Bg from 'common/assets/images/register.svg';
 import Star from 'common/assets/images/star.svg';
 import Navbar from 'common/components/Layouts/Navbar';
+import Svg from 'common/components/Svg';
 
 const { Option } = Select;
 
 const Register: React.FC = () => {
   return (
     <Layout className="max-h-screen  h-screen font-poppins">
-      <Star className="absolute h-full w-full z-0" />
-      <Bg className="absolute h-5/6 z-0 right-0 bottom-0" />
+      <Svg Icon={<Star className="absolute h-full w-full z-0" />} />
+      <Svg Icon={<Bg className="absolute h-5/6 z-0 right-0 bottom-0" />} />
 
       <Navbar />
       <Content className="flex justify-between z-10">
@@ -35,7 +36,6 @@ const Register: React.FC = () => {
             name="loginForm"
             className="max-w-2xl m-auto pt-3 pb-4 mt-48"
             layout="vertical"
-            initialValues={{ remember: true }}
             wrapperCol={{ offset: 4, span: 16 }}
             labelCol={{ offset: 4, span: 16 }}
             autoComplete="off">

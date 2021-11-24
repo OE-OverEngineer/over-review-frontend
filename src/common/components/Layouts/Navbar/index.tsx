@@ -2,16 +2,19 @@ import React from 'react';
 
 import { Menu, Button } from 'antd';
 import { Header } from 'antd/lib/layout/layout';
+import { useRouter } from 'next/dist/client/router';
 
 import Logo from 'common/assets/images/logoNav.svg';
 
 const NAV_CONTENT = [
-  { key: '1', title: 'Home' },
+  { key: 'home', title: 'Home' },
 
-  { key: '2', title: 'Discover' },
+  { key: 'discover', title: 'Discover' },
 ];
 
-const Navbar: React.FC = () => {
+const Navbar: React.FC<{ router?: string[] }> = ({ router }) => {
+  const Router = useRouter();
+
   return (
     <Header className="flex items-center justify-between mt-8 mx-8 font-poppins">
       <Logo />
@@ -20,7 +23,16 @@ const Navbar: React.FC = () => {
           className="max-w-4xl items-center"
           theme="light"
           mode="horizontal"
-          defaultSelectedKeys={['1']}>
+          onClick={(props) => {
+            if (props.key === 'home') {
+              Router.push('/');
+            }
+
+            if (props.key === 'discover') {
+              Router.push(`/discover-movie`);
+            }
+          }}
+          defaultSelectedKeys={router}>
           {NAV_CONTENT.map(({ key, title }) => (
             <Menu.Item className=" px-10 py-0" key={key}>
               {title}

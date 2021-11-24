@@ -15,7 +15,7 @@ const Home: React.FC = () => {
         <title>Home Page</title>
         <link rel="icon" href="/over_icon.svg" />
       </Head>
-      <Layouts>
+      <Layouts router={['home']}>
         <BannerSliderSection />
         <DiscoverMovieSection />
         <HallOfFameSection />
