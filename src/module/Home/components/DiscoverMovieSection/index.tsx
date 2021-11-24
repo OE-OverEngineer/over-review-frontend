@@ -18,7 +18,6 @@ const DiscoverMovieSection: React.FC = () => {
 
   useEffect(() => {
     getMovies(10, 1).then((res) => {
-      console.log(res);
       setmoviePoster(res);
     });
     getCategories().then((res) => {

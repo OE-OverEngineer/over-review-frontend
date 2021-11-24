@@ -56,7 +56,6 @@ const BannerSlider: React.FC<BannerSliderProps> = ({ className, movie }) => {
 
   useEffect(() => {
     setMovieBanner(movie);
-    console.log(`movie`, movie);
     if (subBanner) subBanner.slickNext();
   }, [movie, movieBanner]);
 
@@ -77,7 +76,7 @@ const BannerSlider: React.FC<BannerSliderProps> = ({ className, movie }) => {
             {movieBanner.map((item, index) => (
               <div
                 className="max-w-5xl flex z-10 justify-center m-auto font-poppins"
-                key={`slider-items-${index}`}>
+                key={`${item.title}-items-${index}`}>
                 <img
                   src={item.bannerImage}
                   alt="banner1"
@@ -120,7 +119,9 @@ const BannerSlider: React.FC<BannerSliderProps> = ({ className, movie }) => {
                       {item.actors.map((actor: any, index: any) => {
                         if (index < 3) {
                           return (
-                            <div key={actor.firstname} className="text-gray-800 text-sm">
+                            <div
+                              key={`${actor.firstname}-${index}`}
+                              className="text-gray-800 text-sm">
                               {`${actor.firstName} ${actor.lastName}`}
                             </div>
                           );
@@ -169,7 +170,7 @@ const BannerSlider: React.FC<BannerSliderProps> = ({ className, movie }) => {
             arrows={false}
             variableWidth>
             {movieBanner.map((item, index) => (
-              <div key={index} className="h-104 w-80">
+              <div key={`${item.title}-sub-${index}`} className="h-104 w-80">
                 <img
                   src={item.bannerImage}
                   alt="banner1"

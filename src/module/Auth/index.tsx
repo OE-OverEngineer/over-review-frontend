@@ -4,17 +4,17 @@ import { LockOutlined, UserOutlined } from '@ant-design/icons';
 import { Button, Checkbox, Form, Input, Layout } from 'antd';
 import { Content, Footer } from 'antd/lib/layout/layout';
 import { useRouter } from 'next/dist/client/router';
+import Link from 'next/link';
 import { ToastContainer, toast } from 'react-toastify';
 
 import Star from 'common/assets/images/star.svg';
 import Navbar from 'common/components/Layouts/Navbar';
-import userController from 'common/services/Controllers/userController';
 import { LoginRequset } from 'common/services/postSchemas';
 import { TOKEN_KEY } from 'common/utilities/constants';
 import { handleItem } from 'common/utilities/local-storage';
 
 const Auth: React.FC = () => {
-  const { postAuth } = userController();
+  const { postLogin } = authController();
   const Router = useRouter();
 
   const onFinish = (values: Record<string, string>) => {
@@ -24,7 +24,7 @@ const Auth: React.FC = () => {
       password: values.password,
     };
 
-    postAuth(param)
+    postLogin(param)
       .then((res) => {
         handleItem(TOKEN_KEY, res.access_token);
         Router.push('/');
@@ -47,7 +47,7 @@ const Auth: React.FC = () => {
       <Star className="absolute h-full w-full z-0" />
 
       <Navbar />
-      <Content>
+      <Content className="z-10">
         <section className="max-w-screen-2xl m-auto mt-28">
           <Form
             name="loginForm"
@@ -91,9 +91,10 @@ const Auth: React.FC = () => {
                 Login
               </Button>
             </Form.Item>
-            <p className=" text-purple-400 text-center">
-              Create an account<span className="text-gray-400"> to join OVER review</span>
-            </p>
+            <div className=" text-purple-400 text-center">
+              <Link href="/register">Create an account</Link>
+              <span className="text-gray-400"> to join OVER review</span>
+            </div>
           </Form>
         </section>
         <ToastContainer />
