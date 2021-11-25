@@ -16,7 +16,7 @@ const SearchMovie: React.FC = () => {
       </Head>
       <Layouts>
         <SearchTools />
-        <section className="max-w-screen-2xl m-auto text-white z-10">
+        <section className="max-w-screen-2xl m-auto text-white">
           <SearchFilter />
           <MovieList />
         </section>

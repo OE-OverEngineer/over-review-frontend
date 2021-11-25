@@ -1,20 +1,20 @@
-import React, { useState } from 'react';
+import React, { useEffect, useState } from 'react';
 
-import { UserOutlined } from '@ant-design/icons';
-import { Menu, Button, Avatar, Dropdown, message, Divider } from 'antd';
+import { Menu, Button, Avatar, Dropdown } from 'antd';
 import { Header } from 'antd/lib/layout/layout';
 import { useRouter } from 'next/dist/client/router';
 import Link from 'next/link';
 
 import Logo from 'common/assets/images/logoNav.svg';
+import { TOKEN_KEY } from 'common/utilities/constants';
 
 const menu = (
   <Menu className="rounded-lg">
     <Menu.Item key="1" className="text-primary-default">
-      My profile
+      <Link href="/profile">My profile</Link>
     </Menu.Item>
     <Menu.Item key="2" className="text-primary-default">
-      Request Movie
+      <Link href="/request-movie">Request Movie</Link>
     </Menu.Item>
     <Menu.Divider className="bg-primary-default w-40 mx-auto " />
     <Menu.Item key="3" className="text-primary-default">
@@ -30,11 +30,18 @@ const NAV_CONTENT = [
 ];
 
 const Navbar: React.FC<{ router?: string[] }> = ({ router }) => {
-  const [isAuth, setIsAuth] = useState(true);
+  const [isAuth, setIsAuth] = useState(false);
   const Router = useRouter();
 
+  useEffect(() => {
+    const token = localStorage.getItem(TOKEN_KEY);
+    if (token) {
+      setIsAuth(true);
+    }
+  }, []);
+
   return (
-    <Header className="flex items-center justify-between mt-8 mx-8 font-poppins">
+    <Header className="flex items-center justify-between mt-8 mx-8 font-poppins z-50">
       <Logo />
       <div className="flex items-center">
         <Menu
@@ -59,10 +66,11 @@ const Navbar: React.FC<{ router?: string[] }> = ({ router }) => {
         </Menu>
         <div className=" flex h-16 items-center">
           {isAuth ? (
-            <div className="flex gap-5">
+            <div className="flex gap-5 ml-8">
               <Link href="/profile">
-                <a className="cursor-pointer">Nawa Lee</a>
+                <span className="text-white cursor-pointer">Nawa Lee</span>
               </Link>
+
               <Dropdown overlay={menu}>
                 <div className="flex gap-x-4  items-center flex-1 ">
                   <Avatar
@@ -77,7 +85,10 @@ const Navbar: React.FC<{ router?: string[] }> = ({ router }) => {
             <Button
               className="px-6 py-0 order-5 mr-6 font-poppins "
               type="primary"
-              shape="round">
+              shape="round"
+              onClick={() => {
+                Router.push('/login');
+              }}>
               Login or Register
             </Button>
           )}

@@ -7,7 +7,6 @@
     "build": "next build",
     "export": "next export",
     "start": "next start",
-    "test": "jest",
     "test:snapshots": "jest --updateSnapshot",
     "test:ci": "jest --all --ci --detectOpenHandles",
     "test:pr": "jest --coverage --changedSince=origin/main",
@@ -89,5 +88,10 @@
     "commitizen": {
       "path": "./node_modules/cz-conventional-changelog"
     }
+  },
+  "jest": {
+    "snapshotSerializers": [
+      "enzyme-to-json/serializer"
+    ]
   }
 }

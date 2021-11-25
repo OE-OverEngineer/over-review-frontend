@@ -4,6 +4,7 @@ import React, { useEffect, useState } from 'react';
 import { SearchOutlined } from '@ant-design/icons';
 import { Button, Input, Tabs } from 'antd';
 import dayjs from 'dayjs';
+import { useRouter } from 'next/dist/client/router';
 
 import Banner2 from 'common/assets/images/banner/banner_2.png';
 import Banner3 from 'common/assets/images/banner/banner_3.png';
@@ -16,8 +17,12 @@ const DiscoverMovieSection: React.FC = () => {
   const [moviePoster, setmoviePoster] = useState<Movie[]>();
   const { getMovies, getCategories } = moviesController();
 
+  const Router = useRouter();
+
   useEffect(() => {
     getMovies(10, 1).then((res) => {
+      console.log(res);
+
       setmoviePoster(res);
     });
     getCategories().then((res) => {
@@ -137,7 +142,8 @@ const DiscoverMovieSection: React.FC = () => {
             className="px-6 py-0 order-5 font-poppins"
             type="primary"
             size="large"
-            shape="round">
+            shape="round"
+            onClick={() => Router.push('/discover-movie')}>
             Discover More
           </Button>
         </div>

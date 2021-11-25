@@ -9,6 +9,8 @@ import { ToastContainer, toast } from 'react-toastify';
 
 import Star from 'common/assets/images/star.svg';
 import Navbar from 'common/components/Layouts/Navbar';
+import Svg from 'common/components/Svg';
+import authController from 'common/services/Controllers/authController';
 import { LoginRequset } from 'common/services/postSchemas';
 import { TOKEN_KEY } from 'common/utilities/constants';
 import { handleItem } from 'common/utilities/local-storage';
@@ -44,7 +46,7 @@ const Auth: React.FC = () => {
 
   return (
     <Layout className="min-h-screen h-full font-poppins">
-      <Star className="absolute h-full w-full z-0" />
+      {/* <Svg Icon={<Star className="absolute h-full w-full z-0" />} /> */}
 
       <Navbar />
       <Content className="z-10">

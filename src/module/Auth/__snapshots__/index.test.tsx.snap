@@ -1,0 +1,165 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`Auth page Auth should be defined 1`] = `
+<Layout
+  className="min-h-screen h-full font-poppins"
+>
+  <Navbar />
+  <Content
+    className="z-10"
+  >
+    <section
+      className="max-w-screen-2xl m-auto mt-28"
+    >
+      <ForwardRef(InternalForm)
+        autoComplete="off"
+        className="max-w-lg m-auto bg-white pt-3 pb-4 rounded-3xl "
+        initialValues={
+          Object {
+            "remember": true,
+          }
+        }
+        labelCol={
+          Object {
+            "offset": 4,
+            "span": 16,
+          }
+        }
+        layout="vertical"
+        name="loginForm"
+        onFinish={[Function]}
+        wrapperCol={
+          Object {
+            "offset": 4,
+            "span": 16,
+          }
+        }
+      >
+        <p
+          className=" text-primary-default text-4xl text-center mt-4 "
+        >
+          Sign In
+        </p>
+        <FormItem
+          className="hidden-required"
+          label="Username"
+          name="username"
+          rules={
+            Array [
+              Object {
+                "message": "Please input your username!",
+                "required": true,
+              },
+            ]
+          }
+        >
+          <Input
+            className="rounded-lg"
+            prefix={
+              <ForwardRef(UserOutlined)
+                style={
+                  Object {
+                    "color": "#7433FF",
+                  }
+                }
+              />
+            }
+            type="text"
+          />
+        </FormItem>
+        <FormItem
+          className="hidden-required"
+          label="Password"
+          name="password"
+          rules={
+            Array [
+              Object {
+                "message": "Please input your password!",
+                "required": true,
+              },
+            ]
+          }
+        >
+          <Password
+            action="click"
+            className="rounded-lg"
+            iconRender={[Function]}
+            prefix={
+              <ForwardRef(LockOutlined)
+                style={
+                  Object {
+                    "color": "#7433FF",
+                  }
+                }
+              />
+            }
+            visibilityToggle={true}
+          />
+        </FormItem>
+        <FormItem
+          name="remember"
+          valuePropName="checked"
+        >
+          <Checkbox
+            className="text-primary-default"
+          >
+            Remember me
+          </Checkbox>
+        </FormItem>
+        <FormItem
+          className="text-center"
+        >
+          <Button
+            htmlType="submit"
+            shape="round"
+            style={
+              Object {
+                "width": "128px",
+              }
+            }
+            type="primary"
+          >
+            Login
+          </Button>
+        </FormItem>
+        <div
+          className=" text-purple-400 text-center"
+        >
+          <Link
+            href="/register"
+          >
+            Create an account
+          </Link>
+          <span
+            className="text-gray-400"
+          >
+             to join OVER review
+          </span>
+        </div>
+      </ForwardRef(InternalForm)>
+    </section>
+    <ToastContainer
+      autoClose={5000}
+      closeButton={[Function]}
+      closeOnClick={true}
+      draggable={true}
+      draggableDirection="x"
+      draggablePercent={80}
+      hideProgressBar={false}
+      newestOnTop={false}
+      pauseOnFocusLoss={true}
+      pauseOnHover={true}
+      position="top-right"
+      role="alert"
+      rtl={false}
+      theme="light"
+      transition={[Function]}
+    />
+  </Content>
+  <Footer
+    className="text-center"
+  >
+    Over Review ©2021 Created by Over Engineer
+  </Footer>
+</Layout>
+`;

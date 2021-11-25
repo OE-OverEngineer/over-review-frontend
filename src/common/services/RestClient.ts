@@ -7,10 +7,14 @@ export const http = axios.create({
   baseURL: API_URL,
 });
 
-export const post = <T, U>(endpoint: string, data?: T): Promise<U> =>
+export const post = <T, U>(
+  endpoint: string,
+  data?: T,
+  config?: AxiosRequestConfig,
+): Promise<U> =>
   new Promise((resolve, reject) =>
     http
-      .post(endpoint, data)
+      .post(endpoint, data, config)
       .then((res) => resolve(res.data))
       .catch((e) => reject(e.response?.data)),
   );
