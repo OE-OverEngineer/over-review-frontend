@@ -4,6 +4,7 @@ import React, { useState } from 'react';
 import { LockOutlined, UserOutlined } from '@ant-design/icons';
 import { Button, DatePicker, Form, Input, Layout, message, Select, Upload } from 'antd';
 import { Content, Footer } from 'antd/lib/layout/layout';
+import { useRouter } from 'next/dist/client/router';
 import Link from 'next/link';
 import { toast, ToastContainer } from 'react-toastify';
 
@@ -13,11 +14,16 @@ import Navbar from 'common/components/Layouts/Navbar';
 import Svg from 'common/components/Svg';
 import authController from 'common/services/Controllers/authController';
 import { CreateUserRequest } from 'common/services/postSchemas';
+import { TOKEN_KEY } from 'common/utilities/constants';
+import { handleItem } from 'common/utilities/local-storage';
 
 const { Option } = Select;
 
 const Register: React.FC = () => {
   const [imageUrl, setImageUrl] = useState<any>();
+  const [image, setImage] = useState<any>();
+
+  const Router = useRouter();
 
   const { postRegister } = authController();
 
@@ -42,6 +48,9 @@ const Register: React.FC = () => {
   const handleChange = (info: any) => {
     if (info.file.status === 'done') {
       // Get this url from response in real world.
+      console.log(info);
+
+      setImage(info.file);
       getBase64(info.file.originFileObj, (imageUrl: string | ArrayBuffer | null) => {
         setImageUrl(imageUrl);
       });
@@ -54,7 +63,7 @@ const Register: React.FC = () => {
       password: values.password,
       firstName: values.firstName,
       lastName: values.lastName,
-      avatar: '',
+      avatar: image,
       displayName: values.displayName,
       dateOfBirth: values.dateOfBirth,
       gender: values.gender,
@@ -63,6 +72,8 @@ const Register: React.FC = () => {
     postRegister(params)
       .then((res) => {
         console.log(res);
+        handleItem(TOKEN_KEY, res.access_token);
+        // Router.push('/');
       })
       .catch((res) => {
         console.log(res);

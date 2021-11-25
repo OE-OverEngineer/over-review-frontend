@@ -1,9 +1,9 @@
 import React from 'react';
 
 import { Button, DatePicker, Form, Input, Layout } from 'antd';
+import TextArea from 'antd/lib/input/TextArea';
 import { Content, Footer } from 'antd/lib/layout/layout';
 import { useRouter } from 'next/dist/client/router';
-import TextArea from 'rc-textarea';
 import { ToastContainer, toast } from 'react-toastify';
 
 import Star from 'common/assets/images/star.svg';
@@ -77,9 +77,11 @@ const RequestMovie: React.FC = () => {
               label="Description"
               name="description">
               <TextArea
-                placeholder="input your review."
-                className="mt-4 text-primary-default w-full  p-2  h-32 font-poppins border-gray-200 border-2 rounded-lg"
-                maxLength={300}
+                placeholder="input some description"
+                className="mt-4 text-primary-default"
+                showCount
+                maxLength={1000}
+                rows={5}
               />
             </Form.Item>
             <Form.Item className="text-center" wrapperCol={{ span: 24 }}>

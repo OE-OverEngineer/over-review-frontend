@@ -62,12 +62,13 @@ const Home: React.FC = () => {
           <div className="grid grid-cols-4 px-80 mt-5 font-poppins text-lg">
             {actors.map((actor) => (
               <div className="col-span-1" key={actor.id}>
-                <img src={actor.imgSrc} className="mx-auto" alt={actor.firstName} />
-                <p className="mx-auto text-center mt-4">
-                  {actor.firstName}
-                  <br />
-                  {actor.lastName}
-                </p>
+                <img
+                  src={actor.imgSrc}
+                  className="mx-auto w-40 h-40 rounded-full"
+                  alt={actor.firstName}
+                />
+                <p className="mx-auto text-center mt-4 mb-0">{actor.firstName}</p>
+                <p className="mx-auto text-center">{actor.lastName}</p>
               </div>
             ))}
           </div>
@@ -93,9 +94,9 @@ const Home: React.FC = () => {
           <div className="w-3/5 mx-auto">
             <TextArea
               placeholder="input your review."
-              className="mt-4 text-primary-default font-poppins "
+              className="mt-4 text-primary-default"
               showCount
-              maxLength={300}
+              rows={5}
             />
             <br />
             <Button
@@ -107,7 +108,7 @@ const Home: React.FC = () => {
             </Button>
           </div>
           <TextHeader className="ml-80">YOU MIGHT ALSO LIKE</TextHeader>
-          <div className="w-3/5 mx-auto">
+          <div className="max-w-screen-lg mx-auto">
             <div className="grid gap-y-16 gap-x-5 py-16 justify-items-center grid-cols-2 2xl:grid-cols-5 lg:grid-cols-4 md:grid-cols-3 sm:grid-cols-2">
               {Array.from({ length: 5 }).map((_, index) => (
                 <div className="card-item" key={`banner-items-${index}`}>

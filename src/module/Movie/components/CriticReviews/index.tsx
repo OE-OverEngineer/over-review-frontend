@@ -7,7 +7,7 @@ import Mini from 'common/assets/images/profilemini.png';
 import Svg from 'common/components/Svg';
 import TextHeader from 'common/components/TextHeader';
 
-const CriticReviews = () => {
+const CriticReviews: React.FC = () => {
   return (
     <>
       <TextHeader className="mt-8 ml-80">CRITIC REVIEWS</TextHeader>
@@ -17,7 +17,7 @@ const CriticReviews = () => {
           <div className="grid grid-cols-12" key={index}>
             {index === 0 && (
               <div className="col-span-11 flex justify-end">
-                <span className="text-primary-defaultLight italic">TOP review</span>
+                <span className="text-primary-defaultLight italic mb-2">TOP review</span>
               </div>
             )}
             <div className="border border-white col-span-11 rounded-xl p-3 font-poppins">
