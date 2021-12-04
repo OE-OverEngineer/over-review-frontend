@@ -28,6 +28,7 @@ export interface CreateMovieRequest {
 export interface CreateActorRequest {
   firstName: string;
   lastName: string;
+  image: string | ArrayBuffer | null;
 }
 
 export interface CreateDirectorRequest {

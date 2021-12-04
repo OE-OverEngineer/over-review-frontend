@@ -9,6 +9,11 @@ export interface ErrorInterface {
   statusCode: number;
 }
 
+export interface BaseResponse {
+  createdAt: Date;
+  updatedAt: Date;
+}
+
 export const http = axios.create({
   baseURL: API_URL,
 });

@@ -6,6 +6,6 @@ export default function actorsController() {
   return {
     postActors: (data: CreateActorRequest) =>
       post<CreateActorRequest, Actor>('actors', data),
-    getActors: () => get('actors'),
+    getActors: () => get<Actor[]>('actors'),
   };
 }

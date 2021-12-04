@@ -1,9 +1,6 @@
-import { Movie } from './movie.interface';
+import { BaseResponse } from '../RestClient';
 
-export interface Category {
+export interface Category extends BaseResponse {
   id: number;
-
   title: string;
-
-  movies: Movie[];
 }
