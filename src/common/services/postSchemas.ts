@@ -36,7 +36,7 @@ export interface CreateDirectorRequest {
 }
 
 export interface CreateReviewRequest {
-  moiveID: number;
+  moiveID: number | string;
   message: string;
   score: number;
 }

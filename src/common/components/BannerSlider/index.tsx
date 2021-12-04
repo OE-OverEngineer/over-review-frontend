@@ -127,7 +127,7 @@ const BannerSlider: React.FC<BannerSliderProps> = ({ className, movie }) => {
                           return (
                             <div
                               key={`${actor.firstname}-${index}`}
-                              className="text-gray-800 text-sm">
+                              className="text-gray-800 text-sm whitespace-nowrap overflow-hidden overflow-ellipsis">
                               {`${actor.firstName} ${actor.lastName}`}
                             </div>
                           );

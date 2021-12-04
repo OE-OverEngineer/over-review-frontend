@@ -12,7 +12,12 @@ export default function moviesController() {
       get(
         `movies/search?search=${search}&perPage=${perPage}&pageNum=${pageNum}&sort=${sort}`,
       ),
-    getMoviesId: (id: number) => get(`movies/${id}`),
-    getMoviesIdReviews: (id: number) => get(`movies/${id}/reviews`),
+    getMoviesId: (id: number | string) => get<Movie>(`movies/${id}`),
+    getMoviesIdReviews: (
+      id: number | string,
+      perPage: number,
+      pageNum: number,
+      sort?: string,
+    ) => get(`movies/${id}/reviews?perPage=${perPage}&pageNum=${pageNum}&sort=${sort}`),
   };
 }

@@ -3,6 +3,12 @@ import axios, { AxiosError, AxiosRequestConfig, AxiosResponse } from 'axios';
 
 import { API_URL, TOKEN_KEY } from 'common/utilities/constants';
 
+export interface ErrorInterface {
+  error: string;
+  message: string[];
+  statusCode: number;
+}
+
 export const http = axios.create({
   baseURL: API_URL,
 });

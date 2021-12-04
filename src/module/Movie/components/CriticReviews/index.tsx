@@ -9,10 +9,10 @@ import TextHeader from 'common/components/TextHeader';
 
 const CriticReviews: React.FC = () => {
   return (
-    <>
-      <TextHeader className="mt-8 ml-80">CRITIC REVIEWS</TextHeader>
+    <section className="critic-review max-w-screen-lg m-auto">
+      <TextHeader className="mt-8">CRITIC REVIEWS</TextHeader>
 
-      <div className="border-2 border-primary-default w-3/5 mx-auto rounded-3xl flex flex-col gap-y-4 p-4 mt-4">
+      <div className="border-2 border-primary-default mx-auto rounded-3xl flex flex-col gap-y-4 p-4 mt-4">
         {Array.from({ length: 5 }).map((_, index) => (
           <div className="grid grid-cols-12" key={index}>
             {index === 0 && (
@@ -34,7 +34,7 @@ const CriticReviews: React.FC = () => {
           </div>
         ))}
       </div>
-    </>
+    </section>
   );
 };
 
