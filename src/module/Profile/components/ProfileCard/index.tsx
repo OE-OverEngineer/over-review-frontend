@@ -15,6 +15,8 @@ const ProfileCard: React.FC<ProfileCardProps> = ({ profile }) => {
 
   useEffect(() => {
     if (profile) {
+      console.log(profile);
+
       setLoading(false);
     }
   }, [profile]);
@@ -26,7 +28,7 @@ const ProfileCard: React.FC<ProfileCardProps> = ({ profile }) => {
           <div className="flex justify-center mb-4">
             <Avatar
               className="border-2 border-primary-default"
-              src="https://joeschmoe.io/api/v1/random"
+              src={profile?.avatarUrl}
               size={136}
             />
           </div>
@@ -35,7 +37,7 @@ const ProfileCard: React.FC<ProfileCardProps> = ({ profile }) => {
           <div className="flex items-center mb-2 mt-4">
             <GiftFilled className=" mr-2 ml-0 mx-auto" />
             <div className="text-sm">
-              {dayjs(profile?.dateOfBirth).format('DD MMMM YYY')}
+              {dayjs(profile?.dateOfBirth).format('DD MMMM YYYY')}
             </div>
           </div>
           <div className="flex items-center mb-2">

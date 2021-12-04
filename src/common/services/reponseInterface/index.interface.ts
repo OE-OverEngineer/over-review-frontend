@@ -1,5 +1,5 @@
 export interface UsersProfileResponse {
-  avatar: string;
+  avatarUrl: string;
   banned: boolean;
   createdAt: Date;
   dateOfBirth: Date;

@@ -4,6 +4,7 @@ import React, { useState } from 'react';
 import { LockOutlined, UserOutlined } from '@ant-design/icons';
 import { Button, DatePicker, Form, Input, Layout, message, Select, Upload } from 'antd';
 import { Content, Footer } from 'antd/lib/layout/layout';
+import { useRouter } from 'next/dist/client/router';
 import Link from 'next/link';
 import { toast, ToastContainer } from 'react-toastify';
 
@@ -20,7 +21,8 @@ const { Option } = Select;
 
 const Register: React.FC = () => {
   const [imageUrl, setImageUrl] = useState<any>();
-  const [image, setImage] = useState<any>();
+
+  const Router = useRouter();
 
   const { postRegister } = authController();
 
@@ -47,7 +49,6 @@ const Register: React.FC = () => {
       // Get this url from response in real world.
       console.log(info);
 
-      setImage(info.file);
       getBase64(info.file.originFileObj, (imageUrl: string | ArrayBuffer | null) => {
         setImageUrl(imageUrl);
       });
@@ -60,7 +61,7 @@ const Register: React.FC = () => {
       password: values.password,
       firstName: values.firstName,
       lastName: values.lastName,
-      avatar: image,
+      avatar: imageUrl,
       displayName: values.displayName,
       dateOfBirth: values.dateOfBirth,
       gender: values.gender,
@@ -70,7 +71,7 @@ const Register: React.FC = () => {
       .then((res) => {
         console.log(res);
         handleItem(TOKEN_KEY, res.access_token);
-        // Router.push('/');
+        Router.push('/');
       })
       .catch((res) => {
         console.log(res);
