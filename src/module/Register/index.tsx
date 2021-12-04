@@ -4,7 +4,6 @@ import React, { useState } from 'react';
 import { LockOutlined, UserOutlined } from '@ant-design/icons';
 import { Button, DatePicker, Form, Input, Layout, message, Select, Upload } from 'antd';
 import { Content, Footer } from 'antd/lib/layout/layout';
-import { useRouter } from 'next/dist/client/router';
 import Link from 'next/link';
 import { toast, ToastContainer } from 'react-toastify';
 
@@ -22,8 +21,6 @@ const { Option } = Select;
 const Register: React.FC = () => {
   const [imageUrl, setImageUrl] = useState<any>();
   const [image, setImage] = useState<any>();
-
-  const Router = useRouter();
 
   const { postRegister } = authController();
 
@@ -124,7 +121,13 @@ const Register: React.FC = () => {
                 <Form.Item
                   label="E-mail"
                   name="email"
-                  rules={[{ required: true, message: 'Please input your e-mail!' }]}>
+                  rules={[
+                    {
+                      required: true,
+                      type: 'email',
+                      message: 'Please input valid e-mail!',
+                    },
+                  ]}>
                   <Input
                     prefix={<UserOutlined style={{ color: '#7433FF' }} />}
                     className="rounded-lg"

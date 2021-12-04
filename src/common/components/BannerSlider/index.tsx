@@ -3,13 +3,15 @@ import React, { useEffect, useState } from 'react';
 
 import { Button, Rate } from 'antd';
 import dayjs from 'dayjs';
+import { useRouter } from 'next/dist/client/router';
 import Slider from 'react-slick';
 
 import Arrow from 'common/assets/images/arrow.svg';
-import 'slick-carousel/slick/slick.css';
-import 'slick-carousel/slick/slick-theme.css';
 import Intersperse from 'common/hooks/Intersperse';
 import { Movie } from 'common/services/reponseInterface/movie.interface';
+
+import 'slick-carousel/slick/slick.css';
+import 'slick-carousel/slick/slick-theme.css';
 
 const NextArrow = (props: {
   className?: string;
@@ -54,10 +56,14 @@ const BannerSlider: React.FC<BannerSliderProps> = ({ className, movie }) => {
   const [subBanner, setSubBanner] = useState<any>();
   const [movieBanner, setMovieBanner] = useState<Movie[]>();
 
+  const Router = useRouter();
+
   useEffect(() => {
     setMovieBanner(movie);
-    if (subBanner) subBanner.slickNext();
-  }, [movie, movieBanner]);
+    if (subBanner) {
+      subBanner.slickNext();
+    }
+  }, [movie, movieBanner, Router]);
 
   return (
     <>

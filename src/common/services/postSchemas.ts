@@ -41,6 +41,11 @@ export interface CreateReviewRequest {
   score: number;
 }
 
+export interface CreateReviewLikeRequest {
+  targetReviewID: number;
+  isLike: boolean;
+}
+
 export interface CreateCategoryRequest {
   title: string;
 }
@@ -48,4 +53,13 @@ export interface CreateCategoryRequest {
 export interface LoginRequset {
   email: string;
   password: string;
+}
+
+export interface CreateReportRequest {
+  targetUserID: number;
+  message: string;
+}
+
+export interface CreateRoleRequest {
+  title: string;
 }

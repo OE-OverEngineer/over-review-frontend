@@ -10,12 +10,15 @@ import Banner2 from 'common/assets/images/banner/banner_2.png';
 import Banner3 from 'common/assets/images/banner/banner_3.png';
 import Rating from 'common/assets/images/rating.svg';
 import Star from 'common/assets/images/star.svg';
+import Svg from 'common/components/Svg';
+import categoriesController from 'common/services/Controllers/categoriesControllers';
 import moviesController from 'common/services/Controllers/moviesControllers';
 import { Movie } from 'common/services/reponseInterface/movie.interface';
 
 const DiscoverMovieSection: React.FC = () => {
   const [moviePoster, setmoviePoster] = useState<Movie[]>();
-  const { getMovies, getCategories } = moviesController();
+  const { getMovies } = moviesController();
+  const { getCategories } = categoriesController();
 
   const Router = useRouter();
 
@@ -32,8 +35,9 @@ const DiscoverMovieSection: React.FC = () => {
 
   return (
     <section className="discover-movies h-full">
-      <Star className="absolute h-full w-full z-0" />
-      <div className=" max-w-screen-2xl mt-20 mb-16 mx-auto font-poppins">
+      <Svg Icon={<Star className="absolute h-full w-full -z-10" />} />
+
+      <div className=" max-w-screen-2xl mt-20 mb-16 mx-auto font-poppins z-10">
         <Tabs
           defaultActiveKey="Random"
           centered
@@ -54,7 +58,7 @@ const DiscoverMovieSection: React.FC = () => {
             <div className="grid gap-y-16 gap-x-5 py-16 justify-items-center grid-cols-2 2xl:grid-cols-5 lg:grid-cols-4 md:grid-cols-3 sm:grid-cols-2">
               {moviePoster &&
                 moviePoster.map((movie, index) => (
-                  <div className="card-item" key={`banner-items-${index}`}>
+                  <div className="card-item cursor-pointer" key={`banner-items-${index}`}>
                     <div className="card-item-img">
                       <div className="relative flex items-center bg-primary-gradient -mb-8 w-max ml-auto rounded-full py-px px-3 -right-3 text-sm font-poppins">
                         <span>9.8</span>
@@ -63,7 +67,7 @@ const DiscoverMovieSection: React.FC = () => {
                       <img
                         src={movie.bannerImage}
                         alt="movie1"
-                        className="object-cover w-64 mb-4 rounded-2xl"
+                        className="object-cover w-64 mb-4 rounded-2xl hover:shadow-xl transition-shadow duration-300"
                       />
                       <div className="flex gap-x-1 text-sm text-primary-default">
                         <span>{dayjs(movie.startDate).year()}</span>

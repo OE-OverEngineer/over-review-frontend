@@ -1,5 +1,4 @@
 import { CreateUserRequest, LoginRequset } from '../postSchemas';
-import { User } from '../reponseInterface/user.interface';
 import { post } from '../RestClient';
 
 export default function authController() {

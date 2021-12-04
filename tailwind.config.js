@@ -14,6 +14,9 @@ module.exports = {
           defaultLight2nd: '#5734A8',
         },
       },
+      zIndex: {
+        '-10': '-10',
+      },
       backgroundImage: {
         'primary-gradient': 'linear-gradient(114.44deg, #7433FF 0%, #BCA4FF 100%)',
       },

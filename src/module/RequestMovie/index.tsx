@@ -8,13 +8,13 @@ import { ToastContainer, toast } from 'react-toastify';
 
 import Star from 'common/assets/images/star.svg';
 import Navbar from 'common/components/Layouts/Navbar';
-import userController from 'common/services/Controllers/userController';
+import authController from 'common/services/Controllers/authController';
 import { LoginRequset } from 'common/services/postSchemas';
 import { TOKEN_KEY } from 'common/utilities/constants';
 import { handleItem } from 'common/utilities/local-storage';
 
 const RequestMovie: React.FC = () => {
-  const { postAuth } = userController();
+  const { postLogin } = authController();
   const Router = useRouter();
 
   const onFinish = (values: Record<string, string>) => {
@@ -24,7 +24,7 @@ const RequestMovie: React.FC = () => {
       password: values.password,
     };
 
-    postAuth(param)
+    postLogin(param)
       .then((res) => {
         handleItem(TOKEN_KEY, res.access_token);
         Router.push('/');

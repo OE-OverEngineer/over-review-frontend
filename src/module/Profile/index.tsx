@@ -1,10 +1,13 @@
-import React from 'react';
+import React, { useEffect, useState } from 'react';
 
 import { FlagFilled, SearchOutlined } from '@ant-design/icons';
 import { Anchor, Input } from 'antd';
+import { useRouter } from 'next/dist/client/router';
 import Head from 'next/head';
 
 import Layouts from 'common/components/Layouts';
+import userController from 'common/services/Controllers/userController';
+import { UsersProfileResponse } from 'common/services/reponseInterface/index.interface';
 
 import ProfileCard from './components/ProfileCard';
 import RecentReviewSection from './components/RecentReviewSection';
@@ -12,6 +15,25 @@ import TopReviewSection from './components/TopReivewSection';
 import TopReviewCard from './components/TopReviewCard';
 
 const Profile: React.FC = () => {
+  const [profile, setProfile] = useState<UsersProfileResponse>();
+
+  const { getUsersProfile, getUsersIdReviews } = userController();
+
+  const Router = useRouter();
+
+  useEffect(() => {
+    (async () => {
+      try {
+        const res_user_profile: any = await getUsersProfile();
+        setProfile(res_user_profile);
+        getUsersIdReviews(res_user_profile.id, 10, 1).then((res: any) => {
+          console.log(res);
+        });
+      } catch (error) {
+        Router.push('/login');
+      }
+    })();
+  }, []);
   return (
     <div>
       <Head>
@@ -49,7 +71,7 @@ const Profile: React.FC = () => {
                   <div className="text-sm">report</div>
                 </div>
                 <Anchor className="overflow-hidden mt-2">
-                  <ProfileCard />
+                  <ProfileCard profile={profile} />
                   <TopReviewCard />
                 </Anchor>
               </div>

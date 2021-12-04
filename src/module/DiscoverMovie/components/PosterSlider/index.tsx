@@ -1,14 +1,11 @@
 /* eslint-disable @typescript-eslint/no-explicit-any */
 import React from 'react';
 
+import dayjs from 'dayjs';
 import Slider from 'react-slick';
 
 import Arrow from 'common/assets/images/arrow.svg';
-import Banner1 from 'common/assets/images/banner/banner_1.png';
-import Banner2 from 'common/assets/images/banner/banner_2.png';
-import Banner3 from 'common/assets/images/banner/banner_3.png';
-import Banner4 from 'common/assets/images/banner/banner_4.png';
-import Banner5 from 'common/assets/images/banner/banner_5.png';
+import { Movie } from 'common/services/reponseInterface/movie.interface';
 
 import 'slick-carousel/slick/slick.css';
 import 'slick-carousel/slick/slick-theme.css';
@@ -47,7 +44,7 @@ const PrevArrow = (props: {
   );
 };
 
-const PosterSlider: React.FC = () => {
+const PosterSlider: React.FC<{ movie: Movie[] }> = ({ movie }) => {
   return (
     <div className="slider-banner mb-16">
       <Slider
@@ -57,132 +54,21 @@ const PosterSlider: React.FC = () => {
         variableWidth
         nextArrow={<NextArrow />}
         prevArrow={<PrevArrow />}>
-        <div className="w-52 h-72">
-          <img
-            src={Banner1.src}
-            alt="banner1"
-            className="w-48 h-full brightness-100 m-auto"
-          />
-        </div>
-        <div className="w-52 h-72">
-          <img
-            src={Banner2.src}
-            alt="banner2"
-            className="w-48 h-full brightness-100 m-auto"
-          />
-        </div>
-        <div className="w-52 h-72">
-          <img
-            src={Banner3.src}
-            alt="banner3"
-            className="w-48 h-full brightness-100 m-auto"
-          />
-        </div>
-        <div className="w-52 h-72">
-          <img
-            src={Banner4.src}
-            alt="banner4"
-            className="w-48 h-full brightness-100 m-auto"
-          />
-        </div>
-        <div className="w-52 h-72">
-          <img
-            src={Banner5.src}
-            alt="banner5"
-            className="w-48 h-full brightness-100 m-auto"
-          />
-        </div>
-        <div className="w-52 h-72">
-          <img
-            src={Banner5.src}
-            alt="banner5"
-            className="w-48 h-full brightness-100 m-auto"
-          />
-        </div>
-        <div className="w-52 h-72">
-          <img
-            src={Banner1.src}
-            alt="banner1"
-            className="w-48 h-full brightness-100 m-auto"
-          />
-        </div>
-        <div className="w-52 h-72">
-          <img
-            src={Banner2.src}
-            alt="banner2"
-            className="w-48 h-full brightness-100 m-auto"
-          />
-        </div>
-        <div className="w-52 h-72">
-          <img
-            src={Banner3.src}
-            alt="banner3"
-            className="w-48 h-full brightness-100 m-auto"
-          />
-        </div>
-        <div className="w-52 h-72">
-          <img
-            src={Banner4.src}
-            alt="banner4"
-            className="w-48 h-full brightness-100 m-auto"
-          />
-        </div>
-        <div className="w-52 h-72">
-          <img
-            src={Banner5.src}
-            alt="banner5"
-            className="w-48 h-full brightness-100 m-auto"
-          />
-        </div>
-        <div className="w-52 h-72">
-          <img
-            src={Banner5.src}
-            alt="banner5"
-            className="w-48 h-full brightness-100 m-auto"
-          />
-        </div>
-        <div className="w-52 h-72">
-          <img
-            src={Banner1.src}
-            alt="banner1"
-            className="w-48 h-full brightness-100 m-auto"
-          />
-        </div>
-        <div className="w-52 h-72">
-          <img
-            src={Banner2.src}
-            alt="banner2"
-            className="w-48 h-full brightness-100 m-auto"
-          />
-        </div>
-        <div className="w-52 h-72">
-          <img
-            src={Banner3.src}
-            alt="banner3"
-            className="w-48 h-full brightness-100 m-auto"
-          />
-        </div>
-        <div className="w-52 h-72">
-          <img
-            src={Banner4.src}
-            alt="banner4"
-            className="w-48 h-full brightness-100 m-auto"
-          />
-        </div>
-        <div className="w-52 h-72">
-          <img
-            src={Banner5.src}
-            alt="banner5"
-            className="w-48 h-full brightness-100 m-auto"
-          />
-        </div>
-        <div className="w-52 h-72">
-          <img
-            src={Banner5.src}
-            alt="banner5"
-            className="w-48 h-full brightness-100 m-auto"
-          />
-        </div>
+        {movie.map((item) => (
+          <div className="w-52 h-72 cursor-pointer" key={item.id}>
+            <div className="absolute w-48 h-72 bg-gradient-to-b from-transparent via-transparent to-black mx-2 rounded-xl flex flex-col justify-end bg-opacity-0 opacity-0 p-2 transition duration-300 ease-in-out hover:bg-opacity-20 hover:opacity-100">
+              <div className="text-sm">{dayjs(item.startDate).year()}</div>
+              <div className="text-base w-full whitespace-nowrap overflow-hidden overflow-ellipsis">
+                {item.title}
+              </div>
+            </div>
+            <img
+              src={item.bannerImage}
+              alt="banner3"
+              className="w-48 h-full brightness-100 m-auto rounded-xl"
+            />
+          </div>
+        ))}
       </Slider>
     </div>
   );
