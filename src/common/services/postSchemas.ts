@@ -22,7 +22,7 @@ export interface CreateMovieRequest {
   categoriesID: number[];
   startDate: Date;
   bannerImage: string;
-  trailerLink: string;
+  trailerLinkUrl: string;
 }
 
 export interface CreateActorRequest {

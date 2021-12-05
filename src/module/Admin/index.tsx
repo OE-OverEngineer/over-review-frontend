@@ -10,6 +10,7 @@ import Link from 'next/link';
 import ActorsSection from './components/ActorsSection';
 import CatagorySection from './components/CatagorySection';
 import DirectorsSection from './components/DirectorsSection';
+import MovieSection from './components/MovieSection';
 
 const Admin = () => {
   const [collapsed, setCollapsed] = useState<boolean>(false);
@@ -32,6 +33,8 @@ const Admin = () => {
         return <DirectorsSection />;
       case 'catagories':
         return <CatagorySection />;
+      case 'movie':
+        return <MovieSection />;
 
       default:
         return <CatagorySection />;
@@ -56,6 +59,9 @@ const Admin = () => {
           </Menu.Item>
           <Menu.Item key="actors" icon={<DesktopOutlined />}>
             <Link href="/admin/actors">Actors</Link>
+          </Menu.Item>
+          <Menu.Item key="movie" icon={<DesktopOutlined />}>
+            <Link href="/admin/movie">Movie</Link>
           </Menu.Item>
         </Menu>
       </Sider>
