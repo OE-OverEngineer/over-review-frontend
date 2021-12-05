@@ -20,11 +20,14 @@ const { TextArea } = Input;
 
 const Home: React.FC = () => {
   const [movie, setMovie] = useState<Movie>();
+
   const Router = useRouter();
   const { id } = Router.query;
 
-  const { getMoviesId, getMoviesIdReviews } = moviesController();
+  const { getMoviesId } = moviesController();
   const { postReviews } = reviewsController();
+
+  const [form] = Form.useForm();
 
   useEffect(() => {
     if (typeof id === 'string') {
@@ -32,24 +35,31 @@ const Home: React.FC = () => {
         console.log(res);
         setMovie(res);
       });
-      getMoviesIdReviews(id, 10, 1).then((res: any) => {
-        console.log(res);
-      });
     }
   }, [id]);
 
   const onFinish = (values: Record<string, string>) => {
     console.log('Success:', values);
     const score = parseFloat(values.score + values.score);
-    const moiveID = movie?.id || '';
+    const movieID = movie?.id || '';
     const param = {
-      moiveID,
+      movieID: movieID,
       message: values.message,
       score,
     };
     postReviews(param)
       .then((res: any) => {
         console.log(res);
+        form.resetFields();
+        toast.success('Review Success!', {
+          position: 'bottom-right',
+          autoClose: 5000,
+          hideProgressBar: false,
+          closeOnClick: true,
+          pauseOnHover: true,
+          draggable: true,
+          progress: undefined,
+        });
       })
       .catch((err) => {
         toast.error(err.message, {

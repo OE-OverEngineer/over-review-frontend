@@ -1,16 +1,13 @@
-import { Movie } from './movie.interface';
+import { BaseResponse } from '../RestClient';
+
 import { User } from './user.interface';
 
-export interface Review {
-  id?: number;
-
-  user: User;
-
+export interface Review extends BaseResponse {
+  comments: Comment[];
+  id?: 6;
+  likes: string;
+  likesCount: number;
   message: string;
-
   score: number;
-
-  movie: Movie;
-
-  comments?: Comment[];
+  user: User;
 }

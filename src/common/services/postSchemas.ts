@@ -54,7 +54,7 @@ export interface CreateDirectorRequest {
 }
 
 export interface CreateReviewRequest {
-  moiveID: number | string;
+  movieID: number | string;
   message: string;
   score: number;
 }
