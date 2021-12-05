@@ -1,5 +1,5 @@
 import { CreateMovieRequest } from '../postSchemas';
-import { Movie } from '../reponseInterface/movie.interface';
+import { Movie, MoviePaginate } from '../reponseInterface/movie.interface';
 import { get, post } from '../RestClient';
 
 export default function moviesController() {
@@ -7,7 +7,7 @@ export default function moviesController() {
     postMovies: (data: CreateMovieRequest) =>
       post<CreateMovieRequest, Movie>('movies', data),
     getMovies: (perPage: number, pageNum: number, sort?: string) =>
-      get<Movie[]>(`movies?perPage=${perPage}&pageNum=${pageNum}&sort=${sort}`),
+      get<MoviePaginate>(`movies?perPage=${perPage}&pageNum=${pageNum}&sort=${sort}`),
     getMovieSearch: (search: string, perPage: number, pageNum: number, sort?: string) =>
       get(
         `movies/search?search=${search}&perPage=${perPage}&pageNum=${pageNum}&sort=${sort}`,

@@ -1,5 +1,5 @@
 /* eslint-disable @typescript-eslint/no-explicit-any */
-import React from 'react';
+import React, { useEffect, useState } from 'react';
 
 import { Avatar } from 'antd';
 
@@ -7,8 +7,18 @@ import Banner2 from 'common/assets/images/banner/banner_2.png';
 import OverIcon from 'common/assets/images/Over.svg';
 import Svg from 'common/components/Svg';
 import TextHeader from 'common/components/TextHeader';
+import userController from 'common/services/Controllers/userController';
+import { User } from 'common/services/reponseInterface/user.interface';
 
 const HallOfFameSection: React.FC = () => {
+  const [topReview, setTopReview] = useState<User[]>([]);
+  const { getTopReview } = userController();
+  useEffect(() => {
+    getTopReview(5).then((res) => {
+      console.log('res', res);
+      setTopReview(res);
+    });
+  }, []);
   return (
     <section className="hall-of-fame h-full">
       <div className=" max-w-screen-2xl mt-20 mb-16 mx-auto font-poppins">
@@ -17,16 +27,15 @@ const HallOfFameSection: React.FC = () => {
           <div className="w-2/4">
             <div className="grid grid-cols-2 mb-4">
               <TextHeader>Top Reviewers</TextHeader>
-              <div className="text-base text-center">See All</div>
             </div>
-            {Array.from({ length: 5 }).map((_, index) => (
+            {topReview.map((userTop, index) => (
               <div className="flex items-center justify-between mb-4" key={index}>
                 <div className="flex gap-x-4 text-lg items-center flex-1">
-                  <Avatar src="https://joeschmoe.io/api/v1/random" size={54} />
-                  Nawa Lee
+                  <Avatar src={userTop.avatarUrl} size={54} />
+                  {userTop.firstName} {userTop.lastName}
                 </div>
                 <div className="text-base text-primary-purple2nd flex items-center justify-center flex-1 gap-2">
-                  1000
+                  {userTop.amountReviews}
                   <Svg Icon={<OverIcon />} />
                 </div>
               </div>

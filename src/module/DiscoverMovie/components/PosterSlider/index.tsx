@@ -5,7 +5,7 @@ import dayjs from 'dayjs';
 import Slider from 'react-slick';
 
 import Arrow from 'common/assets/images/arrow.svg';
-import { Movie } from 'common/services/reponseInterface/movie.interface';
+import { MoviePaginate } from 'common/services/reponseInterface/movie.interface';
 
 const NextArrow = (props: {
   className?: string;
@@ -41,7 +41,7 @@ const PrevArrow = (props: {
   );
 };
 
-const PosterSlider: React.FC<{ movie: Movie[] }> = ({ movie }) => {
+const PosterSlider: React.FC<{ movie: MoviePaginate }> = ({ movie }) => {
   return (
     <div className="slider-banner mb-16">
       <Slider
@@ -51,7 +51,7 @@ const PosterSlider: React.FC<{ movie: Movie[] }> = ({ movie }) => {
         variableWidth
         nextArrow={<NextArrow />}
         prevArrow={<PrevArrow />}>
-        {movie.map((item) => (
+        {movie.data.map((item) => (
           <div className="w-52 h-72 cursor-pointer" key={item.id}>
             <div className="absolute w-48 h-72 bg-gradient-to-b from-transparent via-transparent to-black mx-2 rounded-xl flex flex-col justify-end bg-opacity-0 opacity-0 p-2 transition duration-300 ease-in-out hover:bg-opacity-20 hover:opacity-100">
               <div className="text-sm">{dayjs(item.startDate).year()}</div>
@@ -60,7 +60,7 @@ const PosterSlider: React.FC<{ movie: Movie[] }> = ({ movie }) => {
               </div>
             </div>
             <img
-              src={item.bannerImage}
+              src={item.bannerImageUrl}
               alt="banner3"
               className="w-48 h-full brightness-100 m-auto rounded-xl"
             />

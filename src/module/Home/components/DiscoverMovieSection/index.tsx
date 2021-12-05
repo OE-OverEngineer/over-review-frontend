@@ -6,24 +6,22 @@ import { Button, Input, Tabs } from 'antd';
 import dayjs from 'dayjs';
 import { useRouter } from 'next/dist/client/router';
 
-import Banner2 from 'common/assets/images/banner/banner_2.png';
-import Banner3 from 'common/assets/images/banner/banner_3.png';
 import Rating from 'common/assets/images/rating.svg';
 import Star from 'common/assets/images/star.svg';
 import Svg from 'common/components/Svg';
 import categoriesController from 'common/services/Controllers/categoriesControllers';
 import moviesController from 'common/services/Controllers/moviesControllers';
-import { Movie } from 'common/services/reponseInterface/movie.interface';
+import { MoviePaginate } from 'common/services/reponseInterface/movie.interface';
 
 const DiscoverMovieSection: React.FC = () => {
-  const [moviePoster, setmoviePoster] = useState<Movie[]>();
+  const [moviePoster, setmoviePoster] = useState<MoviePaginate>();
   const { getMovies } = moviesController();
   const { getCategories } = categoriesController();
 
   const Router = useRouter();
 
   useEffect(() => {
-    getMovies(10, 1).then((res) => {
+    getMovies(10, 2).then((res) => {
       console.log(res);
 
       setmoviePoster(res);
@@ -41,6 +39,11 @@ const DiscoverMovieSection: React.FC = () => {
         <Tabs
           defaultActiveKey="Random"
           centered
+          onChange={(key) => {
+            getMovies(10, 1, key).then((res) => {
+              setmoviePoster(res);
+            });
+          }}
           tabBarExtraContent={{
             left: <div className="text-2xl">Discover Movies</div>,
             right: (
@@ -57,22 +60,22 @@ const DiscoverMovieSection: React.FC = () => {
           <Tabs.TabPane tab="Random" key="Random">
             <div className="grid gap-y-16 gap-x-5 py-16 justify-items-center grid-cols-2 2xl:grid-cols-5 lg:grid-cols-4 md:grid-cols-3 sm:grid-cols-2">
               {moviePoster &&
-                moviePoster.map((movie, index) => (
+                moviePoster.data.map((movie, index) => (
                   <div className="card-item cursor-pointer" key={`banner-items-${index}`}>
                     <div className="card-item-img">
                       <div className="relative flex items-center bg-primary-gradient -mb-8 w-max ml-auto rounded-full py-px px-3 -right-3 text-sm font-poppins">
-                        <span>9.8</span>
+                        <span>{movie.score}</span>
                         <Rating className="ml-1" />
                       </div>
                       <img
-                        src={movie.bannerImage}
+                        src={movie.bannerImageUrl}
                         alt="movie1"
-                        className="object-cover w-64 mb-4 rounded-2xl hover:shadow-xl transition-shadow duration-300"
+                        className="object-cover w-64 mb-4 rounded-2xl hover:shadow-xl transition-shadow duration-300 m-auto"
                       />
-                      <div className="flex gap-x-1 text-sm text-primary-default">
+                      <div className="flex w-64 gap-x-1 text-sm text-primary-default overflow-hidden overflow-ellipsis">
                         <span>{dayjs(movie.startDate).year()}</span>
                         <span>|</span>
-                        <span>
+                        <span className="whitespace-nowrap overflow-hidden overflow-ellipsis">
                           {movie.categories.map((category) => {
                             return `${category.title} `;
                           })}
@@ -88,56 +91,66 @@ const DiscoverMovieSection: React.FC = () => {
           </Tabs.TabPane>
           <Tabs.TabPane tab="Popular" key="Popular">
             <div className="grid gap-y-16 gap-x-5 py-16 justify-items-center grid-cols-2 2xl:grid-cols-5 lg:grid-cols-4 md:grid-cols-3 sm:grid-cols-2">
-              {Array.from({ length: 10 }).map((_, index) => (
-                <div className="card-item" key={`banner-items-${index}`}>
-                  <div className="card-item-img">
-                    <div className="relative flex items-center bg-primary-gradient -mb-8 w-max ml-auto rounded-full py-px px-3 -right-3 text-sm">
-                      <span>9.8</span>
-                      <Rating className="ml-1" />
-                    </div>
-                    <img
-                      src={Banner2.src}
-                      alt="movie1"
-                      className="object-cover w-64 mb-4 rounded-2xl"
-                    />
-                    <div className="flex gap-x-1 text-sm text-primary-default">
-                      <span>2021</span>
-                      <span>|</span>
-                      <span>Action, Superhero</span>
-                    </div>
-                    <div className="flex gap-x-1 text-lg text-white">
-                      <span>Black Widow</span>
+              {moviePoster &&
+                moviePoster.data.map((movie, index) => (
+                  <div className="card-item cursor-pointer" key={`banner-items-${index}`}>
+                    <div className="card-item-img">
+                      <div className="relative flex items-center bg-primary-gradient -mb-8 w-max ml-auto rounded-full py-px px-3 -right-3 text-sm font-poppins">
+                        <span>{movie.score}</span>
+                        <Rating className="ml-1" />
+                      </div>
+                      <img
+                        src={movie.bannerImageUrl}
+                        alt="movie1"
+                        className="object-cover w-64 mb-4 rounded-2xl hover:shadow-xl transition-shadow duration-300 m-auto"
+                      />
+                      <div className="flex w-64 gap-x-1 text-sm text-primary-default overflow-hidden overflow-ellipsis">
+                        <span>{dayjs(movie.startDate).year()}</span>
+                        <span>|</span>
+                        <span className="whitespace-nowrap overflow-hidden overflow-ellipsis">
+                          {movie.categories.map((category) => {
+                            return `${category.title} `;
+                          })}
+                        </span>
+                      </div>
+                      <div className="flex gap-x-1 text-lg text-white">
+                        <span>{movie.title}</span>
+                      </div>
                     </div>
                   </div>
-                </div>
-              ))}
+                ))}
             </div>
           </Tabs.TabPane>
           <Tabs.TabPane tab="Recent" key="Recent">
             <div className="grid gap-y-16 gap-x-5 py-16 justify-items-center grid-cols-2 2xl:grid-cols-5 lg:grid-cols-4 md:grid-cols-3 sm:grid-cols-2">
-              {Array.from({ length: 10 }).map((_, index) => (
-                <div className="card-item" key={`banner-items-${index}`}>
-                  <div className="card-item-img">
-                    <div className="relative flex items-center bg-primary-gradient -mb-8 w-max ml-auto rounded-full py-px px-3 -right-3 text-sm">
-                      <span>9.8</span>
-                      <Rating className="ml-1" />
-                    </div>
-                    <img
-                      src={Banner3.src}
-                      alt="movie1"
-                      className="object-cover w-64 mb-4 rounded-2xl"
-                    />
-                    <div className="flex gap-x-1 text-sm text-primary-default">
-                      <span>2021</span>
-                      <span>|</span>
-                      <span>Action, Superhero</span>
-                    </div>
-                    <div className="flex gap-x-1 text-lg text-white">
-                      <span>Black Widow</span>
+              {moviePoster &&
+                moviePoster.data.map((movie, index) => (
+                  <div className="card-item cursor-pointer" key={`banner-items-${index}`}>
+                    <div className="card-item-img">
+                      <div className="relative flex items-center bg-primary-gradient -mb-8 w-max ml-auto rounded-full py-px px-3 -right-3 text-sm font-poppins">
+                        <span>{movie.score}</span>
+                        <Rating className="ml-1" />
+                      </div>
+                      <img
+                        src={movie.bannerImageUrl}
+                        alt="movie1"
+                        className="object-cover w-64 mb-4 rounded-2xl hover:shadow-xl transition-shadow duration-300 m-auto"
+                      />
+                      <div className="flex w-64 gap-x-1 text-sm text-primary-default overflow-hidden overflow-ellipsis">
+                        <span>{dayjs(movie.startDate).year()}</span>
+                        <span>|</span>
+                        <span className="whitespace-nowrap overflow-hidden overflow-ellipsis">
+                          {movie.categories.map((category) => {
+                            return `${category.title} `;
+                          })}
+                        </span>
+                      </div>
+                      <div className="flex gap-x-1 text-lg text-white">
+                        <span>{movie.title}</span>
+                      </div>
                     </div>
                   </div>
-                </div>
-              ))}
+                ))}
             </div>
           </Tabs.TabPane>
         </Tabs>

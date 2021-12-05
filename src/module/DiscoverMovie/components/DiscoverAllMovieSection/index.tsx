@@ -4,11 +4,11 @@ import { SearchOutlined } from '@ant-design/icons';
 import { Input } from 'antd';
 
 import TextHeader from 'common/components/TextHeader';
-import { Movie } from 'common/services/reponseInterface/movie.interface';
+import { MoviePaginate } from 'common/services/reponseInterface/movie.interface';
 
 import PosterSlider from '../PosterSlider';
 
-const DiscoverAllMovieSection: React.FC<{ movie: Movie[] }> = ({ movie }) => {
+const DiscoverAllMovieSection: React.FC<{ movie: MoviePaginate }> = ({ movie }) => {
   return (
     <section className="discover-all-movie mt-32">
       <div className="flex justify-between max-w-screen-2xl mx-auto mb-8">

@@ -16,6 +16,6 @@ export default function userController() {
       get(
         `users/${usrid}/reviews?perPage=${perPage}&pageNum=${pageNum}&sortBy=${sortBy}`,
       ),
-    getTopReview: () => get('users/top-review'),
+    getTopReview: (amount: number) => get<User[]>(`users/top-review?amount=${amount}`),
   };
 }

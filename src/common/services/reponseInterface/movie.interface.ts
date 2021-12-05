@@ -19,7 +19,7 @@ export interface Movie {
 
   startDate: Date;
 
-  bannerImage: string;
+  bannerImageUrl: string;
 
   trailerLink: string;
 
@@ -30,4 +30,9 @@ export interface Movie {
   reviews?: Review[];
 
   score?: number;
+}
+
+export interface MoviePaginate {
+  data: Movie[];
+  total: number;
 }

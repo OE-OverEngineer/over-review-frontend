@@ -8,7 +8,7 @@ import Slider from 'react-slick';
 
 import Arrow from 'common/assets/images/arrow.svg';
 import Intersperse from 'common/hooks/Intersperse';
-import { Movie } from 'common/services/reponseInterface/movie.interface';
+import { MoviePaginate } from 'common/services/reponseInterface/movie.interface';
 
 const NextArrow = (props: {
   className?: string;
@@ -44,14 +44,14 @@ const PrevArrow = (props: {
 };
 
 interface BannerSliderProps {
-  movie: Movie[];
+  movie: MoviePaginate;
   className?: string;
 }
 
 const BannerSlider: React.FC<BannerSliderProps> = ({ className, movie }) => {
   const [banner, setBanner] = useState<any>();
   const [subBanner, setSubBanner] = useState<any>();
-  const [movieBanner, setMovieBanner] = useState<Movie[]>();
+  const [movieBanner, setMovieBanner] = useState<MoviePaginate>();
 
   const Router = useRouter();
 
@@ -76,16 +76,16 @@ const BannerSlider: React.FC<BannerSliderProps> = ({ className, movie }) => {
             fade
             nextArrow={<NextArrow />}
             prevArrow={<PrevArrow />}>
-            {movieBanner.map((item, index) => (
+            {movieBanner.data.map((item, index) => (
               <div
                 className="max-w-5xl flex z-10 justify-center m-auto font-poppins"
                 key={`${item.title}-items-${index}`}>
                 <img
-                  src={item.bannerImage}
+                  src={item.bannerImageUrl}
                   alt="banner1"
                   className=" w-96 h-full relative -mr-2 rounded-3xl"
                 />
-                <div className="max-w-xl w-full bg-white my-4 rounded-r-2xl py-8 px-12">
+                <div className="max-w-xl w-full bg-white my-8 rounded-r-2xl py-8 px-12">
                   <div className="text-2xl text-black mb-2">{item.title}</div>
                   <hr className=" border-gray-500" />
                   <div className="grid grid-cols-2 gap-y-8 my-4">
@@ -97,12 +97,10 @@ const BannerSlider: React.FC<BannerSliderProps> = ({ className, movie }) => {
                     </div>
                     <div className="block">
                       <div className="text-gray-600 text-sm">Genre</div>
-                      <div className="text-gray-800 text-sm">
+                      <div className="text-gray-800 text-sm whitespace-nowrap overflow-hidden overflow-ellipsis">
                         {Intersperse(item.categories, ', ').map(
                           (tag: any, index: any) => (
-                            <span key={index} className="">
-                              {tag}
-                            </span>
+                            <span key={index}>{tag}</span>
                           ),
                         )}
                       </div>
@@ -113,7 +111,7 @@ const BannerSlider: React.FC<BannerSliderProps> = ({ className, movie }) => {
                     </div>
                     <div className="block">
                       <div className="text-gray-600 text-sm">Synopsis</div>
-                      <div className="text-gray-800 text-sm line-clamp-5 overflow-hidden">
+                      <div className="text-gray-800 text-sm line-clamp-4 overflow-hidden h-20">
                         {item.description}
                       </div>
                     </div>
@@ -145,15 +143,15 @@ const BannerSlider: React.FC<BannerSliderProps> = ({ className, movie }) => {
                     </div>
                   </div>
                   <hr className=" border-gray-500" />
-                  <div className="flex justify-around mt-8 mx-4">
+                  <div className="flex justify-around mt-4 mx-4">
                     <div className="block text-center">
-                      <div className="text-gray-600 text-2xl">8.2/10</div>
+                      <div className="text-gray-600 text-2xl">{item.score}/10</div>
                       <div className="text-gray-600 text-xs">Ratings by OverUser</div>
                     </div>
 
                     <div className="block text-center">
                       <div className="text-gray-600 text-2xl">
-                        <Rate disabled defaultValue={4} />
+                        <Rate disabled defaultValue={item.score} />
                       </div>
                       <div className="text-gray-600 text-xs">From OverUsers</div>
                     </div>
@@ -172,10 +170,10 @@ const BannerSlider: React.FC<BannerSliderProps> = ({ className, movie }) => {
             slidesToScroll={1}
             arrows={false}
             variableWidth>
-            {movieBanner.map((item, index) => (
+            {movieBanner.data.map((item, index) => (
               <div key={`${item.title}-sub-${index}`} className="h-104 w-80">
                 <img
-                  src={item.bannerImage}
+                  src={item.bannerImageUrl}
                   alt="banner1"
                   className=" h-full object-cover rounded-2xl filter brightness-50 m-auto"
                 />

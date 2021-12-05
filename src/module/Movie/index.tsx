@@ -1,16 +1,13 @@
 import React, { useEffect, useState } from 'react';
 
-import { Button, Form, Input, Layout, Rate } from 'antd';
-import { Content, Footer } from 'antd/lib/layout/layout';
+import { Button, Form, Input, Rate } from 'antd';
 import { useRouter } from 'next/dist/client/router';
+import Head from 'next/head';
 import { toast, ToastContainer } from 'react-toastify';
 
-import Male from 'common/assets/images/actors/1.png';
 import Banner1 from 'common/assets/images/banner/banner_1.png';
-import Line from 'common/assets/images/line.svg';
 import Rating from 'common/assets/images/rating.svg';
-import Star from 'common/assets/images/star.svg';
-import Navbar from 'common/components/Layouts/Navbar';
+import Layouts from 'common/components/Layouts';
 import TextHeader from 'common/components/TextHeader';
 import moviesController from 'common/services/Controllers/moviesControllers';
 import reviewsController from 'common/services/Controllers/reviewsControllers';
@@ -68,10 +65,12 @@ const Home: React.FC = () => {
   };
 
   return (
-    <Layout className="max-h-full ">
-      <Star className="absolute h-full w-full z-0" />
-      <Navbar />
-      <Content>
+    <div>
+      <Head>
+        <title>Home Page</title>
+        <link rel="icon" href="/over_icon.svg" />
+      </Head>
+      <Layouts>
         <section className="max-w-screen-2xl m-auto text-white z-10">
           <div className="flex justify-end mt-14"></div>
 
@@ -87,8 +86,8 @@ const Home: React.FC = () => {
                 return (
                   <div className="col-span-1" key={actor.id}>
                     <img
-                      src={Male.src}
-                      className="mx-auto w-40 h-40 rounded-full"
+                      src={actor.imageUrl}
+                      className="mx-auto w-40 h-40 rounded-full object-cover"
                       alt={actor.firstName}
                     />
                     <p className="mx-auto text-center mt-4 mb-0 whitespace-nowrap overflow-hidden overflow-ellipsis">
@@ -114,7 +113,7 @@ const Home: React.FC = () => {
             )}
           </div>
 
-          <Line className="mx-auto mt-8 " />
+          {/* <Line className="mx-auto mt-8 " /> */}
           <CriticReviews />
 
           <TextHeader className="max-w-screen-lg m-auto mt-8">
@@ -193,9 +192,8 @@ const Home: React.FC = () => {
           </div>
         </section>
         <ToastContainer />
-      </Content>
-      <Footer className="text-center">Over Review ©2021 Created by Over Engineer</Footer>
-    </Layout>
+      </Layouts>
+    </div>
   );
 };
 

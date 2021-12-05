@@ -3,10 +3,10 @@ import React, { useEffect, useState } from 'react';
 
 import BannerSlider from 'common/components/BannerSlider';
 import moviesController from 'common/services/Controllers/moviesControllers';
-import { Movie } from 'common/services/reponseInterface/movie.interface';
+import { MoviePaginate } from 'common/services/reponseInterface/movie.interface';
 
 const BannerSliderSection: React.FC = () => {
-  const [movie, setMovie] = useState<Movie[]>([]);
+  const [movie, setMovie] = useState<MoviePaginate>();
 
   const { getMovies } = moviesController();
 
@@ -21,9 +21,11 @@ const BannerSliderSection: React.FC = () => {
       <div className="text-center text-2xl font-poppins">
         # Your weekend buddy for this week
       </div>
-      <div className="mt-16">
-        <BannerSlider movie={movie} />
-      </div>
+      {movie && (
+        <div className="mt-16">
+          <BannerSlider movie={movie} />
+        </div>
+      )}
     </section>
   );
 };

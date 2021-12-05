@@ -348,7 +348,7 @@ const MovieSection = () => {
             </Select>
           </Form.Item>
           <Form.Item
-            label="FirstName"
+            label="Start Date"
             name="startDate"
             rules={[
               {

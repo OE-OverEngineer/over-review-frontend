@@ -5,34 +5,20 @@ import { Role } from './role.interface';
 
 export interface User {
   id: number;
-
+  amountReviews: number;
   role: Role;
-
   email: string;
-
   password?: string;
-
   firstName: string;
-
   lastName: string;
-
   displayName: string;
-
-  avatar: string;
-
+  avatarUrl: string;
   dateOfBirth: Date;
-
   gender: 'Male' | 'Female';
-
   banned: boolean;
-
   movieRequest: Movie[];
-
   reports: Report[];
-
   reported: Report[];
-
   reviews: Review[];
-
   comments: Comment[];
 }

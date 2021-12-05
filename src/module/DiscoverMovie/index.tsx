@@ -5,12 +5,12 @@ import Head from 'next/head';
 import BannerSlider from 'common/components/BannerSlider';
 import Layouts from 'common/components/Layouts';
 import moviesController from 'common/services/Controllers/moviesControllers';
-import { Movie } from 'common/services/reponseInterface/movie.interface';
+import { MoviePaginate } from 'common/services/reponseInterface/movie.interface';
 
 import DiscoverAllMovieSection from './components/DiscoverAllMovieSection';
 
 const Home: React.FC = () => {
-  const [movie, setMovie] = useState<Movie[]>([]);
+  const [movie, setMovie] = useState<MoviePaginate>();
 
   const { getMovies } = moviesController();
 
@@ -27,8 +27,12 @@ const Home: React.FC = () => {
         <link rel="icon" href="/over_icon.svg" />
       </Head>
       <Layouts router={['discover']}>
-        <BannerSlider className="mt-16" movie={movie} />
-        <DiscoverAllMovieSection movie={movie} />
+        {movie && (
+          <>
+            <BannerSlider className="mt-16" movie={movie} />
+            <DiscoverAllMovieSection movie={movie} />
+          </>
+        )}
       </Layouts>
     </div>
   );
