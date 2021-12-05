@@ -67,7 +67,7 @@ const Profile: React.FC = () => {
               {profile && (
                 <div className="flex-1">
                   {/* <TopReviewSection id={profile.id} /> */}
-                  <RecentReviewSection />
+                  <RecentReviewSection id={profile.id} firstName={profile.firstName} />
                 </div>
               )}
 
