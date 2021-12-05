@@ -22,12 +22,13 @@ export interface CreateMovieRequest {
   categoriesID: number[];
   startDate: Date;
   bannerImage: string;
-  trailerLink: string;
+  trailerLinkUrl: string;
 }
 
 export interface CreateActorRequest {
   firstName: string;
   lastName: string;
+  image: string | ArrayBuffer | null;
 }
 
 export interface CreateDirectorRequest {
@@ -36,9 +37,14 @@ export interface CreateDirectorRequest {
 }
 
 export interface CreateReviewRequest {
-  moiveID: number;
+  moiveID: number | string;
   message: string;
   score: number;
+}
+
+export interface CreateReviewLikeRequest {
+  targetReviewID: number;
+  isLike: boolean;
 }
 
 export interface CreateCategoryRequest {
@@ -48,4 +54,13 @@ export interface CreateCategoryRequest {
 export interface LoginRequset {
   email: string;
   password: string;
+}
+
+export interface CreateReportRequest {
+  targetUserID: number;
+  message: string;
+}
+
+export interface CreateRoleRequest {
+  title: string;
 }

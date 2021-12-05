@@ -21,7 +21,6 @@ const { Option } = Select;
 
 const Register: React.FC = () => {
   const [imageUrl, setImageUrl] = useState<any>();
-  const [image, setImage] = useState<any>();
 
   const Router = useRouter();
 
@@ -50,7 +49,6 @@ const Register: React.FC = () => {
       // Get this url from response in real world.
       console.log(info);
 
-      setImage(info.file);
       getBase64(info.file.originFileObj, (imageUrl: string | ArrayBuffer | null) => {
         setImageUrl(imageUrl);
       });
@@ -73,7 +71,7 @@ const Register: React.FC = () => {
       .then((res) => {
         console.log(res);
         handleItem(TOKEN_KEY, res.access_token);
-        // Router.push('/');
+        Router.push('/');
       })
       .catch((res) => {
         console.log(res);
@@ -124,7 +122,13 @@ const Register: React.FC = () => {
                 <Form.Item
                   label="E-mail"
                   name="email"
-                  rules={[{ required: true, message: 'Please input your e-mail!' }]}>
+                  rules={[
+                    {
+                      required: true,
+                      type: 'email',
+                      message: 'Please input valid e-mail!',
+                    },
+                  ]}>
                   <Input
                     prefix={<UserOutlined style={{ color: '#7433FF' }} />}
                     className="rounded-lg"

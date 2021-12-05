@@ -22,7 +22,7 @@ const Auth: React.FC = () => {
   const onFinish = (values: Record<string, string>) => {
     console.log('Success:', values);
     const param: LoginRequset = {
-      email: values.username,
+      email: values.email,
       password: values.password,
     };
 
@@ -46,7 +46,7 @@ const Auth: React.FC = () => {
 
   return (
     <Layout className="min-h-screen h-full font-poppins">
-      {/* <Svg Icon={<Star className="absolute h-full w-full z-0" />} /> */}
+      <Svg Icon={<Star className="absolute h-full w-full z-0" />} />
 
       <Navbar />
       <Content className="z-10">
@@ -63,9 +63,11 @@ const Auth: React.FC = () => {
             <p className=" text-primary-default text-4xl text-center mt-4 ">Sign In</p>
             <Form.Item
               className="hidden-required"
-              label="Username"
-              name="username"
-              rules={[{ required: true, message: 'Please input your username!' }]}>
+              label="Email"
+              name="email"
+              rules={[
+                { required: true, type: 'email', message: 'Please input valid e-mail!' },
+              ]}>
               <Input
                 prefix={<UserOutlined style={{ color: '#7433FF' }} />}
                 className="rounded-lg"

@@ -1,11 +1,20 @@
-import React from 'react';
+import React, { useEffect } from 'react';
 
 import { Rate, Button } from 'antd';
 
 import Banner3 from 'common/assets/images/banner/banner_3.png';
 import TextHeader from 'common/components/TextHeader';
+import userController from 'common/services/Controllers/userController';
 
 const TopReviewSection: React.FC = () => {
+  const { getUsersIdReviews } = userController();
+
+  useEffect(() => {
+    getUsersIdReviews('0', 10, 1).then((res) => {
+      console.log(res);
+    });
+  }, []);
+
   return (
     <section className="top-review">
       <TextHeader className="mb-2">Nawa-lee’s Top Reviews</TextHeader>

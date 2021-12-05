@@ -1,11 +1,8 @@
-import { Movie } from './movie.interface';
+import { BaseResponse } from '../RestClient';
 
-export interface Actor {
+export interface Actor extends BaseResponse {
   id: number;
-
   firstName: string;
-
   lastName: string;
-
-  movies: Movie[];
+  imageUrl: string | ArrayBuffer | null;
 }

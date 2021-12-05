@@ -3,6 +3,17 @@ import axios, { AxiosError, AxiosRequestConfig, AxiosResponse } from 'axios';
 
 import { API_URL, TOKEN_KEY } from 'common/utilities/constants';
 
+export interface ErrorInterface {
+  error: string;
+  message: string[];
+  statusCode: number;
+}
+
+export interface BaseResponse {
+  createdAt: Date;
+  updatedAt: Date;
+}
+
 export const http = axios.create({
   baseURL: API_URL,
 });
@@ -39,7 +50,7 @@ http.interceptors.request.use(
   (config: AxiosRequestConfig) => {
     // eslint-disable-next-line no-param-reassign
     if (config.headers) {
-      config.headers.Authorization = localStorage.getItem(TOKEN_KEY) || '';
+      config.headers.Authorization = `bearer ${localStorage.getItem(TOKEN_KEY)}`;
     }
 
     return config;

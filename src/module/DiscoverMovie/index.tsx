@@ -28,7 +28,7 @@ const Home: React.FC = () => {
       </Head>
       <Layouts router={['discover']}>
         <BannerSlider className="mt-16" movie={movie} />
-        <DiscoverAllMovieSection />
+        <DiscoverAllMovieSection movie={movie} />
       </Layouts>
     </div>
   );

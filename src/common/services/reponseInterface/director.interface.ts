@@ -1,11 +1,7 @@
-import { Movie } from './movie.interface';
+import { BaseResponse } from '../RestClient';
 
-export interface Director {
+export interface Director extends BaseResponse {
   id: number;
-
   firstName: string;
-
   lastName: string;
-
-  movies: Movie[];
 }
