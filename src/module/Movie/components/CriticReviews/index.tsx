@@ -1,38 +1,93 @@
 import React from 'react';
 
-import { Rate } from 'antd';
+import { Avatar, Rate, Comment, Empty } from 'antd';
+import Link from 'next/link';
 
+import Comments from 'common/assets/images/comment.svg';
 import Over from 'common/assets/images/Over.svg';
-import Mini from 'common/assets/images/profilemini.png';
 import Svg from 'common/components/Svg';
 import TextHeader from 'common/components/TextHeader';
 
 const CriticReviews: React.FC = () => {
+  const likeAction = () => {
+    console.log('like');
+  };
   return (
     <section className="critic-review max-w-screen-lg m-auto">
-      <TextHeader className="mt-8">CRITIC REVIEWS</TextHeader>
+      <TextHeader className="my-8">CRITIC REVIEWS</TextHeader>
 
-      <div className="border-2 border-primary-default mx-auto rounded-3xl flex flex-col gap-y-4 p-4 mt-4">
-        {Array.from({ length: 5 }).map((_, index) => (
-          <div className="grid grid-cols-12" key={index}>
-            {index === 0 && (
-              <div className="col-span-11 flex justify-end">
-                <span className="text-primary-defaultLight italic mb-2">TOP review</span>
-              </div>
-            )}
-            <div className="border border-white col-span-11 rounded-xl p-3 font-poppins">
+      {/* <div className="border-2 border-primary-default rounded-2xl mx-auto flex flex-col p-4">
+        <Empty description={<span>No comments yet. Be the first to comment.</span>} />
+      </div> */}
+
+      <div className="border-2 border-primary-default rounded-2xl mx-auto flex flex-col p-4">
+        <div className="relative text-right top-8 text-primary-defaultLight">
+          Top review
+        </div>
+        <Comment
+          actions={[
+            <div
+              key="like"
+              className="px-3 py-1 gap-1 border-2 border-primary-default text-xs rounded-md text-primary-defaultLight flex cursor-pointer"
+              onClick={likeAction}
+              role="presentation">
+              <span>60</span>
+              <Svg Icon={<Over />} />
+            </div>,
+            <div
+              key="comment"
+              className="px-3 py-1 gap-1 border-2 border-primary-default text-xs rounded-md text-primary-defaultLight flex cursor-pointer ml-2"
+              onClick={likeAction}
+              role="presentation">
+              <span>14</span>
+              <Svg Icon={<Comments />} />
+            </div>,
+          ]}
+          author={
+            <Link href="/">
+              <a className="text-white">Han Solo</a>
+            </Link>
+          }
+          avatar={<Avatar src="https://joeschmoe.io/api/v1/random" alt="Han Solo" />}
+          content={
+            <div className="border border-white rounded-xl p-3">
               <Rate className="" allowHalf defaultValue={3.5} disabled />
-              <br />A powerful reminder how something as seemingly lowbrow and disposable
-              as horror cinema can be a surprisingly successful vehicle to address.
+              <p>
+                We supply a series of design principles, practical patterns and high
+                quality design resources (Sketch and Axure), to help people create their
+                product prototypes beautifully and efficiently.
+              </p>
             </div>
-            <div className="col-span-1">
-              <img src={Mini.src} alt="profile" className="w-9/12 mx-auto" />
+          }
+        />
+        <Comment
+          actions={[
+            <div
+              key="like"
+              className="px-3 py-1 gap-1 border-2 border-primary-default text-xs rounded-md text-primary-defaultLight flex cursor-pointer"
+              onClick={likeAction}
+              role="presentation">
+              <span>2314</span>
+              <Svg Icon={<Over />} />
+            </div>,
+          ]}
+          author={
+            <Link href="/">
+              <a className="text-white">Han Solo</a>
+            </Link>
+          }
+          avatar={<Avatar src="https://joeschmoe.io/api/v1/random" alt="Han Solo" />}
+          content={
+            <div className="border border-white rounded-xl p-3">
+              <Rate className="" allowHalf defaultValue={3.5} disabled />
+              <p>
+                We supply a series of design principles, practical patterns and high
+                quality design resources (Sketch and Axure), to help people create their
+                product prototypes beautifully and efficiently.
+              </p>
             </div>
-            <button className=" px-4 py-1 gap-2 border-2 border-primary-default font-poppins text-xs italic rounded-md w-20 mt-4 text-primary-defaultLight flex">
-              <span>2314</span> <Svg Icon={<Over />} className="inline-block" />
-            </button>
-          </div>
-        ))}
+          }
+        />
       </div>
     </section>
   );
