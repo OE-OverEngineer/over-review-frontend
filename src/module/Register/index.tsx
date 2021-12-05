@@ -264,7 +264,7 @@ const Register: React.FC = () => {
                 htmlType="submit"
                 shape="round"
                 style={{ width: '128px' }}>
-                Login
+                Sign up
               </Button>
             </Form.Item>
             <span className="gap-x-2 flex w-full text-gray-400 justify-center">
