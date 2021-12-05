@@ -21,7 +21,7 @@ export interface Movie {
 
   bannerImageUrl: string;
 
-  trailerLink: string;
+  trailerLinkUrl: string;
 
   approve: boolean;
 

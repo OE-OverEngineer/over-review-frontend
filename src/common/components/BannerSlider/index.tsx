@@ -76,10 +76,10 @@ const BannerSlider: React.FC<BannerSliderProps> = ({ className, movie }) => {
             fade
             nextArrow={<NextArrow />}
             prevArrow={<PrevArrow />}>
-            {movieBanner.data.map((item, index) => (
+            {movieBanner.data.map((item) => (
               <div
                 className="max-w-5xl flex z-10 justify-center m-auto font-poppins"
-                key={`${item.title}-items-${index}`}>
+                key={`${item.id}`}>
                 <img
                   src={item.bannerImageUrl}
                   alt="banner1"
@@ -142,11 +142,33 @@ const BannerSlider: React.FC<BannerSliderProps> = ({ className, movie }) => {
                         shape="round"
                         size="large"
                         onClick={() => {
-                          console.log(item);
-
-                          // Router.push(`/movie/${item.id}`);
+                          // console.log(subBanner.innerSlider.asNavForIndex);
+                          const index = subBanner.innerSlider.asNavForIndex;
+                          if (!index) {
+                            console.log(subBanner.props.children[0].key);
+                            Router.push(`/movie/${subBanner.props.children[0].key}`);
+                          } else if (index === subBanner.props.children.length) {
+                            console.log(subBanner.props.children[0].key);
+                            Router.push(`/movie/${subBanner.props.children[0].key}`);
+                          } else if (index < 0) {
+                            console.log(
+                              subBanner.props.children[
+                                subBanner.props.children.length - 1
+                              ].key,
+                            );
+                            Router.push(
+                              `/movie/${
+                                subBanner.props.children[
+                                  subBanner.props.children.length - 1
+                                ].key
+                              }`,
+                            );
+                          } else if (index < subBanner.props.children.length) {
+                            console.log(subBanner.props.children[index].key);
+                            Router.push(`/movie/${subBanner.props.children[index].key}`);
+                          }
                         }}>
-                        See more
+                        {item.id}
                       </Button>
                     </div>
                   </div>

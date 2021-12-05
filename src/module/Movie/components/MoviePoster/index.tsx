@@ -2,14 +2,12 @@ import React from 'react';
 
 import { Button, Rate } from 'antd';
 import dayjs from 'dayjs';
-import { useRouter } from 'next/dist/client/router';
 
 import Intersperse from 'common/hooks/Intersperse';
 import { Actor } from 'common/services/reponseInterface/actor.interface';
 import { Movie } from 'common/services/reponseInterface/movie.interface';
 
 const MoviePoster: React.FC<{ movie: Movie }> = ({ movie }) => {
-  const Router = useRouter();
   return (
     <section className="slider-banner py-16">
       <div className="max-w-5xl flex z-10 justify-center m-auto font-poppins">
@@ -87,8 +85,15 @@ const MoviePoster: React.FC<{ movie: Movie }> = ({ movie }) => {
           </div>
         </div>
       </div>
-      <div className="max-w-5xl flex z-10 m-auto justify-center">
-        <Button className=" w-56" type="primary" shape="round" size="large">
+      <div className="max-w-5xl flex z-10 m-auto justify-center mt-8">
+        <Button
+          className=" w-56"
+          type="primary"
+          shape="round"
+          size="large"
+          onClick={() => {
+            window.open(movie.trailerLinkUrl, '_blank');
+          }}>
           Watch Trailer
         </Button>
       </div>
