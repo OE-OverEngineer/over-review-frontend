@@ -10,9 +10,6 @@ import Arrow from 'common/assets/images/arrow.svg';
 import Intersperse from 'common/hooks/Intersperse';
 import { Movie } from 'common/services/reponseInterface/movie.interface';
 
-import 'slick-carousel/slick/slick.css';
-import 'slick-carousel/slick/slick-theme.css';
-
 const NextArrow = (props: {
   className?: string;
   style?: React.CSSProperties;
