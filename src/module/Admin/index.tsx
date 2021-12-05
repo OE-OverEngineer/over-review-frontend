@@ -12,6 +12,7 @@ import CatagorySection from './components/CatagorySection';
 import DirectorsSection from './components/DirectorsSection';
 import MovieSection from './components/MovieSection';
 import RequestSection from './components/RequestSection';
+import UserSection from './components/UserSection';
 
 const Admin = () => {
   const [collapsed, setCollapsed] = useState<boolean>(false);
@@ -41,6 +42,8 @@ const Admin = () => {
         return <MovieSection />;
       case 'request-movie':
         return <RequestSection />;
+      case 'user':
+        return <UserSection />;
 
       default:
         return <CatagorySection />;
@@ -71,6 +74,9 @@ const Admin = () => {
           </Menu.Item>
           <Menu.Item key="request-movie" icon={<DesktopOutlined />}>
             <Link href="/admin/request-movie">Request Movie</Link>
+          </Menu.Item>
+          <Menu.Item key="user" icon={<DesktopOutlined />}>
+            <Link href="/admin/user">User</Link>
           </Menu.Item>
         </Menu>
       </Sider>

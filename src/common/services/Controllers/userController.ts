@@ -1,10 +1,11 @@
-import { CreateUserRequest } from '../postSchemas';
+import { CreateAdminUserRequest } from '../postSchemas';
 import { User } from '../reponseInterface/user.interface';
 import { get, post } from '../RestClient';
 
 export default function userController() {
   return {
-    postUsers: (data: CreateUserRequest) => post<CreateUserRequest, User>('users', data),
+    postUsers: (data: CreateAdminUserRequest) =>
+      post<CreateAdminUserRequest, User>('users', data),
     getUsers: () => get<User[]>('users'),
     getUsersProfile: () => get<User>('users/profile'),
     getUsersIdReviews: (

@@ -8,6 +8,17 @@ export interface CreateUserRequest {
   dateOfBirth: Date;
   gender: string;
 }
+export interface CreateAdminUserRequest {
+  email: string;
+  password: string;
+  firstName: string;
+  lastName: string;
+  displayName: string;
+  avatarUrl: string | ArrayBuffer | null;
+  dateOfBirth: Date;
+  gender: string;
+  role?: number;
+}
 
 export interface CreateCommentRequest {
   message: string;
