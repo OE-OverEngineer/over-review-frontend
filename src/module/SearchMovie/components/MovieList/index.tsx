@@ -5,10 +5,10 @@ import Rating from 'common/assets/images/rating.svg';
 import Star from 'common/assets/images/star.svg';
 import categoriesController from 'common/services/Controllers/categoriesControllers';
 import moviesController from 'common/services/Controllers/moviesControllers';
-import { Movie } from 'common/services/reponseInterface/movie.interface';
+import { Movie, MoviePaginate } from 'common/services/reponseInterface/movie.interface';
 
 const DiscoverMovieSection: React.FC = () => {
-  const [moviePoster, setmoviePoster] = useState<Movie[]>();
+  const [moviePoster, setmoviePoster] = useState<MoviePaginate>();
   const { getMovies } = moviesController();
   const { getCategories } = categoriesController();
 

@@ -21,7 +21,15 @@ const MoviePoster: React.FC<{ movie: Movie }> = ({ movie }) => {
         <div className="max-w-xl w-full bg-white my-8 rounded-r-2xl py-8 px-12">
           <div className="text-2xl text-black mb-2">{movie.title}</div>
           <hr className=" border-gray-500" />
-          <div className="grid grid-cols-2 gap-y-8 my-4">
+
+          <div className="block mt-4">
+            <div className="text-gray-600 text-sm">Synopsis</div>
+            <div className="text-gray-800 text-sm line-clamp-5 overflow-hidden h-20">
+              {movie.description}
+            </div>
+          </div>
+
+          <div className="grid grid-cols-2 gap-y-6 my-4">
             <div className="block">
               <div className="text-gray-600 text-sm">Release date</div>
               <div className="text-gray-600 text-sm">
@@ -30,7 +38,7 @@ const MoviePoster: React.FC<{ movie: Movie }> = ({ movie }) => {
             </div>
             <div className="block">
               <div className="text-gray-600 text-sm">Genre</div>
-              <div className="text-gray-800 text-sm whitespace-nowrap overflow-hidden overflow-ellipsis">
+              <div className="text-gray-800 text-sm h-10">
                 {Intersperse(movie.categories, ', ').map((tag: string, index: number) => (
                   <span key={index}>{tag}</span>
                 ))}
@@ -40,12 +48,7 @@ const MoviePoster: React.FC<{ movie: Movie }> = ({ movie }) => {
               <div className="text-gray-600 text-sm">Directed by</div>
               <div className="text-gray-800 text-sm">{`${movie.director.firstName} ${movie.director.lastName}`}</div>
             </div>
-            <div className="block">
-              <div className="text-gray-600 text-sm">Synopsis</div>
-              <div className="text-gray-800 text-sm line-clamp-5 overflow-hidden h-20">
-                {movie.description}
-              </div>
-            </div>
+
             <div className="block h-24">
               <div className="text-gray-600 text-sm">Starring</div>
               {movie.actors.map((actor: Actor, index: number) => {
@@ -66,17 +69,6 @@ const MoviePoster: React.FC<{ movie: Movie }> = ({ movie }) => {
                   {`+ ${movie.actors.length - 3} more`}
                 </div>
               )}
-            </div>
-            <div className="block">
-              <Button
-                type="default"
-                shape="round"
-                size="large"
-                onClick={() => {
-                  Router.push(`/movie/${movie.id}`);
-                }}>
-                See more
-              </Button>
             </div>
           </div>
           <hr className=" border-gray-500" />

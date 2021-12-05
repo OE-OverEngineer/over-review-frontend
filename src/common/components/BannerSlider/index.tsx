@@ -136,13 +136,15 @@ const BannerSlider: React.FC<BannerSliderProps> = ({ className, movie }) => {
                         </div>
                       )}
                     </div>
-                    <div className="block">
+                    <div className="block ">
                       <Button
                         type="default"
                         shape="round"
                         size="large"
                         onClick={() => {
-                          Router.push(`/movie/${item.id}`);
+                          console.log(item);
+
+                          // Router.push(`/movie/${item.id}`);
                         }}>
                         See more
                       </Button>

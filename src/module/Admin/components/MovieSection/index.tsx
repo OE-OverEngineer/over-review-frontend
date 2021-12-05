@@ -27,13 +27,13 @@ import { CreateMovieRequest } from 'common/services/postSchemas';
 import { Actor } from 'common/services/reponseInterface/actor.interface';
 import { Category } from 'common/services/reponseInterface/category.interface';
 import { Director } from 'common/services/reponseInterface/director.interface';
-import { Movie } from 'common/services/reponseInterface/movie.interface';
+import { Movie, MoviePaginate } from 'common/services/reponseInterface/movie.interface';
 
 const MovieSection = () => {
   const [isModalVisible, setIsModalVisible] = useState<boolean>(false);
   const [isLoading, setIsLoading] = useState<boolean>(false);
   const [isLoadingImage, setIsLoadingImage] = useState<boolean>(false);
-  const [movie, setMovie] = useState<Movie[]>();
+  const [movie, setMovie] = useState<MoviePaginate>({ data: [], total: 0 });
   const [imageUrl, setImageUrl] = useState<any>();
   const [actors, setActors] = useState<Actor[]>([]);
   const [directors, setDirectors] = useState<Director[]>([]);
@@ -47,7 +47,7 @@ const MovieSection = () => {
   const { getActors } = actorsController();
 
   useEffect(() => {
-    getMovies(10, 1).then((res: Movie[]) => {
+    getMovies(10, 1).then((res: MoviePaginate) => {
       console.log(res);
 
       setMovie(res);
@@ -204,7 +204,7 @@ const MovieSection = () => {
     <div>
       <Table
         columns={columns}
-        dataSource={movie}
+        dataSource={movie.data}
         bordered
         loading={isLoading}
         rowKey="id"
