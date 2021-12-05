@@ -20,6 +20,7 @@ const { TextArea } = Input;
 
 const Home: React.FC = () => {
   const [movie, setMovie] = useState<Movie>();
+  const [loading, setLoading] = useState<boolean>(false);
 
   const Router = useRouter();
   const { id } = Router.query;
@@ -60,6 +61,7 @@ const Home: React.FC = () => {
           draggable: true,
           progress: undefined,
         });
+        setLoading(true);
       })
       .catch((err) => {
         toast.error(err.message, {
@@ -124,7 +126,7 @@ const Home: React.FC = () => {
           </div>
 
           {/* <Line className="mx-auto mt-8 " /> */}
-          <CriticReviews />
+          <CriticReviews loading={loading} setLoading={setLoading} />
 
           <TextHeader className="max-w-screen-lg m-auto mt-8">
             RATE AND REVIEWS

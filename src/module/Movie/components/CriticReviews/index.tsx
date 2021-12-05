@@ -1,4 +1,4 @@
-import React, { useEffect, useState } from 'react';
+import React, { Dispatch, SetStateAction, useEffect, useState } from 'react';
 
 import { Avatar, Rate, Comment } from 'antd';
 import { useRouter } from 'next/dist/client/router';
@@ -12,7 +12,10 @@ import moviesController from 'common/services/Controllers/moviesControllers';
 import { Movie } from 'common/services/reponseInterface/movie.interface';
 import { Review } from 'common/services/reponseInterface/review.interface';
 
-const CriticReviews: React.FC = () => {
+const CriticReviews: React.FC<{
+  loading: boolean;
+  setLoading: Dispatch<SetStateAction<boolean>>;
+}> = ({ loading, setLoading }) => {
   const [movie, setMovie] = useState<Movie>();
   const [review, setReview] = useState<Review[]>();
 
@@ -30,9 +33,10 @@ const CriticReviews: React.FC = () => {
       getMoviesIdReviews(id, 10, 1).then((res: any) => {
         console.log('id', res);
         setReview(res);
+        setLoading(false);
       });
     }
-  }, [id]);
+  }, [id, loading]);
 
   const likeAction = () => {
     console.log('like');

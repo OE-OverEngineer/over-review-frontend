@@ -22,7 +22,7 @@ const ProfileCard: React.FC<ProfileCardProps> = ({ profile }) => {
   }, [profile]);
 
   return (
-    <section className="profile">
+    <section className="profile w-80 ">
       <Skeleton loading={loading} avatar active>
         <div className="max-w-xs h-full rounded-2xl bg-primary-defaultDark opacity-90 p-4 mb-4">
           <div className="flex justify-center mb-4">

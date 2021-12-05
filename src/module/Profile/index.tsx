@@ -66,7 +66,7 @@ const Profile: React.FC = () => {
             <div className="flex gap-4">
               {profile && (
                 <div className="flex-1">
-                  <TopReviewSection id={profile.id} />
+                  {/* <TopReviewSection id={profile.id} /> */}
                   <RecentReviewSection />
                 </div>
               )}
@@ -78,7 +78,7 @@ const Profile: React.FC = () => {
                 </div>
                 <Anchor className="overflow-hidden mt-2">
                   <ProfileCard profile={profile} />
-                  <TopReviewCard />
+                  {/* <TopReviewCard /> */}
                 </Anchor>
               </div>
             </div>

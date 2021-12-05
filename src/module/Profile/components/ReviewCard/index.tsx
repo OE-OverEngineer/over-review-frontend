@@ -6,7 +6,7 @@ import { useRouter } from 'next/dist/client/router';
 import Banner3 from 'common/assets/images/banner/banner_3.png';
 import TextHeader from 'common/components/TextHeader';
 
-const ReviewCard: React.FC = () => {
+const ReviewCard: React.FC<{ review: any }> = ({ review }) => {
   const Router = useRouter();
   return (
     <div className="w-full h-full rounded-2xl bg-primary-defaultDark opacity-90 p-4 mb-4">
