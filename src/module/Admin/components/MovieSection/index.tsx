@@ -12,6 +12,7 @@ import {
   Select,
   Space,
   Table,
+  Tag,
   Upload,
 } from 'antd';
 import TextArea from 'antd/lib/input/TextArea';
@@ -109,6 +110,20 @@ const MovieSection = () => {
       title: 'Description',
       dataIndex: 'description',
       key: 'description',
+    },
+    {
+      title: 'Category',
+      dataIndex: 'categories',
+      key: 'categories',
+      render: (categories: Category[]) => (
+        <>
+          {categories.map((category) => (
+            <Tag color="default" key={category.id} className="text-black">
+              {category.title}
+            </Tag>
+          ))}
+        </>
+      ),
     },
     {
       title: 'Start Date',
