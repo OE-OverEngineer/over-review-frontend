@@ -2,6 +2,7 @@ import React from 'react';
 
 import { SearchOutlined } from '@ant-design/icons';
 import { Input } from 'antd';
+import { useRouter } from 'next/dist/client/router';
 
 import TextHeader from 'common/components/TextHeader';
 import { MoviePaginate } from 'common/services/reponseInterface/movie.interface';
@@ -9,6 +10,7 @@ import { MoviePaginate } from 'common/services/reponseInterface/movie.interface'
 import PosterSlider from '../PosterSlider';
 
 const DiscoverAllMovieSection: React.FC<{ movie: MoviePaginate }> = ({ movie }) => {
+  const Router = useRouter();
   return (
     <section className="discover-all-movie mt-32">
       <div className="flex justify-between max-w-screen-2xl mx-auto mb-8">
@@ -20,6 +22,9 @@ const DiscoverAllMovieSection: React.FC<{ movie: MoviePaginate }> = ({ movie }) 
           className="text-white w-72"
           prefix={<SearchOutlined className="text-white mr-2" />}
           size="large"
+          onPressEnter={(e: any) => {
+            Router.push(`/search-movie?search=${e.target.value}`);
+          }}
         />
       </div>
       <TextHeader className="max-w-screen-2xl mx-auto mb-8">Trending Now</TextHeader>

@@ -1,23 +1,26 @@
-import BannerSliderSection from 'module/Home/components/BannerSliderSection';
-import DiscoverMovieSection from 'module/Home/components/DiscoverMovieSection';
-import HallOfFameSection from 'module/Home/components/HallOfFameSection';
-
 import { SearchOutlined } from '@ant-design/icons';
 import { Input } from 'antd';
-import Head from 'next/head';
-
-import TextHeader from 'common/components/TextHeader';
+import { useRouter } from 'next/dist/client/router';
 
 const SearchTools: React.FC = () => {
+  const Router = useRouter();
+  const { search } = Router.query;
   return (
-    <div className="flex flex-end mx-8 px-16">
+    <div className="flex justify-between max-w-screen-2xl mx-auto my-8">
+      <div className="text-2xl flex gap-4">
+        <div>Key word: </div>
+        <div>{search}</div>
+      </div>
       <Input
         allowClear
         placeholder="search something here"
         bordered={false}
-        className="text-white mt-32 ml-auto w-80"
-        prefix={<SearchOutlined className="text-white mr-2 " />}
+        className="text-white w-72"
+        prefix={<SearchOutlined className="text-white mr-2" />}
         size="large"
+        onPressEnter={(e: any) => {
+          Router.push(`/search-movie?search=${e.target.value}`);
+        }}
       />
     </div>
   );

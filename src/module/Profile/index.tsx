@@ -50,13 +50,16 @@ const Profile: React.FC = () => {
               <div className="flex">
                 <Input
                   allowClear
-                  placeholder="search something here ..."
+                  placeholder="search something here"
                   bordered={false}
                   style={{ color: '#fff' }}
                   prefix={
                     <SearchOutlined style={{ color: '#fff', marginRight: '8px' }} />
                   }
                   size="large"
+                  onPressEnter={(e: any) => {
+                    Router.push(`/search-movie?search=${e.target.value}`);
+                  }}
                 />
               </div>
             </div>

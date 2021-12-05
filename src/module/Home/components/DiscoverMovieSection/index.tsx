@@ -21,7 +21,7 @@ const DiscoverMovieSection: React.FC = () => {
   const Router = useRouter();
 
   useEffect(() => {
-    getMovies(10, 2).then((res) => {
+    getMovies(10, 1).then((res) => {
       console.log(res);
 
       setmoviePoster(res);
@@ -54,6 +54,9 @@ const DiscoverMovieSection: React.FC = () => {
                 className="text-white"
                 prefix={<SearchOutlined className="text-white mr-2" />}
                 size="large"
+                onPressEnter={(e: any) => {
+                  Router.push(`/search-movie?search=${e.target.value}`);
+                }}
               />
             ),
           }}>

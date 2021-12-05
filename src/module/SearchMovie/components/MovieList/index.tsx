@@ -1,54 +1,72 @@
 import React, { useEffect, useState } from 'react';
 
-import Banner3 from 'common/assets/images/banner/banner_3.png';
+import dayjs from 'dayjs';
+import { useRouter } from 'next/dist/client/router';
+
 import Rating from 'common/assets/images/rating.svg';
 import Star from 'common/assets/images/star.svg';
-import categoriesController from 'common/services/Controllers/categoriesControllers';
+import Svg from 'common/components/Svg';
 import moviesController from 'common/services/Controllers/moviesControllers';
-import { Movie, MoviePaginate } from 'common/services/reponseInterface/movie.interface';
 
 const DiscoverMovieSection: React.FC = () => {
-  const [moviePoster, setmoviePoster] = useState<MoviePaginate>();
-  const { getMovies } = moviesController();
-  const { getCategories } = categoriesController();
+  const [moviePoster, setmoviePoster] = useState<any>();
+  const { getMovieSearch } = moviesController();
+
+  const Router = useRouter();
+  const { search } = Router.query;
 
   useEffect(() => {
-    getMovies(10, 1).then((res) => {
-      setmoviePoster(res);
-    });
-    getCategories().then((res) => {
-      console.log(res);
-    });
-  }, []);
+    if (typeof search === 'string') {
+      console.log(search);
+
+      getMovieSearch(search, 10, 1).then((res) => {
+        console.log(res);
+
+        setmoviePoster(res);
+      });
+    }
+  }, [search]);
 
   return (
-    <section className="discover-movies h-full">
-      <Star className="absolute h-full w-full z-0" />
-      <div className=" max-w-screen-2xl mt-6 mx-auto font-poppins">
-        <div className="grid gap-y-16 gap-x-5 py-16 justify-items-center grid-cols-2 2xl:grid-cols-5 lg:grid-cols-4 md:grid-cols-3 sm:grid-cols-2">
-          {Array.from({ length: 20 }).map((_, index) => (
-            <div className="card-item" key={`banner-items-${index}`}>
-              <div className="card-item-img">
-                <div className="relative flex items-center bg-primary-gradient -mb-8 w-max ml-auto rounded-full py-px px-3 -right-3 text-sm">
-                  <span>9.8</span>
-                  <Rating className="ml-1" />
-                </div>
-                <img
-                  src={Banner3.src}
-                  alt="movie1"
-                  className="object-cover w-56 mb-4 rounded-2xl"
-                />
-                <div className="flex gap-x-1 text-sm text-primary-default">
-                  <span>2021</span>
-                  <span>|</span>
-                  <span>Action, Superhero</span>
-                </div>
-                <div className="flex gap-x-1 text-lg text-white">
-                  <span>Black Widow</span>
+    <section className="discover-movies h-full ">
+      <Svg Icon={<Star className="absolute h-full w-full -z-10" />} />
+
+      <div className=" max-w-screen-2xl mb-16 mx-auto font-poppins z-10">
+        <div className="grid gap-y-16 gap-x-5 mt-16 justify-items-center grid-cols-2 2xl:grid-cols-5 lg:grid-cols-4 md:grid-cols-3 sm:grid-cols-2">
+          {moviePoster &&
+            moviePoster.data.map((movie: any, index: any) => (
+              <div
+                className="card-item cursor-pointer"
+                key={`banner-items-${index}`}
+                role="presentation"
+                onClick={() => {
+                  Router.push(`/movie/${movie.id}`);
+                }}>
+                <div className="card-item-img">
+                  <div className="relative flex items-center bg-primary-gradient -mb-8 w-max ml-auto rounded-full py-px px-3 -right-3 text-sm font-poppins">
+                    <span>{movie.score}</span>
+                    <Rating className="ml-1" />
+                  </div>
+                  <img
+                    src={movie.bannerImageUrl}
+                    alt="movie1"
+                    className="object-cover w-64 mb-4 rounded-2xl hover:shadow-xl transition-shadow duration-300 m-auto"
+                  />
+                  <div className="flex w-64 gap-x-1 text-sm text-primary-default overflow-hidden overflow-ellipsis">
+                    <span>{dayjs(movie.startDate).year()}</span>
+                    <span>|</span>
+                    <span className="whitespace-nowrap overflow-hidden overflow-ellipsis">
+                      {movie.categories.map((category: any) => {
+                        return `${category.title} `;
+                      })}
+                    </span>
+                  </div>
+                  <div className="flex gap-x-1 text-lg text-white">
+                    <span>{movie.title}</span>
+                  </div>
                 </div>
               </div>
-            </div>
-          ))}
+            ))}
         </div>
       </div>
     </section>

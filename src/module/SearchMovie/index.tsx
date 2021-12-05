@@ -3,7 +3,6 @@ import Head from 'next/head';
 import Layouts from 'common/components/Layouts';
 
 import MovieList from './components/MovieList';
-import SearchFilter from './components/SearchFilter';
 import SearchTools from './components/SearchTools';
 
 const SearchMovie: React.FC = () => {
@@ -16,10 +15,7 @@ const SearchMovie: React.FC = () => {
       </Head>
       <Layouts>
         <SearchTools />
-        <section className="max-w-screen-2xl m-auto text-white">
-          <SearchFilter />
-          <MovieList />
-        </section>
+        <MovieList />
       </Layouts>
     </div>
   );
