@@ -6,8 +6,6 @@ import dayjs from 'dayjs';
 import Slider from 'react-slick';
 
 import Arrow from 'common/assets/images/arrow.svg';
-import 'slick-carousel/slick/slick.css';
-import 'slick-carousel/slick/slick-theme.css';
 import Intersperse from 'common/hooks/Intersperse';
 import { Movie } from 'common/services/reponseInterface/movie.interface';
 

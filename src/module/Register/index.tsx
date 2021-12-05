@@ -63,7 +63,7 @@ const Register: React.FC = () => {
       password: values.password,
       firstName: values.firstName,
       lastName: values.lastName,
-      avatar: image,
+      avatar: imageUrl,
       displayName: values.displayName,
       dateOfBirth: values.dateOfBirth,
       gender: values.gender,

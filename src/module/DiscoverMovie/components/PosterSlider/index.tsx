@@ -10,9 +10,6 @@ import Banner3 from 'common/assets/images/banner/banner_3.png';
 import Banner4 from 'common/assets/images/banner/banner_4.png';
 import Banner5 from 'common/assets/images/banner/banner_5.png';
 
-import 'slick-carousel/slick/slick.css';
-import 'slick-carousel/slick/slick-theme.css';
-
 const NextArrow = (props: {
   className?: string;
   style?: React.CSSProperties;
