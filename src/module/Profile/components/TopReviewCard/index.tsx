@@ -6,7 +6,7 @@ const TopReviewCard: React.FC = () => {
   const { getTopReview } = userController();
 
   useEffect(() => {
-    getTopReview().then((res) => {
+    getTopReview(5).then((res) => {
       console.log(`res`, res);
     });
   }, []);

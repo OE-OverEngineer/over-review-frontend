@@ -7,7 +7,7 @@ import Head from 'next/head';
 
 import Layouts from 'common/components/Layouts';
 import userController from 'common/services/Controllers/userController';
-import { UsersProfileResponse } from 'common/services/reponseInterface/index.interface';
+import { User } from 'common/services/reponseInterface/user.interface';
 
 import ProfileCard from './components/ProfileCard';
 import RecentReviewSection from './components/RecentReviewSection';
@@ -15,7 +15,7 @@ import TopReviewSection from './components/TopReivewSection';
 import TopReviewCard from './components/TopReviewCard';
 
 const Profile: React.FC = () => {
-  const [profile, setProfile] = useState<UsersProfileResponse>();
+  const [profile, setProfile] = useState<User>();
 
   const { getUsersProfile, getUsersIdReviews } = userController();
 
@@ -24,9 +24,9 @@ const Profile: React.FC = () => {
   useEffect(() => {
     (async () => {
       try {
-        const res_user_profile: any = await getUsersProfile();
+        const res_user_profile: User = await getUsersProfile();
         setProfile(res_user_profile);
-        getUsersIdReviews(res_user_profile.id, 10, 1).then((res: any) => {
+        getUsersIdReviews(res_user_profile.id, 10, 1, 'recent').then((res: any) => {
           console.log(res);
         });
       } catch (error) {
@@ -61,10 +61,13 @@ const Profile: React.FC = () => {
               </div>
             </div>
             <div className="flex gap-4">
-              <div className="flex-1">
-                <TopReviewSection />
-                <RecentReviewSection />
-              </div>
+              {profile && (
+                <div className="flex-1">
+                  <TopReviewSection id={profile.id} />
+                  <RecentReviewSection />
+                </div>
+              )}
+
               <div>
                 <div className="flex items-center justify-end mb-4 cursor-pointer">
                   <FlagFilled className=" mr-2 ml-0 mx-auto" />

@@ -137,7 +137,13 @@ const BannerSlider: React.FC<BannerSliderProps> = ({ className, movie }) => {
                       )}
                     </div>
                     <div className="block">
-                      <Button type="default" shape="round" size="large">
+                      <Button
+                        type="default"
+                        shape="round"
+                        size="large"
+                        onClick={() => {
+                          Router.push(`/movie/${item.id}`);
+                        }}>
                         See more
                       </Button>
                     </div>

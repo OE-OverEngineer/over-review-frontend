@@ -1,13 +1,12 @@
 import React from 'react';
 
-import { Button, DatePicker, Form, Input, Layout } from 'antd';
+import { Button, DatePicker, Form, Input } from 'antd';
 import TextArea from 'antd/lib/input/TextArea';
-import { Content, Footer } from 'antd/lib/layout/layout';
 import { useRouter } from 'next/dist/client/router';
+import Head from 'next/head';
 import { ToastContainer, toast } from 'react-toastify';
 
-import Star from 'common/assets/images/star.svg';
-import Navbar from 'common/components/Layouts/Navbar';
+import Layouts from 'common/components/Layouts';
 import authController from 'common/services/Controllers/authController';
 import { LoginRequset } from 'common/services/postSchemas';
 import { TOKEN_KEY } from 'common/utilities/constants';
@@ -19,37 +18,38 @@ const RequestMovie: React.FC = () => {
 
   const onFinish = (values: Record<string, string>) => {
     console.log('Success:', values);
-    const param: LoginRequset = {
-      email: values.username,
-      password: values.password,
-    };
+    // const param: LoginRequset = {
+    //   email: values.username,
+    //   password: values.password,
+    // };
 
-    postLogin(param)
-      .then((res) => {
-        handleItem(TOKEN_KEY, res.access_token);
-        Router.push('/');
-      })
-      .catch(() => {
-        toast.error('Wrong email or password', {
-          position: 'bottom-right',
-          autoClose: 5000,
-          hideProgressBar: false,
-          closeOnClick: true,
-          pauseOnHover: true,
-          draggable: true,
-          progress: undefined,
-        });
-      });
+    // postLogin(param)
+    //   .then((res) => {
+    //     handleItem(TOKEN_KEY, res.access_token);
+    //     Router.push('/');
+    //   })
+    //   .catch(() => {
+    //     toast.error('Wrong email or password', {
+    //       position: 'bottom-right',
+    //       autoClose: 5000,
+    //       hideProgressBar: false,
+    //       closeOnClick: true,
+    //       pauseOnHover: true,
+    //       draggable: true,
+    //       progress: undefined,
+    //     });
+    //   });
   };
 
   return (
-    <Layout className="min-h-screen h-full font-poppins">
-      <Star className="absolute h-full w-full z-0" />
-
-      <Navbar />
-      <Content>
+    <div>
+      <Head>
+        <title>Request Movie</title>
+        <link rel="icon" href="/over_icon.svg" />
+      </Head>
+      <Layouts>
         <section className="max-w-screen-2xl m-auto mt-28">
-          <div className="text-center text-6xl font-poppins italic mt-10">
+          <div className="text-center text-6xl font-poppins italic my-10">
             Request Movie
           </div>
           <Form
@@ -96,9 +96,8 @@ const RequestMovie: React.FC = () => {
           </Form>
         </section>
         <ToastContainer />
-      </Content>
-      <Footer className="text-center">Over Review ©2021 Created by Over Engineer</Footer>
-    </Layout>
+      </Layouts>
+    </div>
   );
 };
 

@@ -4,10 +4,10 @@ import { GiftFilled, WomanOutlined } from '@ant-design/icons';
 import { Avatar, Divider, Skeleton } from 'antd';
 import dayjs from 'dayjs';
 
-import { UsersProfileResponse } from 'common/services/reponseInterface/index.interface';
+import { User } from 'common/services/reponseInterface/user.interface';
 
 interface ProfileCardProps {
-  profile?: UsersProfileResponse;
+  profile?: User;
 }
 
 const ProfileCard: React.FC<ProfileCardProps> = ({ profile }) => {

@@ -1,9 +1,11 @@
+import { BaseResponse } from '../RestClient';
+
 import { Movie } from './movie.interface';
 import { Report } from './report.interface';
 import { Review } from './review.interface';
 import { Role } from './role.interface';
 
-export interface User {
+export interface User extends BaseResponse {
   id: number;
   amountReviews: number;
   role: Role;

@@ -2,6 +2,7 @@
 import React from 'react';
 
 import dayjs from 'dayjs';
+import { useRouter } from 'next/dist/client/router';
 import Slider from 'react-slick';
 
 import Arrow from 'common/assets/images/arrow.svg';
@@ -42,6 +43,7 @@ const PrevArrow = (props: {
 };
 
 const PosterSlider: React.FC<{ movie: MoviePaginate }> = ({ movie }) => {
+  const Router = useRouter();
   return (
     <div className="slider-banner mb-16">
       <Slider
@@ -52,7 +54,13 @@ const PosterSlider: React.FC<{ movie: MoviePaginate }> = ({ movie }) => {
         nextArrow={<NextArrow />}
         prevArrow={<PrevArrow />}>
         {movie.data.map((item) => (
-          <div className="w-52 h-72 cursor-pointer" key={item.id}>
+          <div
+            className="w-52 h-72 cursor-pointer"
+            key={item.id}
+            role="presentation"
+            onClick={() => {
+              Router.push(`/movie/${item.id}`);
+            }}>
             <div className="absolute w-48 h-72 bg-gradient-to-b from-transparent via-transparent to-black mx-2 rounded-xl flex flex-col justify-end bg-opacity-0 opacity-0 p-2 transition duration-300 ease-in-out hover:bg-opacity-20 hover:opacity-100">
               <div className="text-sm">{dayjs(item.startDate).year()}</div>
               <div className="text-base w-full whitespace-nowrap overflow-hidden overflow-ellipsis">

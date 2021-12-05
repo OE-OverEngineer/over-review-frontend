@@ -1,11 +1,13 @@
 import React from 'react';
 
 import { Avatar, Rate, Button, Comment } from 'antd';
+import { useRouter } from 'next/dist/client/router';
 
 import Banner3 from 'common/assets/images/banner/banner_3.png';
 import TextHeader from 'common/components/TextHeader';
 
 const ReviewCard: React.FC = () => {
+  const Router = useRouter();
   return (
     <div className="w-full h-full rounded-2xl bg-primary-defaultDark opacity-90 p-4 mb-4">
       <div className="flex justify-between gap-2">
@@ -66,7 +68,10 @@ const ReviewCard: React.FC = () => {
                   className="px-6 py-0 order-5 mr-6 font-poppins w-48"
                   type="primary"
                   size="large"
-                  shape="round">
+                  shape="round"
+                  onClick={() => {
+                    Router.push(`/movie/${'id'}`);
+                  }}>
                   See more
                 </Button>
               </div>

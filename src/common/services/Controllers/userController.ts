@@ -5,10 +5,10 @@ import { get, post } from '../RestClient';
 export default function userController() {
   return {
     postUsers: (data: CreateUserRequest) => post<CreateUserRequest, User>('users', data),
-    getUsers: () => get('users'),
-    getUsersProfile: () => get('users/profile'),
+    getUsers: () => get<User[]>('users'),
+    getUsersProfile: () => get<User>('users/profile'),
     getUsersIdReviews: (
-      usrid: string,
+      usrid: number | string,
       perPage: number,
       pageNum: number,
       sortBy?: string,

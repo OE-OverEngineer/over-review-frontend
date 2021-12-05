@@ -57,11 +57,17 @@ const DiscoverMovieSection: React.FC = () => {
               />
             ),
           }}>
-          <Tabs.TabPane tab="Random" key="Random">
+          <Tabs.TabPane tab="Random" key="random">
             <div className="grid gap-y-16 gap-x-5 py-16 justify-items-center grid-cols-2 2xl:grid-cols-5 lg:grid-cols-4 md:grid-cols-3 sm:grid-cols-2">
               {moviePoster &&
                 moviePoster.data.map((movie, index) => (
-                  <div className="card-item cursor-pointer" key={`banner-items-${index}`}>
+                  <div
+                    className="card-item cursor-pointer"
+                    key={`banner-items-${index}`}
+                    role="presentation"
+                    onClick={() => {
+                      Router.push(`/movie/${movie.id}`);
+                    }}>
                     <div className="card-item-img">
                       <div className="relative flex items-center bg-primary-gradient -mb-8 w-max ml-auto rounded-full py-px px-3 -right-3 text-sm font-poppins">
                         <span>{movie.score}</span>
@@ -89,11 +95,17 @@ const DiscoverMovieSection: React.FC = () => {
                 ))}
             </div>
           </Tabs.TabPane>
-          <Tabs.TabPane tab="Popular" key="Popular">
+          <Tabs.TabPane tab="Popular" key="popular">
             <div className="grid gap-y-16 gap-x-5 py-16 justify-items-center grid-cols-2 2xl:grid-cols-5 lg:grid-cols-4 md:grid-cols-3 sm:grid-cols-2">
               {moviePoster &&
                 moviePoster.data.map((movie, index) => (
-                  <div className="card-item cursor-pointer" key={`banner-items-${index}`}>
+                  <div
+                    className="card-item cursor-pointer"
+                    key={`banner-items-${index}`}
+                    role="presentation"
+                    onClick={() => {
+                      Router.push(`/movie/${movie.id}`);
+                    }}>
                     <div className="card-item-img">
                       <div className="relative flex items-center bg-primary-gradient -mb-8 w-max ml-auto rounded-full py-px px-3 -right-3 text-sm font-poppins">
                         <span>{movie.score}</span>
@@ -121,11 +133,17 @@ const DiscoverMovieSection: React.FC = () => {
                 ))}
             </div>
           </Tabs.TabPane>
-          <Tabs.TabPane tab="Recent" key="Recent">
+          <Tabs.TabPane tab="Recent" key="recent">
             <div className="grid gap-y-16 gap-x-5 py-16 justify-items-center grid-cols-2 2xl:grid-cols-5 lg:grid-cols-4 md:grid-cols-3 sm:grid-cols-2">
               {moviePoster &&
                 moviePoster.data.map((movie, index) => (
-                  <div className="card-item cursor-pointer" key={`banner-items-${index}`}>
+                  <div
+                    className="card-item cursor-pointer"
+                    key={`banner-items-${index}`}
+                    role="presentation"
+                    onClick={() => {
+                      Router.push(`/movie/${movie.id}`);
+                    }}>
                     <div className="card-item-img">
                       <div className="relative flex items-center bg-primary-gradient -mb-8 w-max ml-auto rounded-full py-px px-3 -right-3 text-sm font-poppins">
                         <span>{movie.score}</span>

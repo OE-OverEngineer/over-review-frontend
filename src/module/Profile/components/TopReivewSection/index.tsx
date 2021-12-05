@@ -1,19 +1,22 @@
 import React, { useEffect } from 'react';
 
 import { Rate, Button } from 'antd';
+import { useRouter } from 'next/dist/client/router';
 
 import Banner3 from 'common/assets/images/banner/banner_3.png';
 import TextHeader from 'common/components/TextHeader';
 import userController from 'common/services/Controllers/userController';
 
-const TopReviewSection: React.FC = () => {
+const TopReviewSection: React.FC<{ id: number }> = ({ id }) => {
   const { getUsersIdReviews } = userController();
 
+  const Router = useRouter();
+
   useEffect(() => {
-    getUsersIdReviews('0', 10, 1).then((res) => {
+    getUsersIdReviews(id, 10, 1, 'recent').then((res) => {
       console.log(res);
     });
-  }, []);
+  }, [id]);
 
   return (
     <section className="top-review">
@@ -79,7 +82,10 @@ const TopReviewSection: React.FC = () => {
                     className="px-6 py-0 order-5 mr-6 font-poppins w-48"
                     type="primary"
                     size="large"
-                    shape="round">
+                    shape="round"
+                    onClick={() => {
+                      Router.push(`/movie/${'id'}`);
+                    }}>
                     See more
                   </Button>
                 </div>

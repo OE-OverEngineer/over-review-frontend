@@ -2,11 +2,14 @@ import React from 'react';
 
 import { Button, Rate } from 'antd';
 import dayjs from 'dayjs';
+import { useRouter } from 'next/dist/client/router';
 
 import Intersperse from 'common/hooks/Intersperse';
+import { Actor } from 'common/services/reponseInterface/actor.interface';
 import { Movie } from 'common/services/reponseInterface/movie.interface';
 
 const MoviePoster: React.FC<{ movie: Movie }> = ({ movie }) => {
+  const Router = useRouter();
   return (
     <section className="slider-banner py-16">
       <div className="max-w-5xl flex z-10 justify-center m-auto font-poppins">
@@ -45,11 +48,11 @@ const MoviePoster: React.FC<{ movie: Movie }> = ({ movie }) => {
             </div>
             <div className="block h-24">
               <div className="text-gray-600 text-sm">Starring</div>
-              {movie.actors.map((actor: any, index: number) => {
+              {movie.actors.map((actor: Actor, index: number) => {
                 if (index < 3) {
                   return (
                     <div
-                      key={`${actor.firstname}-${index}`}
+                      key={`${actor.firstName}-${index}`}
                       className="text-gray-800 text-sm">
                       {`${actor.firstName} ${actor.lastName}`}
                     </div>
@@ -65,7 +68,13 @@ const MoviePoster: React.FC<{ movie: Movie }> = ({ movie }) => {
               )}
             </div>
             <div className="block">
-              <Button type="default" shape="round" size="large">
+              <Button
+                type="default"
+                shape="round"
+                size="large"
+                onClick={() => {
+                  Router.push(`/movie/${movie.id}`);
+                }}>
                 See more
               </Button>
             </div>

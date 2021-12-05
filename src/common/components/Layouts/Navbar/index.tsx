@@ -6,7 +6,11 @@ import { useRouter } from 'next/dist/client/router';
 import Link from 'next/link';
 
 import Logo from 'common/assets/images/logoNav.svg';
+import Svg from 'common/components/Svg';
+import userController from 'common/services/Controllers/userController';
+import { User } from 'common/services/reponseInterface/user.interface';
 import { TOKEN_KEY } from 'common/utilities/constants';
+import { handleItem } from 'common/utilities/local-storage';
 
 const menu = (
   <Menu className="rounded-lg">
@@ -17,8 +21,13 @@ const menu = (
       <Link href="/request-movie">Request Movie</Link>
     </Menu.Item>
     <Menu.Divider className="bg-primary-default w-40 mx-auto " />
-    <Menu.Item key="3" className="text-primary-default">
-      Log out
+    <Menu.Item
+      key="3"
+      className="text-primary-default"
+      onClick={() => {
+        handleItem(TOKEN_KEY);
+      }}>
+      <Link href="/">Logout</Link>
     </Menu.Item>
   </Menu>
 );
@@ -31,18 +40,32 @@ const NAV_CONTENT = [
 
 const Navbar: React.FC<{ router?: string[] }> = ({ router }) => {
   const [isAuth, setIsAuth] = useState(false);
+  const [profile, setProfile] = useState<User>();
   const Router = useRouter();
 
+  const { getUsersProfile } = userController();
+
   useEffect(() => {
-    const token = localStorage.getItem(TOKEN_KEY);
-    if (token) {
-      setIsAuth(true);
-    }
+    getUsersProfile()
+      .then((res) => {
+        console.log('user', res);
+
+        setProfile(res);
+        setIsAuth(true);
+      })
+      .catch(() => {
+        setIsAuth(false);
+      });
   }, []);
 
   return (
     <Header className="flex items-center justify-between mt-8 mx-8 font-poppins z-50">
-      <Logo />
+      <div
+        className="cursor-pointer"
+        role="presentation"
+        onClick={() => Router.push('/')}>
+        <Svg Icon={<Logo />} />
+      </div>
       <div className="flex items-center">
         <Menu
           className="max-w-4xl items-center"
@@ -65,16 +88,18 @@ const Navbar: React.FC<{ router?: string[] }> = ({ router }) => {
           ))}
         </Menu>
         <div className=" flex h-16 items-center">
-          {isAuth ? (
+          {profile && isAuth ? (
             <div className="flex gap-5 ml-8">
               <Link href="/profile">
-                <span className="text-white cursor-pointer">Nawa Lee</span>
+                <span className="text-white cursor-pointer whitespace-nowrap overflow-hidden overflow-ellipsis">
+                  {profile.firstName} {profile.lastName}
+                </span>
               </Link>
 
               <Dropdown overlay={menu}>
                 <div className="flex gap-x-4  items-center flex-1 ">
                   <Avatar
-                    src="https://joeschmoe.io/api/v1/random"
+                    src={profile.avatarUrl}
                     size={54}
                     className="border-2 border-primary-default"
                   />
