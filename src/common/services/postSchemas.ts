@@ -25,6 +25,12 @@ export interface CreateMovieRequest {
   trailerLinkUrl: string;
 }
 
+export interface CreateRequest {
+  title?: string;
+  startDate?: Date | string;
+  description?: string;
+}
+
 export interface CreateActorRequest {
   firstName: string;
   lastName: string;

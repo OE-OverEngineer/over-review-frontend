@@ -1,6 +1,6 @@
 import React, { useEffect, useState } from 'react';
 
-import { DesktopOutlined, PieChartOutlined } from '@ant-design/icons';
+import { DesktopOutlined } from '@ant-design/icons';
 import { Layout, Menu } from 'antd';
 import { Content, Footer } from 'antd/lib/layout/layout';
 import Sider from 'antd/lib/layout/Sider';
@@ -11,6 +11,7 @@ import ActorsSection from './components/ActorsSection';
 import CatagorySection from './components/CatagorySection';
 import DirectorsSection from './components/DirectorsSection';
 import MovieSection from './components/MovieSection';
+import RequestSection from './components/RequestSection';
 
 const Admin = () => {
   const [collapsed, setCollapsed] = useState<boolean>(false);
@@ -22,6 +23,9 @@ const Admin = () => {
   useEffect(() => {
     if (tabs && typeof tabs === 'string') {
       setTab(tabs);
+    }
+    if (tabs && typeof tabs === 'object') {
+      setTab(tabs[0]);
     }
   }, [tabs]);
 
@@ -35,6 +39,8 @@ const Admin = () => {
         return <CatagorySection />;
       case 'movie':
         return <MovieSection />;
+      case 'request-movie':
+        return <RequestSection />;
 
       default:
         return <CatagorySection />;
@@ -51,7 +57,7 @@ const Admin = () => {
         }}>
         <div className="logo" />
         <Menu theme="dark" defaultSelectedKeys={[tab]} mode="inline">
-          <Menu.Item key="catagories" icon={<PieChartOutlined />}>
+          <Menu.Item key="catagories" icon={<DesktopOutlined />}>
             <Link href="/admin/catagories">Category</Link>
           </Menu.Item>
           <Menu.Item key="directors" icon={<DesktopOutlined />}>
@@ -62,6 +68,9 @@ const Admin = () => {
           </Menu.Item>
           <Menu.Item key="movie" icon={<DesktopOutlined />}>
             <Link href="/admin/movie">Movie</Link>
+          </Menu.Item>
+          <Menu.Item key="request-movie" icon={<DesktopOutlined />}>
+            <Link href="/admin/request-movie">Request Movie</Link>
           </Menu.Item>
         </Menu>
       </Sider>

@@ -107,7 +107,9 @@ const BannerSlider: React.FC<BannerSliderProps> = ({ className, movie }) => {
                     </div>
                     <div className="block">
                       <div className="text-gray-600 text-sm">Directed by</div>
-                      <div className="text-gray-800 text-sm">{`${item.director.firstName} ${item.director.lastName}`}</div>
+                      {item.director && (
+                        <div className="text-gray-800 text-sm">{`${item.director.firstName} ${item.director.lastName}`}</div>
+                      )}
                     </div>
                     <div className="block">
                       <div className="text-gray-600 text-sm">Synopsis</div>
@@ -168,7 +170,7 @@ const BannerSlider: React.FC<BannerSliderProps> = ({ className, movie }) => {
                             Router.push(`/movie/${subBanner.props.children[index].key}`);
                           }
                         }}>
-                        {item.id}
+                        See more
                       </Button>
                     </div>
                   </div>

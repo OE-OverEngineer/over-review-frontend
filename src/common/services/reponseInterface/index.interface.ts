@@ -1,3 +1,5 @@
+import { CreateRequest } from '../postSchemas';
+
 export interface UsersProfileResponse {
   avatarUrl: string;
   banned: boolean;
@@ -11,4 +13,9 @@ export interface UsersProfileResponse {
   lastName: string;
   role: string | null;
   updatedAt: Date;
+}
+
+export interface RequestMovieRespones {
+  data: CreateRequest[];
+  total: number;
 }

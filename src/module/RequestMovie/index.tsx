@@ -7,38 +7,39 @@ import Head from 'next/head';
 import { ToastContainer, toast } from 'react-toastify';
 
 import Layouts from 'common/components/Layouts';
-import authController from 'common/services/Controllers/authController';
-import { LoginRequset } from 'common/services/postSchemas';
-import { TOKEN_KEY } from 'common/utilities/constants';
-import { handleItem } from 'common/utilities/local-storage';
+import moviesController from 'common/services/Controllers/moviesControllers';
+import { CreateRequest } from 'common/services/postSchemas';
 
 const RequestMovie: React.FC = () => {
-  const { postLogin } = authController();
-  const Router = useRouter();
+  const { postMovieRequest } = moviesController();
 
-  const onFinish = (values: Record<string, string>) => {
+  const onFinish = (values: CreateRequest) => {
     console.log('Success:', values);
-    // const param: LoginRequset = {
-    //   email: values.username,
-    //   password: values.password,
-    // };
 
-    // postLogin(param)
-    //   .then((res) => {
-    //     handleItem(TOKEN_KEY, res.access_token);
-    //     Router.push('/');
-    //   })
-    //   .catch(() => {
-    //     toast.error('Wrong email or password', {
-    //       position: 'bottom-right',
-    //       autoClose: 5000,
-    //       hideProgressBar: false,
-    //       closeOnClick: true,
-    //       pauseOnHover: true,
-    //       draggable: true,
-    //       progress: undefined,
-    //     });
-    //   });
+    postMovieRequest(values)
+      .then((res) => {
+        console.log(res);
+        toast.success('Request Moive success!!', {
+          position: 'bottom-right',
+          autoClose: 5000,
+          hideProgressBar: false,
+          closeOnClick: true,
+          pauseOnHover: true,
+          draggable: true,
+          progress: undefined,
+        });
+      })
+      .catch(() => {
+        toast.error('Error request movie fail!', {
+          position: 'bottom-right',
+          autoClose: 5000,
+          hideProgressBar: false,
+          closeOnClick: true,
+          pauseOnHover: true,
+          draggable: true,
+          progress: undefined,
+        });
+      });
   };
 
   return (
@@ -68,7 +69,7 @@ const RequestMovie: React.FC = () => {
               rules={[{ required: true, message: 'Please input title' }]}>
               <Input className="rounded-lg" />
             </Form.Item>
-            <Form.Item className="hidden-required" label="Year" name="year">
+            <Form.Item className="hidden-required" label="Year" name="startDate">
               <DatePicker picker="year" className="rounded-lg" />
             </Form.Item>
 
