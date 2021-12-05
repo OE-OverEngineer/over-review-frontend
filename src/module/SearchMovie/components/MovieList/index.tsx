@@ -1,19 +1,16 @@
 import React, { useEffect, useState } from 'react';
 
-import { SearchOutlined } from '@ant-design/icons';
-import { Button, Input, Tabs } from 'antd';
-import dayjs from 'dayjs';
-
-import Banner2 from 'common/assets/images/banner/banner_2.png';
 import Banner3 from 'common/assets/images/banner/banner_3.png';
 import Rating from 'common/assets/images/rating.svg';
 import Star from 'common/assets/images/star.svg';
+import categoriesController from 'common/services/Controllers/categoriesControllers';
 import moviesController from 'common/services/Controllers/moviesControllers';
 import { Movie } from 'common/services/reponseInterface/movie.interface';
 
 const DiscoverMovieSection: React.FC = () => {
   const [moviePoster, setmoviePoster] = useState<Movie[]>();
-  const { getMovies, getCategories } = moviesController();
+  const { getMovies } = moviesController();
+  const { getCategories } = categoriesController();
 
   useEffect(() => {
     getMovies(10, 1).then((res) => {
