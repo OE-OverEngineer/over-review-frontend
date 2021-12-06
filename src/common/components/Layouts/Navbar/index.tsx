@@ -12,10 +12,10 @@ import { User } from 'common/services/reponseInterface/user.interface';
 import { TOKEN_KEY } from 'common/utilities/constants';
 import { handleItem } from 'common/utilities/local-storage';
 
-const menu = (
+const menu = (id: number) => (
   <Menu className="rounded-lg">
     <Menu.Item key="1" className="text-primary-default">
-      <Link href="/profile">My profile</Link>
+      <Link href={`/profile/${id}`}>My profile</Link>
     </Menu.Item>
     <Menu.Item key="2" className="text-primary-default">
       <Link href="/request-movie">Request Movie</Link>
@@ -90,13 +90,13 @@ const Navbar: React.FC<{ router?: string[] }> = ({ router }) => {
         <div className=" flex h-16 items-center">
           {profile && isAuth ? (
             <div className="flex gap-5 ml-8">
-              <Link href="/profile">
+              <Link href={`/profile/${profile.id}`}>
                 <span className="text-white cursor-pointer whitespace-nowrap overflow-hidden overflow-ellipsis">
-                  {profile.firstName} {profile.lastName}
+                  {profile.displayName}
                 </span>
               </Link>
 
-              <Dropdown overlay={menu}>
+              <Dropdown overlay={() => menu(profile.id)}>
                 <div className="flex gap-x-4  items-center flex-1 ">
                   <Avatar
                     src={profile.avatarUrl}

@@ -1,6 +1,6 @@
 import React, { useEffect, useState } from 'react';
 
-import { GiftFilled, WomanOutlined } from '@ant-design/icons';
+import { ContactsFilled, GiftFilled, MehFilled, WomanOutlined } from '@ant-design/icons';
 import { Avatar, Divider, Skeleton } from 'antd';
 import dayjs from 'dayjs';
 
@@ -32,9 +32,13 @@ const ProfileCard: React.FC<ProfileCardProps> = ({ profile }) => {
               size={136}
             />
           </div>
-          <div className="text-lg text-center">{`${profile?.firstName} ${profile?.lastName}`}</div>
+          <div className="text-lg text-center">{profile?.displayName}</div>
           <Divider className="my-2 border-t-px border-primary-default" />
           <div className="flex items-center mb-2 mt-4">
+            <ContactsFilled className=" mr-2 ml-0 mx-auto" />
+            <div className="text-sm">{`${profile?.firstName} ${profile?.lastName}`}</div>
+          </div>
+          <div className="flex items-center mb-2">
             <GiftFilled className=" mr-2 ml-0 mx-auto" />
             <div className="text-sm">
               {dayjs(profile?.dateOfBirth).format('DD MMMM YYYY')}

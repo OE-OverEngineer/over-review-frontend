@@ -25,6 +25,11 @@ export interface CreateCommentRequest {
   reviewID: number;
 }
 
+export interface CreateRepliesRequest {
+  message: string;
+  commentID: number;
+}
+
 export interface CreateMovieRequest {
   title: string;
   description: string;
@@ -61,7 +66,6 @@ export interface CreateReviewRequest {
 
 export interface CreateReviewLikeRequest {
   targetReviewID: number;
-  isLike: boolean;
 }
 
 export interface CreateCategoryRequest {

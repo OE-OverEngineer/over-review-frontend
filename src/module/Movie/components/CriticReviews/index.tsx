@@ -3,6 +3,7 @@ import React, { Dispatch, SetStateAction, useEffect, useState } from 'react';
 import { Avatar, Rate, Comment, Empty } from 'antd';
 import { useRouter } from 'next/dist/client/router';
 import Link from 'next/link';
+import { toast } from 'react-toastify';
 
 import Comments from 'common/assets/images/comment.svg';
 import Over from 'common/assets/images/Over.svg';
@@ -17,8 +18,7 @@ import { Review } from 'common/services/reponseInterface/review.interface';
 const CriticReviews: React.FC<{
   loading: boolean;
   setLoading: Dispatch<SetStateAction<boolean>>;
-  userid?: string | number;
-}> = ({ loading, setLoading, userid }) => {
+}> = ({ loading, setLoading }) => {
   const [movie, setMovie] = useState<Movie>();
   const [review, setReview] = useState<Review[]>();
   const [topReview, setTopReview] = useState<Review[]>();
@@ -51,13 +51,36 @@ const CriticReviews: React.FC<{
     console.log('like');
     const params: CreateReviewLikeRequest = {
       targetReviewID: id,
-      isLike: true,
     };
 
-    postReviewLike(params).then((res) => {
-      setLoading(true);
-      console.log(postReviewLike, res);
-    });
+    postReviewLike(params)
+      .then((res) => {
+        setLoading(true);
+        console.log(postReviewLike, res);
+      })
+      .catch((err) => {
+        if (err.statusCode === 401) {
+          toast.error('Please login!', {
+            position: 'bottom-right',
+            autoClose: 5000,
+            hideProgressBar: false,
+            closeOnClick: true,
+            pauseOnHover: true,
+            draggable: true,
+            progress: undefined,
+          });
+        } else {
+          toast.error(err.message, {
+            position: 'bottom-right',
+            autoClose: 5000,
+            hideProgressBar: false,
+            closeOnClick: true,
+            pauseOnHover: true,
+            draggable: true,
+            progress: undefined,
+          });
+        }
+      });
   };
 
   return (
@@ -98,7 +121,7 @@ const CriticReviews: React.FC<{
                 </div>,
               ]}
               author={
-                <Link href="/">
+                <Link href={`/profile/${topReview[0].user.id}`}>
                   <a className="text-white">
                     {topReview[0].user.firstName} {topReview[0].user.lastName}
                   </a>

@@ -1,11 +1,12 @@
 import { BaseResponse } from '../RestClient';
 
+import { Comment } from './comment.interface';
 import { Movie } from './movie.interface';
 import { User } from './user.interface';
 
 export interface Review extends BaseResponse {
   comments: Comment[];
-  id?: number;
+  id: number;
   likes: string;
   likesCount: number;
   message: string;

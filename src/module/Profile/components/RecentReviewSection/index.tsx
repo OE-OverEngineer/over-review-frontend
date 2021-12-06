@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { Dispatch } from 'react';
 
 import { Button, Empty } from 'antd';
 import { useRouter } from 'next/dist/client/router';
@@ -9,17 +9,25 @@ import { Review } from 'common/services/reponseInterface/review.interface';
 import ReviewCard from '../ReviewCard';
 
 const RecentReviewSection: React.FC<{
-  id: string | number;
-  firstName: string;
+  displayName: string;
   review: Review[];
-}> = ({ id, firstName, review }) => {
+  loading: boolean;
+  setLoading: Dispatch<React.SetStateAction<boolean>>;
+}> = ({ displayName, review, loading, setLoading }) => {
   const Router = useRouter();
 
   return (
     <section className="recent-review">
-      <TextHeader className="mb-2">Recent {firstName} Reviews</TextHeader>
+      <TextHeader className="mb-2">Recent {displayName} Reviews</TextHeader>
       {review &&
-        review.map((review: Review) => <ReviewCard key={review.id} review={review} />)}
+        review.map((review: Review) => (
+          <ReviewCard
+            key={review.id}
+            review={review}
+            loading={loading}
+            setLoading={setLoading}
+          />
+        ))}
       {review && review.length === 0 && (
         <div className="w-full h-full rounded-2xl bg-primary-defaultDark opacity-90 p-4 mb-4">
           <Empty

@@ -8,15 +8,16 @@ export default function userController() {
     postUsers: (data: CreateAdminUserRequest) =>
       post<CreateAdminUserRequest, User>('users', data),
     getUsers: () => get<User[]>('users'),
+    getUserId: (id: number | string) => get<User>(`users/${id}`),
     getUsersProfile: () => get<User>('users/profile'),
     getUsersIdReviews: (
       usrid: number | string,
       perPage: number,
       pageNum: number,
-      sortBy?: string,
+      sort?: string,
     ) =>
       get<ReviewPaginate>(
-        `users/${usrid}/reviews?perPage=${perPage}&pageNum=${pageNum}&sortBy=${sortBy}`,
+        `users/${usrid}/reviews?perPage=${perPage}&pageNum=${pageNum}&sort=${sort}`,
       ),
     getTopReview: (amount: number) => get<User[]>(`users/top-review?amount=${amount}`),
   };

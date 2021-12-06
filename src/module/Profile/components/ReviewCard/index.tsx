@@ -1,18 +1,99 @@
-import React from 'react';
+import React, { Dispatch, useEffect, useState } from 'react';
 
-import { Avatar, Rate, Button, Comment } from 'antd';
+import { Avatar, Rate, Button, Comment, Form } from 'antd';
+import TextArea from 'antd/lib/input/TextArea';
 import dayjs from 'dayjs';
 import { useRouter } from 'next/dist/client/router';
+import { toast, ToastContainer } from 'react-toastify';
 
 import TextHeader from 'common/components/TextHeader';
 import Intersperse from 'common/hooks/Intersperse';
+import commentsController from 'common/services/Controllers/commentsControllers';
+import repliesControllers from 'common/services/Controllers/repliesControllers';
+import userController from 'common/services/Controllers/userController';
+import { CreateCommentRequest, CreateRepliesRequest } from 'common/services/postSchemas';
 import { Actor } from 'common/services/reponseInterface/actor.interface';
-import { ProfileReview, Review } from 'common/services/reponseInterface/review.interface';
+import { Review } from 'common/services/reponseInterface/review.interface';
+import { User } from 'common/services/reponseInterface/user.interface';
 
 const ReviewCard: React.FC<{
   review: Review;
-}> = ({ review }) => {
+  loading: boolean;
+  setLoading: Dispatch<React.SetStateAction<boolean>>;
+}> = ({ review, setLoading, loading }) => {
+  const [user, setUser] = useState<User>();
+  const [replayId, setReplayId] = useState<number>();
+
   const Router = useRouter();
+  const [form] = Form.useForm<{ message: string; messageReplies: string }>();
+
+  const { getUsersProfile } = userController();
+  const { postComments } = commentsController();
+  const { postReplies } = repliesControllers();
+
+  useEffect(() => {
+    getUsersProfile().then((res) => {
+      setUser(res);
+    });
+  }, []);
+
+  const handleSubmit = async (
+    values: { message: string; messageReplies: string },
+    id?: number,
+  ) => {
+    const { message, messageReplies } = values;
+
+    if (message) {
+      const param: CreateCommentRequest = {
+        reviewID: review.id,
+        message: message,
+      };
+
+      postComments(param)
+        .then((res) => {
+          console.log('postComments', res);
+          form.resetFields();
+          setLoading(true);
+        })
+        .catch(() => {
+          toast.error('Fail to comment message', {
+            position: 'bottom-right',
+            autoClose: 5000,
+            hideProgressBar: false,
+            closeOnClick: true,
+            pauseOnHover: true,
+            draggable: true,
+            progress: undefined,
+          });
+        });
+    }
+
+    if (messageReplies && id) {
+      const param: CreateRepliesRequest = {
+        commentID: id,
+        message: messageReplies,
+      };
+
+      postReplies(param)
+        .then((res) => {
+          console.log('postReplies', res);
+          form.resetFields();
+          setLoading(true);
+        })
+        .catch((err) => {
+          toast.error(err.message, {
+            position: 'bottom-right',
+            autoClose: 5000,
+            hideProgressBar: false,
+            closeOnClick: true,
+            pauseOnHover: true,
+            draggable: true,
+            progress: undefined,
+          });
+        });
+    }
+  };
+
   return (
     <div className="w-full h-full rounded-2xl bg-primary-defaultDark opacity-90 p-4 mb-4">
       <div className="flex justify-between gap-2">
@@ -111,74 +192,145 @@ const ReviewCard: React.FC<{
           <div className="text-sm">{review.message}</div>
         </div>
       </div>
-      {review.comments.length > 0 && (
+      {user && (
         <div className="comment">
           <TextHeader className="mb-2">Comment</TextHeader>
           <div className="w-full h-auto bg-primary-defaultLight2nd rounded-2xl px-16 py-4">
             <Comment
-              actions={[
-                <span className="text-white" key="comment-nested-reply-to">
-                  Reply to
-                </span>,
-              ]}
-              author={<a className="text-white">Han Solo</a>}
-              avatar={<Avatar src="https://joeschmoe.io/api/v1/random" alt="Han Solo" />}
+              avatar={<Avatar src={user?.avatarUrl} alt="User avatar" />}
               content={
-                <p>
-                  We supply a series of design principles, practical patterns and high
-                  quality design resources (Sketch and Axure).
-                </p>
-              }>
+                <>
+                  <Form
+                    form={form}
+                    name="comment"
+                    onFinish={(data) => {
+                      handleSubmit(data);
+                    }}>
+                    <Form.Item name="message">
+                      <TextArea rows={3} />
+                    </Form.Item>
+                    <Button htmlType="submit" type="primary">
+                      Add Comment
+                    </Button>
+                  </Form>
+                </>
+              }
+            />
+            {review.comments.map((comment) => (
               <Comment
+                key={comment.id}
                 actions={[
-                  <span className="text-white" key="comment-nested-reply-to">
+                  <span
+                    className="text-white"
+                    key="comment-nested-reply-to"
+                    role="presentation"
+                    onClick={() => {
+                      console.log('reply to');
+                      setReplayId(comment.id);
+                    }}>
                     Reply to
                   </span>,
                 ]}
-                author={<a className="text-white">Han Solo</a>}
-                avatar={
-                  <Avatar src="https://joeschmoe.io/api/v1/random" alt="Han Solo" />
-                }
-                content={
-                  <p>
-                    We supply a series of design principles, practical patterns and high
-                    quality design resources (Sketch and Axure).
-                  </p>
-                }></Comment>
-              <Comment
-                actions={[
-                  <span className="text-white" key="comment-nested-reply-to">
-                    Reply to
-                  </span>,
-                ]}
-                author={<a className="text-white">Han Solo</a>}
-                avatar={
-                  <Avatar src="https://joeschmoe.io/api/v1/random" alt="Han Solo" />
-                }
-                content={
-                  <p>
-                    We supply a series of design principles, practical patterns and high
-                    quality design resources (Sketch and Axure).
-                  </p>
-                }></Comment>
-            </Comment>
-            <Comment
-              actions={[
-                <span className="text-white" key="comment-nested-reply-to">
-                  Reply to
-                </span>,
-              ]}
-              author={<a className="text-white">Han Solo</a>}
-              avatar={<Avatar src="https://joeschmoe.io/api/v1/random" alt="Han Solo" />}
-              content={
-                <p>
-                  We supply a series of design principles, practical patterns and high
-                  quality design resources (Sketch and Axure).
-                </p>
-              }></Comment>
+                author={<a className="text-white">{comment.user.displayName}</a>}
+                avatar={<Avatar src={comment.user.avatarUrl} alt="userImage" />}
+                content={<p>{comment.message}</p>}>
+                {comment.replies.map((reply) => (
+                  <Comment
+                    key={reply.id}
+                    author={<a className="text-white">{reply.byUser.displayName}</a>}
+                    avatar={<Avatar src={reply.byUser.avatarUrl} alt="userImage" />}
+                    content={<p>{reply.message}</p>}
+                  />
+                ))}
+                {comment.id === replayId && (
+                  <Comment
+                    avatar={<Avatar src={user?.avatarUrl} alt="User avatar" />}
+                    content={
+                      <>
+                        <Form
+                          form={form}
+                          name="replies"
+                          onFinish={(data) => {
+                            handleSubmit(data, replayId);
+                          }}>
+                          <Form.Item name="messageReplies">
+                            <TextArea rows={2} />
+                          </Form.Item>
+                          <Form.Item>
+                            <Button htmlType="submit" type="primary">
+                              Add Replay
+                            </Button>
+                          </Form.Item>
+                        </Form>
+                      </>
+                    }
+                  />
+                )}
+              </Comment>
+            ))}
           </div>
         </div>
       )}
+
+      {!user && (
+        <div className="comment">
+          <TextHeader className="mb-2">Comment</TextHeader>
+          <div className="w-full h-auto bg-primary-defaultLight2nd rounded-2xl px-16 py-4">
+            <Comment
+              content={
+                <>
+                  <Form>
+                    <Form.Item>
+                      <TextArea rows={2} disabled />
+                    </Form.Item>
+                    <Form.Item>
+                      <Button htmlType="submit" type="primary">
+                        Please Login
+                      </Button>
+                    </Form.Item>
+                  </Form>
+                </>
+              }
+            />
+            {review.comments.map((comment) => (
+              <Comment
+                key={comment.id}
+                actions={[
+                  <span
+                    className="text-white"
+                    key="comment-nested-reply-to"
+                    role="presentation"
+                    onClick={() => {
+                      toast.warn('Please login before posting a comment.', {
+                        position: 'bottom-right',
+                        autoClose: 5000,
+                        hideProgressBar: false,
+                        closeOnClick: true,
+                        pauseOnHover: true,
+                        draggable: true,
+                        progress: undefined,
+                      });
+                    }}>
+                    Reply to
+                  </span>,
+                ]}
+                author={<a className="text-white">{comment.user.displayName}</a>}
+                avatar={<Avatar src={comment.user.avatarUrl} alt="userImage" />}
+                content={<p>{comment.message}</p>}>
+                {comment.replies.map((reply) => (
+                  <Comment
+                    key={reply.id}
+                    author={<a className="text-white">{reply.byUser.displayName}</a>}
+                    avatar={<Avatar src={reply.byUser.avatarUrl} alt="userImage" />}
+                    content={<p>{reply.message}</p>}
+                  />
+                ))}
+              </Comment>
+            ))}
+          </div>
+        </div>
+      )}
+      <ToastContainer />
     </div>
   );
 };

@@ -36,9 +36,7 @@ const Home: React.FC = () => {
 
   const { getMoviesId, getMoviesIdReviews } = moviesController();
   const { postReviews } = reviewsController();
-  const { getUsersProfile, getUsersIdReviews } = userController();
-
-  const [form] = Form.useForm<{ message: string; score: number }>();
+  const { getUsersProfile } = userController();
 
   useEffect(() => {
     (async () => {
@@ -180,7 +178,7 @@ const Home: React.FC = () => {
           </section>
 
           {/* <Line className="mx-auto mt-8 " /> */}
-          <CriticReviews loading={loading} setLoading={setLoading} userid={user?.id} />
+          <CriticReviews loading={loading} setLoading={setLoading} />
 
           {user && isUserReview && (
             <section className="rate-review max-w-screen-lg m-auto my-12">

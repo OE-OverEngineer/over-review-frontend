@@ -8,6 +8,7 @@ import Head from 'next/head';
 
 import Layouts from 'common/components/Layouts';
 import userController from 'common/services/Controllers/userController';
+import { Review } from 'common/services/reponseInterface/review.interface';
 import { User } from 'common/services/reponseInterface/user.interface';
 
 import ProfileCard from './components/ProfileCard';
@@ -16,10 +17,12 @@ import TopReviewSection from './components/TopReivewSection';
 import TopReviewCard from './components/TopReviewCard';
 
 const Profile: React.FC = () => {
+  const [isLoading, setIsLoading] = useState<boolean>(false);
   const [profile, setProfile] = useState<User>();
-  const [review, setReview] = useState<any>();
+  const [review, setReview] = useState<Review[]>([]);
+  const [topReview, setTopReview] = useState<Review[]>([]);
 
-  const { getUsersProfile, getUsersIdReviews } = userController();
+  const { getUserId, getUsersProfile, getUsersIdReviews } = userController();
 
   const Router = useRouter();
 
@@ -27,8 +30,21 @@ const Profile: React.FC = () => {
 
   useEffect(() => {
     (async () => {
-      try {
-        // TODO: ใช้APIอีกเส้นGETIDเอา
+      if (id) {
+        const res_user_profile: User = await getUserId(id?.toString());
+        console.log('res_user_profile', res_user_profile);
+        setProfile(res_user_profile);
+        getUsersIdReviews(id?.toString() || res_user_profile.id, 10, 1).then((res) => {
+          console.log('review', res);
+          setReview(res.data);
+        });
+        getUsersIdReviews(id?.toString() || res_user_profile.id, 1, 1, 'likeCount').then(
+          (res) => {
+            console.log('review', res);
+            setTopReview(res.data);
+          },
+        );
+      } else {
         const res_user_profile: User = await getUsersProfile();
         console.log('res_user_profile', res_user_profile);
         setProfile(res_user_profile);
@@ -36,11 +52,16 @@ const Profile: React.FC = () => {
           console.log('review', res);
           setReview(res.data);
         });
-      } catch (error) {
-        Router.push('/login');
+        getUsersIdReviews(id?.toString() || res_user_profile.id, 1, 1, 'likeCount').then(
+          (res) => {
+            console.log('review', res);
+            setTopReview(res.data);
+          },
+        );
       }
+      setIsLoading(false);
     })();
-  }, [id]);
+  }, [id, isLoading]);
 
   return (
     <div>
@@ -53,7 +74,7 @@ const Profile: React.FC = () => {
           <div className=" max-w-screen-2xl mx-auto">
             <div className="flex itmes-center mb-8">
               <div className="flex flex-1 justify-center text-2xl">
-                Say , Hello to me !
+                Say , Hello to {profile?.displayName} !
               </div>
               <div className="flex">
                 <Input
@@ -75,14 +96,16 @@ const Profile: React.FC = () => {
               {profile && (
                 <div className="flex-1">
                   <TopReviewSection
-                    id={id?.toString() || profile.id}
-                    firstName={profile.firstName}
-                    review={review}
+                    displayName={profile.displayName}
+                    review={topReview}
+                    loading={isLoading}
+                    setLoading={setIsLoading}
                   />
                   <RecentReviewSection
-                    id={id?.toString() || profile.id}
-                    firstName={profile.firstName}
+                    displayName={profile.displayName}
                     review={review}
+                    loading={isLoading}
+                    setLoading={setIsLoading}
                   />
                 </div>
               )}
