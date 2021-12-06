@@ -30,7 +30,7 @@ const Home: React.FC = () => {
         {movie && (
           <>
             <BannerSlider className="mt-16" movie={movie} />
-            <DiscoverAllMovieSection movie={movie} />
+            <DiscoverAllMovieSection />
           </>
         )}
       </Layouts>

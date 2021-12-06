@@ -37,7 +37,7 @@ const DiscoverMovieSection: React.FC = () => {
 
       <div className=" max-w-screen-2xl mt-20 mb-16 mx-auto font-poppins z-10">
         <Tabs
-          defaultActiveKey="Random"
+          defaultActiveKey="Score"
           centered
           onChange={(key) => {
             getMovies(10, 1, key).then((res) => {
@@ -60,7 +60,7 @@ const DiscoverMovieSection: React.FC = () => {
               />
             ),
           }}>
-          <Tabs.TabPane tab="Random" key="random">
+          <Tabs.TabPane tab="Popular" key="popular">
             <div className="grid gap-y-16 gap-x-5 py-16 justify-items-center grid-cols-2 2xl:grid-cols-5 lg:grid-cols-4 md:grid-cols-3 sm:grid-cols-2">
               {moviePoster &&
                 moviePoster.data.map((movie, index) => (
@@ -98,7 +98,7 @@ const DiscoverMovieSection: React.FC = () => {
                 ))}
             </div>
           </Tabs.TabPane>
-          <Tabs.TabPane tab="Popular" key="popular">
+          <Tabs.TabPane tab="Score" key="score">
             <div className="grid gap-y-16 gap-x-5 py-16 justify-items-center grid-cols-2 2xl:grid-cols-5 lg:grid-cols-4 md:grid-cols-3 sm:grid-cols-2">
               {moviePoster &&
                 moviePoster.data.map((movie, index) => (

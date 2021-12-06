@@ -1,11 +1,11 @@
 import React, { useEffect, useState } from 'react';
 
 import { Button, Form, Input, Rate } from 'antd';
+import dayjs from 'dayjs';
 import { useRouter } from 'next/dist/client/router';
 import Head from 'next/head';
 import { toast, ToastContainer } from 'react-toastify';
 
-import Banner1 from 'common/assets/images/banner/banner_1.png';
 import Rating from 'common/assets/images/rating.svg';
 import Layouts from 'common/components/Layouts';
 import TextHeader from 'common/components/TextHeader';
@@ -26,6 +26,7 @@ const { TextArea } = Input;
 
 const Home: React.FC = () => {
   const [movie, setMovie] = useState<Movie>();
+  const [recommand, setRecommand] = useState<Movie[]>([]);
   const [review, setReview] = useState<ReviewPaginate>({ data: [], total: 0 });
   const [user, setUser] = useState<User>();
   const [loading, setLoading] = useState<boolean>(false);
@@ -34,7 +35,7 @@ const Home: React.FC = () => {
   const Router = useRouter();
   const { id } = Router.query;
 
-  const { getMoviesId, getMoviesIdReviews } = moviesController();
+  const { getMoviesId, getMoviesIdReviews, getMovies } = moviesController();
   const { postReviews } = reviewsController();
   const { getUsersProfile } = userController();
 
@@ -50,6 +51,11 @@ const Home: React.FC = () => {
   }, []);
 
   useEffect(() => {
+    getMovies(5, 1, 'popular').then((res) => {
+      console.log(res);
+      setRecommand(res.data);
+    });
+
     if (typeof id === 'string') {
       getMoviesId(id).then((res: Movie) => {
         console.log('getMoviesId', res);
@@ -300,25 +306,35 @@ const Home: React.FC = () => {
             </TextHeader>
             <div className="max-w-screen-lg mx-auto">
               <div className="grid gap-y-16 gap-x-5 py-16 justify-items-center grid-cols-2 2xl:grid-cols-5 lg:grid-cols-4 md:grid-cols-3 sm:grid-cols-2">
-                {Array.from({ length: 5 }).map((_, index) => (
-                  <div className="card-item" key={`banner-items-${index}`}>
+                {recommand.map((movie, index) => (
+                  <div
+                    className="card-item cursor-pointer"
+                    key={`banner-items-${index}`}
+                    role="presentation"
+                    onClick={() => {
+                      Router.push(`/movie/${movie.id}`);
+                    }}>
                     <div className="card-item-img">
-                      <div className="relative flex items-center bg-primary-gradient -mb-8 w-max ml-auto rounded-full py-px px-3 -right-3 text-sm font-poppins">
-                        <span>9.8</span>
+                      <div className="relative flex items-center bg-primary-gradient -mb-8 w-max ml-auto rounded-full py-px px-3 -right-3 text-sm">
+                        <span>{movie.score}</span>
                         <Rating className="ml-1" />
                       </div>
                       <img
-                        src={Banner1.src}
+                        src={movie.bannerImageUrl}
                         alt="movie1"
-                        className="object-cover w-64 mb-4 rounded-2xl"
+                        className="object-cover w-64 h-72 mb-4 rounded-2xl hover:shadow-xl transition-shadow duration-300 m-auto"
                       />
-                      <div className="flex gap-x-1 text-sm text-primary-default">
-                        <span>2021</span>
+                      <div className="flex w-32 gap-x-1 text-sm text-primary-default overflow-hidden overflow-ellipsis">
+                        <span>{dayjs(movie.startDate).year()}</span>
                         <span>|</span>
-                        <span>Action, Superhero</span>
+                        <span className="whitespace-nowrap overflow-hidden overflow-ellipsis">
+                          {movie.categories.map((category) => {
+                            return `${category.title} `;
+                          })}
+                        </span>
                       </div>
-                      <div className="flex gap-x-1 text-lg text-white">
-                        <span>Black Widow</span>
+                      <div className="flex gap-x-1 text-smtext-white">
+                        <span>{movie.title}</span>
                       </div>
                     </div>
                   </div>
