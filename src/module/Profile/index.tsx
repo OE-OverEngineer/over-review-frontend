@@ -1,3 +1,4 @@
+/* eslint-disable @typescript-eslint/no-explicit-any */
 import React, { useEffect, useState } from 'react';
 
 import { FlagFilled, SearchOutlined } from '@ant-design/icons';
@@ -16,24 +17,31 @@ import TopReviewCard from './components/TopReviewCard';
 
 const Profile: React.FC = () => {
   const [profile, setProfile] = useState<User>();
+  const [review, setReview] = useState<any>();
 
   const { getUsersProfile, getUsersIdReviews } = userController();
 
   const Router = useRouter();
 
+  const { id } = Router.query;
+
   useEffect(() => {
     (async () => {
       try {
+        // TODO: ใช้APIอีกเส้นGETIDเอา
         const res_user_profile: User = await getUsersProfile();
+        console.log('res_user_profile', res_user_profile);
         setProfile(res_user_profile);
-        getUsersIdReviews(res_user_profile.id, 10, 1, 'recent').then((res: any) => {
+        getUsersIdReviews(id?.toString() || res_user_profile.id, 10, 1).then((res) => {
           console.log(res);
+          setReview(res);
         });
       } catch (error) {
         Router.push('/login');
       }
     })();
-  }, []);
+  }, [id]);
+
   return (
     <div>
       <Head>
@@ -67,7 +75,11 @@ const Profile: React.FC = () => {
               {profile && (
                 <div className="flex-1">
                   {/* <TopReviewSection id={profile.id} /> */}
-                  <RecentReviewSection id={profile.id} firstName={profile.firstName} />
+                  <RecentReviewSection
+                    id={id?.toString() || profile.id}
+                    firstName={profile.firstName}
+                    review={review}
+                  />
                 </div>
               )}
 

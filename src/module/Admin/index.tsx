@@ -22,15 +22,13 @@ const Admin = () => {
   const { tabs } = Router.query;
 
   useEffect(() => {
-    if (tabs && typeof tabs === 'string') {
-      setTab(tabs);
-    }
-    if (tabs && typeof tabs === 'object') {
-      setTab(tabs[0]);
+    if (tabs) {
+      setTab(tabs.toString());
     }
   }, [tabs]);
 
   const SectionTabs = () => {
+    // TODO : edit api
     switch (tabs) {
       case 'actors':
         return <ActorsSection />;
@@ -44,6 +42,7 @@ const Admin = () => {
         return <RequestSection />;
       case 'user':
         return <UserSection />;
+      // TODO: ban user and report user section
 
       default:
         return <CatagorySection />;

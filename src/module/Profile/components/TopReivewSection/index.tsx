@@ -13,6 +13,7 @@ const TopReviewSection: React.FC<{ id: number }> = ({ id }) => {
   const Router = useRouter();
 
   useEffect(() => {
+    // TODO: ใช้ API Top Review
     getUsersIdReviews(id, 10, 1, 'recent').then((res) => {
       console.log(res);
     });

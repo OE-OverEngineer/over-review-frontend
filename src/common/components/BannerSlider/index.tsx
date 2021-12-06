@@ -119,20 +119,21 @@ const BannerSlider: React.FC<BannerSliderProps> = ({ className, movie }) => {
                     </div>
                     <div className="block h-24">
                       <div className="text-gray-600 text-sm">Starring</div>
-                      {item.actors.map((actor: any, index: any) => {
-                        if (index < 3) {
-                          return (
-                            <div
-                              key={`${actor.firstname}-${index}`}
-                              className="text-gray-800 text-sm whitespace-nowrap overflow-hidden overflow-ellipsis">
-                              {`${actor.firstName} ${actor.lastName}`}
-                            </div>
-                          );
-                        } else {
-                          return null;
-                        }
-                      })}
-                      {item.actors.length > 3 && (
+                      {item.actors &&
+                        item.actors.map((actor: any, index: any) => {
+                          if (index < 3) {
+                            return (
+                              <div
+                                key={`${actor.firstname}-${index}`}
+                                className="text-gray-800 text-sm whitespace-nowrap overflow-hidden overflow-ellipsis">
+                                {`${actor.firstName} ${actor.lastName}`}
+                              </div>
+                            );
+                          } else {
+                            return null;
+                          }
+                        })}
+                      {item.actors && item.actors.length > 3 && (
                         <div className="text-gray-400 text-sm">
                           {`+ ${item.actors.length - 3} more`}
                         </div>
