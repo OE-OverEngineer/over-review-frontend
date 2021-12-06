@@ -116,9 +116,12 @@ const ReviewCard: React.FC<{
               <div className="w-full h-16 bg-primary-purpleDark2nd rounded-2xl px-4 py-2">
                 <div className="block text-center">
                   <div className="text-2xl">
-                    <Rate disabled defaultValue={review.movie.score} />
+                    <Rate
+                      disabled
+                      defaultValue={review.movie.score && review.movie.score / 2}
+                    />
                   </div>
-                  <div className=" text-xs">From over Nawa-lee</div>
+                  <div className=" text-xs">From {review.user.displayName}</div>
                 </div>
               </div>
             </div>

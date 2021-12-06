@@ -2,27 +2,32 @@
 import React, { useEffect, useState } from 'react';
 
 import { FlagFilled, SearchOutlined } from '@ant-design/icons';
-import { Anchor, Input } from 'antd';
+import { Anchor, Button, Input, Modal, Form } from 'antd';
 import { useRouter } from 'next/dist/client/router';
 import Head from 'next/head';
+import { toast } from 'react-toastify';
 
 import Layouts from 'common/components/Layouts';
+import reportsController from 'common/services/Controllers/reportsController';
 import userController from 'common/services/Controllers/userController';
+import { CreateReportRequest } from 'common/services/postSchemas';
 import { Review } from 'common/services/reponseInterface/review.interface';
 import { User } from 'common/services/reponseInterface/user.interface';
 
 import ProfileCard from './components/ProfileCard';
 import RecentReviewSection from './components/RecentReviewSection';
 import TopReviewSection from './components/TopReivewSection';
-import TopReviewCard from './components/TopReviewCard';
 
 const Profile: React.FC = () => {
   const [isLoading, setIsLoading] = useState<boolean>(false);
   const [profile, setProfile] = useState<User>();
   const [review, setReview] = useState<Review[]>([]);
   const [topReview, setTopReview] = useState<Review[]>([]);
+  const [isModalVisible, setIsModalVisible] = useState<boolean>(false);
 
   const { getUserId, getUsersProfile, getUsersIdReviews } = userController();
+  const { postReport } = reportsController();
+  const [form] = Form.useForm();
 
   const Router = useRouter();
 
@@ -62,6 +67,15 @@ const Profile: React.FC = () => {
       setIsLoading(false);
     })();
   }, [id, isLoading]);
+
+  const handleOk = () => {
+    setIsModalVisible(false);
+  };
+
+  const handleCancel = () => {
+    setIsModalVisible(false);
+    form.resetFields();
+  };
 
   return (
     <div>
@@ -111,18 +125,62 @@ const Profile: React.FC = () => {
               )}
 
               <div>
-                <div className="flex items-center justify-end mb-4 cursor-pointer">
+                <div
+                  className="flex items-center justify-end mb-4 cursor-pointer"
+                  role="presentation"
+                  onClick={() => {
+                    console.log('report');
+                    setIsModalVisible(true);
+                  }}>
                   <FlagFilled className=" mr-2 ml-0 mx-auto" />
                   <div className="text-sm">report</div>
                 </div>
                 <Anchor className="overflow-hidden mt-2">
                   <ProfileCard profile={profile} />
-                  <TopReviewCard />
+                  {/* <TopReviewCard /> */}
                 </Anchor>
               </div>
             </div>
           </div>
         </div>
+        <Modal
+          title="Report user"
+          visible={isModalVisible}
+          onOk={handleOk}
+          footer
+          onCancel={handleCancel}>
+          <Form
+            form={form}
+            onFinish={(data) => {
+              const params: CreateReportRequest = {
+                targetUserID: profile?.id,
+                message: data.message,
+              };
+              postReport(params).then((res) => {
+                console.log('report', res);
+                form.resetFields();
+                setIsModalVisible(false);
+                toast.success('Report user Successfully', {
+                  position: 'bottom-right',
+                  autoClose: 5000,
+                  hideProgressBar: false,
+                  closeOnClick: true,
+                  pauseOnHover: true,
+                  draggable: true,
+                  progress: undefined,
+                });
+              });
+            }}>
+            <Form.Item
+              name="message"
+              rules={[{ required: true, message: 'Please input your message!' }]}>
+              <Input.TextArea rows={4} />
+            </Form.Item>
+            <Button type="primary" htmlType="submit">
+              Submit
+            </Button>
+          </Form>
+        </Modal>
       </Layouts>
     </div>
   );

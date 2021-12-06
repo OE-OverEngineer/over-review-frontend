@@ -78,7 +78,7 @@ export interface LoginRequset {
 }
 
 export interface CreateReportRequest {
-  targetUserID: number;
+  targetUserID?: number;
   message: string;
 }
 
