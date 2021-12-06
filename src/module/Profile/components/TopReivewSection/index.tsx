@@ -6,8 +6,15 @@ import { useRouter } from 'next/dist/client/router';
 import Banner3 from 'common/assets/images/banner/banner_3.png';
 import TextHeader from 'common/components/TextHeader';
 import userController from 'common/services/Controllers/userController';
+import { Review } from 'common/services/reponseInterface/review.interface';
 
-const TopReviewSection: React.FC<{ id: number }> = ({ id }) => {
+import ReviewCard from '../ReviewCard';
+
+const TopReviewSection: React.FC<{
+  id: string | number;
+  firstName: string;
+  review: Review[];
+}> = ({ id, firstName, review }) => {
   const { getUsersIdReviews } = userController();
 
   const Router = useRouter();
@@ -21,7 +28,9 @@ const TopReviewSection: React.FC<{ id: number }> = ({ id }) => {
 
   return (
     <section className="top-review">
-      <TextHeader className="mb-2">Nawa-lee’s Top Reviews</TextHeader>
+      <TextHeader className="mb-2">{firstName} Top Reviews</TextHeader>
+      {review &&
+        review.map((review: Review) => <ReviewCard key={review.id} review={review} />)}
       <div className="w-full h-full rounded-2xl bg-primary-defaultDark opacity-90 p-4 mb-4">
         <div className="flex justify-between gap-2">
           <img

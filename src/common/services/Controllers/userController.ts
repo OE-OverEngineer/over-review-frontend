@@ -1,4 +1,5 @@
 import { CreateAdminUserRequest } from '../postSchemas';
+import { ReviewPaginate } from '../reponseInterface/review.interface';
 import { User } from '../reponseInterface/user.interface';
 import { get, post } from '../RestClient';
 
@@ -14,7 +15,7 @@ export default function userController() {
       pageNum: number,
       sortBy?: string,
     ) =>
-      get(
+      get<ReviewPaginate>(
         `users/${usrid}/reviews?perPage=${perPage}&pageNum=${pageNum}&sortBy=${sortBy}`,
       ),
     getTopReview: (amount: number) => get<User[]>(`users/top-review?amount=${amount}`),

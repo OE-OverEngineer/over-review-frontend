@@ -78,7 +78,7 @@ const MoviePoster: React.FC<{ movie: Movie }> = ({ movie }) => {
 
             <div className="block text-center">
               <div className="text-gray-600 text-2xl">
-                <Rate disabled defaultValue={movie.score} />
+                <Rate disabled defaultValue={movie.score && movie.score / 2} allowHalf />
               </div>
               <div className="text-gray-600 text-xs">From OverUsers</div>
             </div>

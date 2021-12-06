@@ -184,7 +184,7 @@ const BannerSlider: React.FC<BannerSliderProps> = ({ className, movie }) => {
 
                     <div className="block text-center">
                       <div className="text-gray-600 text-2xl">
-                        <Rate disabled defaultValue={item.score} />
+                        <Rate disabled defaultValue={item.score && item.score / 2} />
                       </div>
                       <div className="text-gray-600 text-xs">From OverUsers</div>
                     </div>

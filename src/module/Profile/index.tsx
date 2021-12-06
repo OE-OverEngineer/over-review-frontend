@@ -33,8 +33,8 @@ const Profile: React.FC = () => {
         console.log('res_user_profile', res_user_profile);
         setProfile(res_user_profile);
         getUsersIdReviews(id?.toString() || res_user_profile.id, 10, 1).then((res) => {
-          console.log(res);
-          setReview(res);
+          console.log('review', res);
+          setReview(res.data);
         });
       } catch (error) {
         Router.push('/login');
@@ -74,7 +74,11 @@ const Profile: React.FC = () => {
             <div className="flex gap-4">
               {profile && (
                 <div className="flex-1">
-                  {/* <TopReviewSection id={profile.id} /> */}
+                  <TopReviewSection
+                    id={id?.toString() || profile.id}
+                    firstName={profile.firstName}
+                    review={review}
+                  />
                   <RecentReviewSection
                     id={id?.toString() || profile.id}
                     firstName={profile.firstName}
@@ -90,7 +94,7 @@ const Profile: React.FC = () => {
                 </div>
                 <Anchor className="overflow-hidden mt-2">
                   <ProfileCard profile={profile} />
-                  {/* <TopReviewCard /> */}
+                  <TopReviewCard />
                 </Anchor>
               </div>
             </div>

@@ -1,14 +1,19 @@
 import { CreateMovieRequest, CreateRequest } from '../postSchemas';
 import { RequestMovieRespones } from '../reponseInterface/index.interface';
 import { Movie, MoviePaginate } from '../reponseInterface/movie.interface';
+import { ReviewPaginate } from '../reponseInterface/review.interface';
 import { get, post } from '../RestClient';
 
 export default function moviesController() {
   return {
     postMovies: (data: CreateMovieRequest) =>
       post<CreateMovieRequest, Movie>('movies', data),
-    getMovies: (perPage: number, pageNum: number, sort?: string) =>
-      get<MoviePaginate>(`movies?perPage=${perPage}&pageNum=${pageNum}&sort=${sort}`),
+    getMovies: (perPage: number, pageNum: number, sort?: string, category?: number) =>
+      get<MoviePaginate>(
+        `movies?perPage=${perPage}&pageNum=${pageNum}&sort=${sort}${
+          category ? `&category=${category}` : ''
+        }`,
+      ),
     getMovieSearch: (search: string, perPage: number, pageNum: number, sort?: string) =>
       get(
         `movies/search?search=${search}&perPage=${perPage}&pageNum=${pageNum}&sort=${sort}`,
@@ -19,7 +24,10 @@ export default function moviesController() {
       perPage: number,
       pageNum: number,
       sort?: string,
-    ) => get(`movies/${id}/reviews?perPage=${perPage}&pageNum=${pageNum}&sort=${sort}`),
+    ) =>
+      get<ReviewPaginate>(
+        `movies/${id}/reviews?perPage=${perPage}&pageNum=${pageNum}&sort=${sort}`,
+      ),
     postMovieRequest: (data: CreateRequest) =>
       post<CreateRequest, any>('movies/request', data),
     getMovieRequest: (perPage: number, pageNum: number, sort?: string) =>

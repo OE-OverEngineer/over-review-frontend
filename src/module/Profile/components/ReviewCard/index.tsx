@@ -7,10 +7,10 @@ import { useRouter } from 'next/dist/client/router';
 import TextHeader from 'common/components/TextHeader';
 import Intersperse from 'common/hooks/Intersperse';
 import { Actor } from 'common/services/reponseInterface/actor.interface';
-import { ProfileReview } from 'common/services/reponseInterface/review.interface';
+import { ProfileReview, Review } from 'common/services/reponseInterface/review.interface';
 
 const ReviewCard: React.FC<{
-  review: ProfileReview;
+  review: Review;
 }> = ({ review }) => {
   const Router = useRouter();
   return (
