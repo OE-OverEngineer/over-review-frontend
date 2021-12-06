@@ -98,11 +98,10 @@ const BannerSlider: React.FC<BannerSliderProps> = ({ className, movie }) => {
                     <div className="block">
                       <div className="text-gray-600 text-sm">Genre</div>
                       <div className="text-gray-800 text-sm whitespace-nowrap overflow-hidden overflow-ellipsis">
-                        {Intersperse(item.categories, ', ').map(
-                          (tag: any, index: any) => (
-                            <span key={index}>{tag}</span>
-                          ),
-                        )}
+                        {item.categories &&
+                          Intersperse(item.categories, ', ').map(
+                            (tag: any, index: any) => <span key={index}>{tag}</span>,
+                          )}
                       </div>
                     </div>
                     <div className="block">

@@ -150,27 +150,28 @@ const Home: React.FC = () => {
           <section className="actor">
             <TextHeader className="max-w-screen-lg m-auto">ACTOR</TextHeader>
             <div className="grid grid-cols-4 px-80 mt-5 font-poppins text-lg">
-              {movie?.actors.map((actor, index) => {
-                if (index < 4) {
-                  return (
-                    <div className="col-span-1" key={actor.id}>
-                      <img
-                        src={actor.imageUrl}
-                        className="mx-auto w-40 h-40 rounded-full object-cover"
-                        alt={actor.firstName}
-                      />
-                      <p className="mx-auto text-center mt-4 mb-0 whitespace-nowrap overflow-hidden overflow-ellipsis">
-                        {actor.firstName}
-                      </p>
-                      <p className="mx-auto text-center whitespace-nowrap overflow-hidden overflow-ellipsis">
-                        {actor.lastName}
-                      </p>
-                    </div>
-                  );
-                } else {
-                  return null;
-                }
-              })}
+              {movie &&
+                movie.actors.map((actor, index) => {
+                  if (index < 4) {
+                    return (
+                      <div className="col-span-1" key={actor.id}>
+                        <img
+                          src={actor.imageUrl}
+                          className="mx-auto w-40 h-40 rounded-full object-cover"
+                          alt={actor.firstName}
+                        />
+                        <p className="mx-auto text-center mt-4 mb-0 whitespace-nowrap overflow-hidden overflow-ellipsis">
+                          {actor.firstName}
+                        </p>
+                        <p className="mx-auto text-center whitespace-nowrap overflow-hidden overflow-ellipsis">
+                          {actor.lastName}
+                        </p>
+                      </div>
+                    );
+                  } else {
+                    return null;
+                  }
+                })}
               {movie && movie.actors.length > 4 && (
                 <Button
                   className="px-6 py-0 font-poppins mx-auto block"

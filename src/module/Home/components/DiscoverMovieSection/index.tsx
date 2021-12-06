@@ -85,9 +85,10 @@ const DiscoverMovieSection: React.FC = () => {
                         <span>{dayjs(movie.startDate).year()}</span>
                         <span>|</span>
                         <span className="whitespace-nowrap overflow-hidden overflow-ellipsis">
-                          {movie.categories.map((category) => {
-                            return `${category.title} `;
-                          })}
+                          {movie.categories &&
+                            movie.categories.map((category) => {
+                              return `${category.title} `;
+                            })}
                         </span>
                       </div>
                       <div className="flex gap-x-1 text-lg text-white">
@@ -123,9 +124,10 @@ const DiscoverMovieSection: React.FC = () => {
                         <span>{dayjs(movie.startDate).year()}</span>
                         <span>|</span>
                         <span className="whitespace-nowrap overflow-hidden overflow-ellipsis">
-                          {movie.categories.map((category) => {
-                            return `${category.title} `;
-                          })}
+                          {movie.categories &&
+                            movie.categories.map((category) => {
+                              return `${category.title} `;
+                            })}
                         </span>
                       </div>
                       <div className="flex gap-x-1 text-lg text-white">
@@ -161,9 +163,10 @@ const DiscoverMovieSection: React.FC = () => {
                         <span>{dayjs(movie.startDate).year()}</span>
                         <span>|</span>
                         <span className="whitespace-nowrap overflow-hidden overflow-ellipsis">
-                          {movie.categories.map((category) => {
-                            return `${category.title} `;
-                          })}
+                          {movie.categories &&
+                            movie.categories.map((category) => {
+                              return `${category.title} `;
+                            })}
                         </span>
                       </div>
                       <div className="flex gap-x-1 text-lg text-white">
