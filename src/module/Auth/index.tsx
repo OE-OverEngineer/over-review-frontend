@@ -29,7 +29,13 @@ const Auth: React.FC = () => {
     postLogin(param)
       .then((res) => {
         handleItem(TOKEN_KEY, res.access_token);
-        Router.push('/');
+        console.log(res);
+
+        if (res.role === 'admin') {
+          Router.push('/admin');
+        } else {
+          Router.push('/');
+        }
       })
       .catch(() => {
         toast.error('Wrong email or password', {

@@ -7,6 +7,8 @@ import Sider from 'antd/lib/layout/Sider';
 import { useRouter } from 'next/dist/client/router';
 import Link from 'next/link';
 
+import userController from 'common/services/Controllers/userController';
+
 import ActorsSection from './components/ActorsSection';
 import CatagorySection from './components/CatagorySection';
 import DirectorsSection from './components/DirectorsSection';
@@ -21,11 +23,21 @@ const Admin = () => {
   const Router = useRouter();
   const { tabs } = Router.query;
 
+  const { getUsersProfile } = userController();
+
   useEffect(() => {
     if (tabs) {
       setTab(tabs.toString());
     }
   }, [tabs]);
+
+  useEffect(() => {
+    getUsersProfile().then((res) => {
+      if (res.role.title !== 'admin') {
+        Router.push('/');
+      }
+    });
+  }, []);
 
   const SectionTabs = () => {
     // TODO : edit api
