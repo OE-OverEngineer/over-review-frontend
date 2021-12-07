@@ -20,5 +20,7 @@ export default function userController() {
         `users/${usrid}/reviews?perPage=${perPage}&pageNum=${pageNum}&sort=${sort}`,
       ),
     getTopReview: (amount: number) => get<User[]>(`users/top-review?amount=${amount}`),
+    postBanUsers: (id: number | string) => post(`users/${id}/banuser`),
+    postUnbanUsers: (id: number | string) => post(`users/${id}/unbanuser`),
   };
 }

@@ -13,6 +13,7 @@ import ActorsSection from './components/ActorsSection';
 import CatagorySection from './components/CatagorySection';
 import DirectorsSection from './components/DirectorsSection';
 import MovieSection from './components/MovieSection';
+import ReportUserSection from './components/ReportUserSection';
 import RequestSection from './components/RequestSection';
 import UserSection from './components/UserSection';
 
@@ -40,7 +41,6 @@ const Admin = () => {
   }, []);
 
   const SectionTabs = () => {
-    // TODO : edit api
     switch (tabs) {
       case 'actors':
         return <ActorsSection />;
@@ -54,7 +54,8 @@ const Admin = () => {
         return <RequestSection />;
       case 'user':
         return <UserSection />;
-      // TODO: ban user and report user section
+      case 'report-user':
+        return <ReportUserSection />;
 
       default:
         return <CatagorySection />;
@@ -88,6 +89,9 @@ const Admin = () => {
           </Menu.Item>
           <Menu.Item key="user" icon={<DesktopOutlined />}>
             <Link href="/admin/user">User</Link>
+          </Menu.Item>
+          <Menu.Item key="report-user" icon={<DesktopOutlined />}>
+            <Link href="/admin/report-user">Report User</Link>
           </Menu.Item>
         </Menu>
       </Sider>

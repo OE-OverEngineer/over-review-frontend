@@ -47,7 +47,7 @@ const MovieSection = () => {
   const { getActors } = actorsController();
 
   useEffect(() => {
-    getMovies(10, 1).then((res: MoviePaginate) => {
+    getMovies(999, 1).then((res: MoviePaginate) => {
       console.log(res);
 
       setMovie(res);
