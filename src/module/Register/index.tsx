@@ -247,7 +247,7 @@ const Register: React.FC = () => {
                     <Option value="Male" className="text-primary-default">
                       Male
                     </Option>
-                    <Option value="Female " className="text-primary-default">
+                    <Option value="Female" className="text-primary-default">
                       Female
                     </Option>
                   </Select>
