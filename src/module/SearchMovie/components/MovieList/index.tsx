@@ -4,8 +4,6 @@ import dayjs from 'dayjs';
 import { useRouter } from 'next/dist/client/router';
 
 import Rating from 'common/assets/images/rating.svg';
-import Star from 'common/assets/images/star.svg';
-import Svg from 'common/components/Svg';
 import moviesController from 'common/services/Controllers/moviesControllers';
 
 const DiscoverMovieSection: React.FC = () => {
@@ -25,8 +23,6 @@ const DiscoverMovieSection: React.FC = () => {
 
   return (
     <section className="discover-movies h-full ">
-      <Svg Icon={<Star className="absolute h-full w-full -z-10" />} />
-
       <div className=" max-w-screen-2xl mb-16 mx-auto font-poppins z-10">
         <div className="grid gap-y-16 gap-x-5 mt-16 justify-items-center grid-cols-2 2xl:grid-cols-5 lg:grid-cols-4 md:grid-cols-3 sm:grid-cols-2">
           {moviePoster &&

@@ -8,7 +8,6 @@ import SearchTools from './components/SearchTools';
 const SearchMovie: React.FC = () => {
   return (
     <div>
-      <section></section>
       <Head>
         <title>Search Movie</title>
         <link rel="icon" href="/over_icon.svg" />
