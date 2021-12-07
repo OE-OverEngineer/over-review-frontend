@@ -20,8 +20,6 @@ const ActorsSection = () => {
 
   useEffect(() => {
     getActors().then((res: Actor[]) => {
-      console.log(res);
-
       setActor(res);
     });
     setIsLoading(false);
@@ -98,7 +96,6 @@ const ActorsSection = () => {
   };
 
   const onFinish = (values: CreateActorRequest) => {
-    console.log('Success:', values);
     values.image = imageUrl;
 
     postActors(values)

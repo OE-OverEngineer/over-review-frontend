@@ -27,7 +27,6 @@ const HallOfFameSection: React.FC = () => {
 
   useEffect(() => {
     getTopReview(5).then((res) => {
-      console.log('res', res);
       setTopReview(res);
     });
     getMovies(3, 1, 'score').then((res) => {

@@ -9,25 +9,18 @@ import { useRouter } from 'next/dist/client/router';
 import Rating from 'common/assets/images/rating.svg';
 import Star from 'common/assets/images/star.svg';
 import Svg from 'common/components/Svg';
-import categoriesController from 'common/services/Controllers/categoriesControllers';
 import moviesController from 'common/services/Controllers/moviesControllers';
 import { MoviePaginate } from 'common/services/reponseInterface/movie.interface';
 
 const DiscoverMovieSection: React.FC = () => {
   const [moviePoster, setmoviePoster] = useState<MoviePaginate>();
   const { getMovies } = moviesController();
-  const { getCategories } = categoriesController();
 
   const Router = useRouter();
 
   useEffect(() => {
     getMovies(10, 1).then((res) => {
-      console.log(res);
-
       setmoviePoster(res);
-    });
-    getCategories().then((res) => {
-      console.log(res);
     });
   }, []);
 

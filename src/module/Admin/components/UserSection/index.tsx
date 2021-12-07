@@ -32,7 +32,6 @@ const UserSection = () => {
 
   useEffect(() => {
     getUsers().then((res: User[]) => {
-      console.log(res);
       setUser(res);
     });
     setIsLoading(false);
@@ -124,8 +123,6 @@ const UserSection = () => {
   };
 
   const onFinish = (values: CreateAdminUserRequest) => {
-    console.log('Success:', values);
-
     const params: CreateAdminUserRequest = {
       email: values.email,
       password: values.password,

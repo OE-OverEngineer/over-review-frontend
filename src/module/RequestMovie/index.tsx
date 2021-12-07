@@ -14,11 +14,8 @@ const RequestMovie: React.FC = () => {
   const { postMovieRequest } = moviesController();
 
   const onFinish = (values: CreateRequest) => {
-    console.log('Success:', values);
-
     postMovieRequest(values)
       .then((res) => {
-        console.log(res);
         toast.success('Request Moive success!!', {
           position: 'bottom-right',
           autoClose: 5000,

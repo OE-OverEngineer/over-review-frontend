@@ -20,7 +20,6 @@ const Auth: React.FC = () => {
   const Router = useRouter();
 
   const onFinish = (values: Record<string, string>) => {
-    console.log('Success:', values);
     const param: LoginRequset = {
       email: values.email,
       password: values.password,
@@ -29,7 +28,6 @@ const Auth: React.FC = () => {
     postLogin(param)
       .then((res) => {
         handleItem(TOKEN_KEY, res.access_token);
-        console.log(res);
 
         if (res.role === 'admin') {
           Router.push('/admin');

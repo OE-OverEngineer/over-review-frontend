@@ -27,7 +27,7 @@ import { CreateMovieRequest } from 'common/services/postSchemas';
 import { Actor } from 'common/services/reponseInterface/actor.interface';
 import { Category } from 'common/services/reponseInterface/category.interface';
 import { Director } from 'common/services/reponseInterface/director.interface';
-import { Movie, MoviePaginate } from 'common/services/reponseInterface/movie.interface';
+import { MoviePaginate } from 'common/services/reponseInterface/movie.interface';
 
 const MovieSection = () => {
   const [isModalVisible, setIsModalVisible] = useState<boolean>(false);
@@ -48,8 +48,6 @@ const MovieSection = () => {
 
   useEffect(() => {
     getMovies(999, 1).then((res: MoviePaginate) => {
-      console.log(res);
-
       setMovie(res);
     });
     setIsLoading(false);
@@ -168,7 +166,6 @@ const MovieSection = () => {
   };
 
   const onFinish = (values: CreateMovieRequest) => {
-    console.log('Success:', values);
     values.bannerImage = imageUrl;
 
     postMovies(values)

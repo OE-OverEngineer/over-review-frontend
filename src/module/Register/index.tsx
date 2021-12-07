@@ -47,7 +47,6 @@ const Register: React.FC = () => {
   const handleChange = (info: any) => {
     if (info.file.status === 'done') {
       // Get this url from response in real world.
-      console.log(info);
 
       getBase64(info.file.originFileObj, (imageUrl: string | ArrayBuffer | null) => {
         setImageUrl(imageUrl);
@@ -66,15 +65,13 @@ const Register: React.FC = () => {
       dateOfBirth: values.dateOfBirth,
       gender: values.gender,
     };
-    console.log('Success:', params);
+
     postRegister(params)
       .then((res) => {
-        console.log(res);
         handleItem(TOKEN_KEY, res.access_token);
         Router.push('/');
       })
       .catch((res) => {
-        console.log(res);
         res.message.map((item: string) => {
           toast.error(item, {
             position: 'bottom-right',

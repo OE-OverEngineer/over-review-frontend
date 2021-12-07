@@ -51,7 +51,6 @@ const ReviewCard: React.FC<{
 
       postComments(param)
         .then((res) => {
-          console.log('postComments', res);
           form.resetFields();
           setLoading(true);
         })
@@ -76,7 +75,6 @@ const ReviewCard: React.FC<{
 
       postReplies(param)
         .then((res) => {
-          console.log('postReplies', res);
           form.resetFields();
           setLoading(true);
         })
@@ -228,7 +226,6 @@ const ReviewCard: React.FC<{
                     key="comment-nested-reply-to"
                     role="presentation"
                     onClick={() => {
-                      console.log('reply to');
                       setReplayId(comment.id);
                     }}>
                     Reply to

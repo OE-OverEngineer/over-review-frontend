@@ -27,7 +27,7 @@ const menu = (id: number) => (
       onClick={() => {
         handleItem(TOKEN_KEY);
       }}>
-      <Link href="/">Logout</Link>
+      <Link href="/login">Logout</Link>
     </Menu.Item>
   </Menu>
 );
@@ -48,8 +48,6 @@ const Navbar: React.FC<{ router?: string[] }> = ({ router }) => {
   useEffect(() => {
     getUsersProfile()
       .then((res) => {
-        console.log('user', res);
-
         setProfile(res);
         setIsAuth(true);
       })

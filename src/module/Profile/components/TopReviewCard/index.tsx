@@ -1,16 +1,6 @@
-import React, { useEffect } from 'react';
-
-import userController from 'common/services/Controllers/userController';
+import React from 'react';
 
 const TopReviewCard: React.FC = () => {
-  const { getTopReview } = userController();
-
-  useEffect(() => {
-    getTopReview(5).then((res) => {
-      console.log(`res`, res);
-    });
-  }, []);
-
   return (
     <section className="top-reivew-card">
       <div className="max-w-xs w-80 h-full rounded-2xl bg-primary-defaultDark opacity-90 px-4 py-8">

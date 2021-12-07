@@ -57,8 +57,6 @@ const CatagorySection = () => {
   };
 
   const onFinish = (values: CreateCategoryRequest) => {
-    console.log('Success:', values);
-
     postCategories(values)
       .then(() => {
         toast.success('Catagory Added Successfully', {

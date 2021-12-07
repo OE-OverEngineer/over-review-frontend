@@ -15,8 +15,6 @@ const ProfileCard: React.FC<ProfileCardProps> = ({ profile }) => {
 
   useEffect(() => {
     if (profile) {
-      console.log(profile);
-
       setLoading(false);
     }
   }, [profile]);

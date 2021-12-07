@@ -52,17 +52,14 @@ const Home: React.FC = () => {
 
   useEffect(() => {
     getMovies(5, 1, 'popular').then((res) => {
-      console.log(res);
       setRecommand(res.data);
     });
 
     if (typeof id === 'string') {
       getMoviesId(id).then((res: Movie) => {
-        console.log('getMoviesId', res);
         setMovie(res);
       });
       getMoviesIdReviews(id, 100, 1).then((res) => {
-        console.log('getMoviesIdReviews', res);
         if (user) {
           console.log(
             'user',
@@ -77,7 +74,6 @@ const Home: React.FC = () => {
   }, [id, user]);
 
   const onFinish = (values: { message: string; score: number }) => {
-    console.log('Success:', values);
     const score = values.score + values.score;
     const movieID = movie?.id || '';
     const param = {

@@ -144,20 +144,17 @@ const BannerSlider: React.FC<BannerSliderProps> = ({ className, movie }) => {
                         shape="round"
                         size="large"
                         onClick={() => {
-                          // console.log(subBanner.innerSlider.asNavForIndex);
                           const index = subBanner.innerSlider.asNavForIndex;
                           if (!index) {
-                            console.log(subBanner.props.children[0].key);
                             Router.push(`/movie/${subBanner.props.children[0].key}`);
                           } else if (index === subBanner.props.children.length) {
-                            console.log(subBanner.props.children[0].key);
                             Router.push(`/movie/${subBanner.props.children[0].key}`);
                           } else if (index < 0) {
-                            console.log(
-                              subBanner.props.children[
-                                subBanner.props.children.length - 1
-                              ].key,
-                            );
+                            // console.log(
+                            //   subBanner.props.children[
+                            //     subBanner.props.children.length - 1
+                            //   ].key,
+                            // );
                             Router.push(
                               `/movie/${
                                 subBanner.props.children[
@@ -166,7 +163,6 @@ const BannerSlider: React.FC<BannerSliderProps> = ({ className, movie }) => {
                               }`,
                             );
                           } else if (index < subBanner.props.children.length) {
-                            console.log(subBanner.props.children[index].key);
                             Router.push(`/movie/${subBanner.props.children[index].key}`);
                           }
                         }}>

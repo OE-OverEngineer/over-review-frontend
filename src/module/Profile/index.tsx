@@ -37,29 +37,25 @@ const Profile: React.FC = () => {
     (async () => {
       if (id) {
         const res_user_profile: User = await getUserId(id?.toString());
-        console.log('res_user_profile', res_user_profile);
+
         setProfile(res_user_profile);
         getUsersIdReviews(id?.toString() || res_user_profile.id, 10, 1).then((res) => {
-          console.log('review', res);
           setReview(res.data);
         });
         getUsersIdReviews(id?.toString() || res_user_profile.id, 1, 1, 'likeCount').then(
           (res) => {
-            console.log('review', res);
             setTopReview(res.data);
           },
         );
       } else {
         const res_user_profile: User = await getUsersProfile();
-        console.log('res_user_profile', res_user_profile);
+
         setProfile(res_user_profile);
         getUsersIdReviews(id?.toString() || res_user_profile.id, 10, 1).then((res) => {
-          console.log('review', res);
           setReview(res.data);
         });
         getUsersIdReviews(id?.toString() || res_user_profile.id, 1, 1, 'likeCount').then(
           (res) => {
-            console.log('review', res);
             setTopReview(res.data);
           },
         );
@@ -129,7 +125,6 @@ const Profile: React.FC = () => {
                   className="flex items-center justify-end mb-4 cursor-pointer"
                   role="presentation"
                   onClick={() => {
-                    console.log('report');
                     setIsModalVisible(true);
                   }}>
                   <FlagFilled className=" mr-2 ml-0 mx-auto" />
@@ -156,8 +151,7 @@ const Profile: React.FC = () => {
                 targetUserID: profile?.id,
                 message: data.message,
               };
-              postReport(params).then((res) => {
-                console.log('report', res);
+              postReport(params).then(() => {
                 form.resetFields();
                 setIsModalVisible(false);
                 toast.success('Report user Successfully', {

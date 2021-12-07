@@ -23,8 +23,6 @@ const RequestSection = () => {
 
   useEffect(() => {
     getMovieRequest(10, 1).then((res: RequestMovieRespones) => {
-      console.log(res);
-
       setRequestMovie(res);
     });
     setIsLoading(false);
@@ -59,10 +57,6 @@ const RequestSection = () => {
     },
   ];
 
-  const showModal = () => {
-    setIsModalVisible(true);
-  };
-
   const handleOk = () => {
     setIsModalVisible(false);
   };
@@ -70,10 +64,6 @@ const RequestSection = () => {
   const handleCancel = () => {
     setIsModalVisible(false);
     form.resetFields();
-  };
-
-  const onFinish = (values: CreateRequest) => {
-    console.log('Success:', values);
   };
 
   return (
@@ -108,8 +98,7 @@ const RequestSection = () => {
           name="cmsForm"
           id="adminForm"
           layout="vertical"
-          autoComplete="off"
-          onFinish={onFinish}>
+          autoComplete="off">
           <Form.Item
             label="FirstName"
             name="firstName"

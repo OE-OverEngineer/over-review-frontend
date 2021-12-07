@@ -5,7 +5,6 @@ import { Input } from 'antd';
 import { useRouter } from 'next/dist/client/router';
 
 import TextHeader from 'common/components/TextHeader';
-import categoriesController from 'common/services/Controllers/categoriesControllers';
 import moviesController from 'common/services/Controllers/moviesControllers';
 import { MoviePaginate } from 'common/services/reponseInterface/movie.interface';
 
@@ -35,12 +34,8 @@ const DiscoverAllMovieSection: React.FC = () => {
   const Router = useRouter();
 
   const { getMovies } = moviesController();
-  const { getCategories } = categoriesController();
 
   useEffect(() => {
-    getCategories().then((res) => {
-      console.log(res);
-    });
     Promise.all([
       getMovies(10, 1, 'popular'),
       getMovies(10, 1, 'recent'),
@@ -48,7 +43,6 @@ const DiscoverAllMovieSection: React.FC = () => {
       getMovies(10, 1, 'popular', 11),
       getMovies(10, 1, 'popular', 15),
     ]).then(([popular, recent, action, romantic, crime]) => {
-      console.log(popular, recent, action, romantic, crime);
       setPopularMovie(popular);
       setRecentMovie(recent);
       setActionMovie(action);

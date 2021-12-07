@@ -61,8 +61,6 @@ const DirectorsSection = () => {
   };
 
   const onFinish = (values: CreateDirectorRequest) => {
-    console.log('Success:', values);
-
     postDirectors(values)
       .then(() => {
         toast.success('Director Added Successfully', {

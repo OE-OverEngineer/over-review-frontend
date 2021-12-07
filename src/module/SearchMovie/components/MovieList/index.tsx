@@ -17,11 +17,7 @@ const DiscoverMovieSection: React.FC = () => {
 
   useEffect(() => {
     if (typeof search === 'string') {
-      console.log(search);
-
       getMovieSearch(search, 10, 1).then((res) => {
-        console.log(res);
-
         setmoviePoster(res);
       });
     }

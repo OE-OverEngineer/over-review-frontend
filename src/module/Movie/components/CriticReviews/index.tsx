@@ -35,12 +35,10 @@ const CriticReviews: React.FC<{
         setMovie(res);
       });
       getMoviesIdReviews(id, 10, 1, 'recent').then((res) => {
-        console.log('getMoviesIdReviews', res);
         setReview(res.data);
         setLoading(false);
       });
       getMoviesIdReviews(id, 1, 1, 'likesCount').then((res) => {
-        console.log('getMoviesTopReviews', res);
         setTopReview(res.data);
         setLoading(false);
       });
@@ -48,7 +46,6 @@ const CriticReviews: React.FC<{
   }, [id, loading]);
 
   const likeAction = (id: number) => {
-    console.log('like');
     const params: CreateReviewLikeRequest = {
       targetReviewID: id,
     };
@@ -56,7 +53,6 @@ const CriticReviews: React.FC<{
     postReviewLike(params)
       .then((res) => {
         setLoading(true);
-        console.log(postReviewLike, res);
       })
       .catch((err) => {
         if (err.statusCode === 401) {

@@ -2,14 +2,11 @@
 import React, { useEffect, useState } from 'react';
 
 import { Button, Form, Input, Modal, Space, Table } from 'antd';
-import dayjs from 'dayjs';
 import { toast, ToastContainer } from 'react-toastify';
 
-import moviesController from 'common/services/Controllers/moviesControllers';
 import reportsController from 'common/services/Controllers/reportsController';
 import userController from 'common/services/Controllers/userController';
 import { CreateRequest } from 'common/services/postSchemas';
-import { RequestMovieRespones } from 'common/services/reponseInterface/index.interface';
 import { Report } from 'common/services/reponseInterface/report.interface';
 import { User } from 'common/services/reponseInterface/user.interface';
 
@@ -29,7 +26,6 @@ const ReportUserSection = () => {
       setReportUser(res);
     });
     getUsers().then((res) => {
-      console.log(res);
       const banuser = res.filter((item) => item.banned === true);
       setUser(banuser);
     });
@@ -67,9 +63,7 @@ const ReportUserSection = () => {
           <Button
             type="primary"
             onClick={() => {
-              console.log(id);
               postBanUsers(id).then((res) => {
-                console.log(res);
                 setIsLoading(true);
                 toast.success('Banned user Successfully', {
                   position: 'bottom-right',
@@ -117,9 +111,7 @@ const ReportUserSection = () => {
           <Button
             type="primary"
             onClick={() => {
-              console.log(id);
               postUnbanUsers(id).then((res) => {
-                console.log(res);
                 setIsLoading(true);
                 toast.success('Banned user Successfully', {
                   position: 'bottom-right',
@@ -151,10 +143,6 @@ const ReportUserSection = () => {
   const handleCancel = () => {
     setIsModalVisible(false);
     form.resetFields();
-  };
-
-  const onFinish = (values: CreateRequest) => {
-    console.log('Success:', values);
   };
 
   return (
@@ -201,8 +189,7 @@ const ReportUserSection = () => {
           name="cmsForm"
           id="adminForm"
           layout="vertical"
-          autoComplete="off"
-          onFinish={onFinish}>
+          autoComplete="off">
           <Form.Item
             label="FirstName"
             name="firstName"
